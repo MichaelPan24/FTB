@@ -15,7 +15,7 @@ export default class CommentItem extends Component{
     render(){
         return (
             <View>
-                <TouchableHighlight onPress={this.props.onSelect.bind(this, this.props.comment)}
+                <TouchableHighlight onPress={this.props.onSelect( this.props.comment)}
                           underlayColor={"#f3f3f3"}>
                     <View>
                         <View style={styles.commentContent}>

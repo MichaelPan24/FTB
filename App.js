@@ -93,7 +93,10 @@
 
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {createStackNavigator, createAppContainer} from 'react-navigation';
+import {createBottomTabNavigator, createAppContainer} from 'react-navigation';
+
+import ShotDetails from './app/client/components/Loading'
+import TabNavigators from './app/client/TabNavigators'
 
 class HomeScreen extends Component {
   render(){
@@ -105,7 +108,7 @@ class HomeScreen extends Component {
   }
 }
 
-const AppNavigator = createStackNavigator({ Home: { screen: HomeScreen } }); 
+const AppNavigator = createBottomTabNavigator({ Home: { screen: ShotDetails } }); 
 export default createAppContainer(AppNavigator);
 
 const styles = StyleSheet.create({

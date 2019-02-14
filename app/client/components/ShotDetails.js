@@ -58,7 +58,7 @@ export default class ShotDetails extends Component{
         >
         <View>
           <TouchableHighlight style={styles.invisibleTouch}
-                              onPress={this.selectPlayer.bind(this, player)}
+                              onPress={this.selectPlayer(player)}
                               underlayColor={"#333"}
                               activeOpacity={0.95}>
             <View style={styles.headerContent}>
@@ -105,7 +105,7 @@ export default class ShotDetails extends Component{
     );
   }
 
-  _showModalTransition(transition) {
+  _showModalTransition = (transition) => {
     transition("opacity", {
       duration: 200,
       begin: 0,
@@ -118,7 +118,7 @@ export default class ShotDetails extends Component{
     });
   }
   
-  _hideModalTransition(transition) {
+  _hideModalTransition = (transition) => {
     transition("height", {
       duration: 200,
       begin: screen.height,
@@ -132,15 +132,16 @@ export default class ShotDetails extends Component{
     });
   }
 
-  selectPlayer(player) {
-    this.props.navigation.push({
+  selectPlayer = (player) => {
+    this.props.navigation.push("Player",{
       component: Player,
       passProps: {player},
       title: player.name
-    });
+    }
+    );
   }
 
-  _renderCommentsList() {
+  _renderCommentsList = () => {
     return <View style={styles.sectionSpacing}>
       <View style={styles.separator} />
       <Text style={styles.heading}>Comments</Text>
@@ -154,13 +155,13 @@ export default class ShotDetails extends Component{
     </View>
   }
 
-  renderRow(comment) {
+  renderRow = () => {(comment) 
     return <CommentItem
       onSelect={() => this.selectPlayer(comment.user)}
       comment={comment} />;
   }
 
-  _renderLoading() {
+  _renderLoading = () => {
     return <ActivityIndicator animating={this.state.isLoading}
                                  style={styles.spinner}/>;
   }
