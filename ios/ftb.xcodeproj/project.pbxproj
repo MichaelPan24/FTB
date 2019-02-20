@@ -55,6 +55,8 @@
 		51BC6F681EE742E6ABD492E1 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89364349C1EB4E779B9C5032 /* SimpleLineIcons.ttf */; };
 		E08F48C9229E41ADB4D872EA /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57038276D8654749944A5CAA /* Zocial.ttf */; };
 		5EFEFE89D55A4057A02684CA /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD004B3AF5B40A797B80D35 /* libRNGestureHandler.a */; };
+		1AFF163CDAC94F479FEF72F4 /* SCRATCHMYBACK.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C8F80C21E67945DFA4443A84 /* SCRATCHMYBACK.TTF */; };
+		46BF8F74C2B44BA1835EB404 /* NexaRustSlab-BlackShadow01.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95EB7A5CE5154A17AC8BB059 /* NexaRustSlab-BlackShadow01.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -380,6 +382,8 @@
 		57038276D8654749944A5CAA /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		E665E62675E3409D9E94C7F4 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; name = "RNGestureHandler.xcodeproj"; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		8FD004B3AF5B40A797B80D35 /* libRNGestureHandler.a */ = {isa = PBXFileReference; name = "libRNGestureHandler.a"; path = "libRNGestureHandler.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		C8F80C21E67945DFA4443A84 /* SCRATCHMYBACK.TTF */ = {isa = PBXFileReference; name = "SCRATCHMYBACK.TTF"; path = "../assets/fonts/SCRATCHMYBACK.TTF"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		95EB7A5CE5154A17AC8BB059 /* NexaRustSlab-BlackShadow01.otf */ = {isa = PBXFileReference; name = "NexaRustSlab-BlackShadow01.otf"; path = "../assets/fonts/NexaRustSlab-BlackShadow01.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -664,6 +668,8 @@
 				C8D1A067528D4D0E8715F2E6 /* Octicons.ttf */,
 				89364349C1EB4E779B9C5032 /* SimpleLineIcons.ttf */,
 				57038276D8654749944A5CAA /* Zocial.ttf */,
+				C8F80C21E67945DFA4443A84 /* SCRATCHMYBACK.TTF */,
+				95EB7A5CE5154A17AC8BB059 /* NexaRustSlab-BlackShadow01.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1130,6 +1136,8 @@
 				29647C3E72AD4C63B5C2CF1A /* Octicons.ttf in Resources */,
 				51BC6F681EE742E6ABD492E1 /* SimpleLineIcons.ttf in Resources */,
 				E08F48C9229E41ADB4D872EA /* Zocial.ttf in Resources */,
+				1AFF163CDAC94F479FEF72F4 /* SCRATCHMYBACK.TTF in Resources */,
+				46BF8F74C2B44BA1835EB404 /* NexaRustSlab-BlackShadow01.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
