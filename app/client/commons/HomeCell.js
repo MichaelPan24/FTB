@@ -1,21 +1,27 @@
 import  React, {Component}  from 'react';
 import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-export default class DetailItem extends Component{
+import getResource from '../../utils/api'
+
+export default class HomeCell extends Component{
     constructor(props){
         super(props)
-    }
-
-    componentWillMount(){
         
     }
+
 
 
     render(){
         return (
             <View style={styles.container}>
-                <TouchableOpacity>
-                   <Image />
+                <TouchableOpacity
+                    onPress = {this.props.onPress}
+                >
+                    <View>
+                        <Text>{this.props.data.title}</Text>
+                        <Image source={this.props.data.images}/>
+                    </View> 
+                   
                 </TouchableOpacity>
             </View>
         )     

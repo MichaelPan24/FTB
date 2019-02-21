@@ -1,53 +1,72 @@
+//在这里注册所有页面路由
+
 import React, {Component} from 'react';
-import {createBottomTabNavigator, createStackNavigator, createSwitchNavigator, createAppContainer} from 'react-navigation';
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import {Text, Image} from 'react-native';
+import {createStackNavigator} from 'react-navigation';
+import {createStore, applyMiddleware, combineReducers} from 'redux'
+import {createReactNavigationReduxMiddleware, createNavigationReducer, createReduxContainer} from 'react-navigation-redux-helpers' 
+import {Provider, connect} from 'react-redux';
 
-import WelcomePage from '../pages/WelcomePage'
+import WelcomePage from '../pages/WelcomePage';
+import LoginPage from '../pages/LoginPage';
+import HomePage from '../pages/HomePage';
+import DetailsPage from '../pages/DetailsPage';
 import InfoPage from '../pages/InfoPage';
-import MyPage from '../pages/MyPage';
+import InfoDetailPage from '../pages/InfoDetailPage'
 
-import TabNavigator from './TabNavigators';
 
-const BottomTab = createBottomTabNavigator({
-    HomePage: {
-        screen: TabNavigator,
-        navigationOptions: {
-            tabBarLabel: '首页',
-            tabBarIcon: (focus, tintColor) => (<Icon 
-                name={"home"}
-                size={26}
-                style={{color: tintColor, paddingTop:5}}
-                />)
+
+const HomeStack = createStackNavigator({
+    Home: {
+        screen: HomePage,
+        navigationOptions: ({navigation}) => {
+            return {
+                headerTitle: "热门项目",
+                headerTitleContainerStyle:{justifyContent: 'center'},
+                headerStyle: {opacity: 0.7},
+            }
         }
     },
-    InfoPage: {
-        screen: InfoPage,
-        navigationOptions: {
-            tabBarLabel: '资讯',
-            tabBarIcon: ({focus, tintColor}) => (<Icon 
-                name={"broadcast-tower"}
-                size={26}
-                style={{color: tintColor, paddingTop:5}}
-                />
-                )
-        }
-    },
-    MyPage: {
-        screen: MyPage,
-        navigationOptions: {
-            tabBarLabel: '我',
-            tabBarIcon: ({focus, tintColor}) => (<Icon 
-                name={"user"}
-                size={26}
-                style={{color: tintColor,paddingTop:5}}
-            />)
+    Details: {
+        screen: DetailsPage,
+        navigationOptions: ({navigation}) => {
+            return {
+                title: `${navigation.state.params.name&&navigation.state.params.name}详情`,
+
+            }
         }
     }
 })
 
-export default createAppContainer(createSwitchNavigator({
-    Welcome: WelcomePage,
-    Main: BottomTab 
-},{
-    initialRouteName: 'Welcome'
-}))
+const InfoStack = createStackNavigator({
+  Info: {
+    screen: InfoPage,
+    navigationOptions: ({navigation}) =>{
+      return {
+        title: `资讯`,
+        headerTitleContainerStyle:{justifyContent: 'center'},
+        headerStyle: {opacity: 0.7},
+      }
+    }
+  },
+  InfoDetail: {
+    screen: InfoDetailPage,
+    navigationOptions: ({navigation}) => {
+      return {
+        title: `${navigation.state.params.info&&navigation.state.params.info||''}详情`
+      }
+    }
+  }
+})
+
+const InitStack = createStackNavigator({
+  Welcome: {
+    screen: WelcomePage
+  },
+  Login: {
+    screen: LoginPage
+  }
+})
+
+
+export {HomeStack, InfoStack, InitStack}
