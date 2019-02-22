@@ -7,7 +7,6 @@ export default class DetailsPage extends Component {
     }
 
     render(){
-        const {navigation} = this.props
         return (
                 <View style={styles.container}>
                     <Text>this is DetailsPage</Text>

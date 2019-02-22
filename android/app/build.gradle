@@ -138,6 +138,7 @@ android {
 }
 
 dependencies {
+    // compile "com.facebook.fresco:animated-gif:1.10.0"
     compile project(':react-native-gesture-handler')
     compile project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
