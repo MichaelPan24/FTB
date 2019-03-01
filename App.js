@@ -13,16 +13,16 @@ class HomeScreen extends Component {
       // <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       //   <Text>Home Screen</Text>
       // </View>
-      <ParallaxView
-      windowHeight={SCREEN_HEIGHT * 0.4}
-      backgroundSource='http://i.imgur.com/UyjQBkJ.png'
-      navBarTitle='John Oliver'
-      userName='John Oliver'
-      userTitle='Comedian'
-      userImage='http://i.imgur.com/RQ1iLOs.jpg'
-      leftIcon={{name: 'rocket', color: 'rgba(131, 175, 41, 1)', size: 30, type: 'font-awesome'}}
-      rightIcon={{name: 'user', color: 'rgba(193, 193, 193, 1)', size: 30, type: 'font-awesome'}}
-      />
+      // <ParallaxView
+      // windowHeight={SCREEN_HEIGHT * 0.4}
+      // backgroundSource='http://i.imgur.com/UyjQBkJ.png'
+      // navBarTitle='John Oliver'
+      // userName='John Oliver'
+      // userTitle='Comedian'
+      // userImage='http://i.imgur.com/RQ1iLOs.jpg'
+      // leftIcon={{name: 'rocket', color: 'rgba(131, 175, 41, 1)', size: 30, type: 'font-awesome'}}
+      // rightIcon={{name: 'user', color: 'rgba(193, 193, 193, 1)', size: 30, type: 'font-awesome'}}
+      // />
     )
   }
 }

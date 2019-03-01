@@ -11,7 +11,7 @@ import BottomTab from './TabNavigator'
 
 import WelcomePage from '../pages/WelcomePage';
 import LoginPage from '../pages/LoginPage';
-import HomeCell from '../commons/HomeCell'
+import HomeCell from '../commons/ShowCell'
 import Home from '../action/Home/index';
 
 

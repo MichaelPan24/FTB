@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Button, FlatList, RefreshControl,} from 'react-native';
 
-import HomeCell from '../commons/HomeCell';
+import ShowCell from '../commons/ShowCell';
 
-import getResource,{mockData} from '../../utils/api';
+import getResource from '../../utils/api';
 
 
 export default class HomePage extends Component {
@@ -12,6 +12,7 @@ export default class HomePage extends Component {
         this.state = {
             dataResource: []
         }
+        console.disableYellowBox = true
     }
 
     componentDidMount(){
@@ -25,33 +26,31 @@ export default class HomePage extends Component {
                 this.setState( {dataResource: this.state.dataResource.concat(data)})
             }
         })
-        // console.log(this.state.dataResource)
     }
 
-    _onPress = () => {
-
+    _onPress = (item) => {
+        const  {navigation} = this.props;
+        navigation.navigate('ShowDetails',{name:'项目', item})
     }
 
     _renderItem = ({item}) => {
         return(
-            <HomeCell
+            <ShowCell
                 data = {item}
-                onPress = {this._onPress}
+                onPress = {() => (this._onPress(item))}
 
             />
         )
         
     }
     render(){
-        const {navigation} = this.props
         return (
             <View style={styles.container}>
-               <View style={{flex: 1, alignItems: 'center',}}>
                     <FlatList
                         extraData={this.state}
                         data={this.state.dataResource}
                         renderItem={this._renderItem}
-                        keyExtractor={(item, index) => index}
+                        keyExtractor={(item) => `${item.id}`}
                         refreshControl={
                             <RefreshControl
                                 title={'loading'}
@@ -59,10 +58,6 @@ export default class HomePage extends Component {
                             />
                         }             
                     />
-                </View>
-                {/* <FlatList>
-
-                </FlatList> */}
             </View>
         )
     }
@@ -71,9 +66,8 @@ export default class HomePage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F4F4F4',
       },
 })
