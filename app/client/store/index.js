@@ -1,6 +1,6 @@
-import {applyMiddleware, createStore} from 'redux'
-import thunk from 'redux-thunk'
-import reducers from '../reducers'
+import {applyMiddleware, createStore} from 'redux';
+import thunk from 'redux-thunk';
+import reducers from '../reducers';
 
 /**
  * 自定义logger中间件
@@ -12,13 +12,13 @@ const logger = store => next => action => {
         console.log(`dispatch ${action}`);
     }
     const result = next(action);
-    console.log(`next state ${store.getState()}`)
-    return result
+    console.log(`next state ${store.getState()}`);
+    return result;
 }
 
 const middleWares = [
     logger,
     thunk
-]
+];
 
 export default createStore(reducers, applyMiddleware(...middleWares))

@@ -12,7 +12,6 @@ import BottomTab from './TabNavigator'
 import WelcomePage from '../pages/WelcomePage';
 import LoginPage from '../pages/LoginPage';
 import HomeCell from '../commons/ShowCell'
-import Home from '../action/Home/index';
 
 
 
@@ -47,6 +46,21 @@ const RootStack = createAppContainer(createSwitchNavigator({
   initialRouteName: 'Init'
 }))
 
+// const navReducer = createNavigationReducer(RootStack);
+//初始化react-navigation和 redux的中间件
+// const middleware = createReactNavigationReduxMiddleware(
+//   "root",
+//   state => state.nav
+// );
+
+// const App = createReduxContainer(RootStack, "root");
+
+//将State映射到 props中
+// const mapStateToProps = (state) => ({
+//   state: state.nav
+// });
+
+// const AppWithNavigationState = connect(mapStateToProps)(App)
 
 
 export default RootStack

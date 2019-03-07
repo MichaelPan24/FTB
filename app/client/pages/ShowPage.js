@@ -1,32 +1,46 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Button, FlatList, RefreshControl,} from 'react-native';
+import {View, StyleSheet, FlatList, RefreshControl} from 'react-native';
+import {connect} from 'react-redux';
+
+import actions from '../action';
+
+
 
 import ShowCell from '../commons/ShowCell';
 
-import getResource from '../../utils/api';
 
+// import getResource from '../../utils/api';
 
-export default class HomePage extends Component {
+const URL = 'user/shots';
+
+export  class ShowPage extends Component {
     constructor(props){
         super(props)
-        this.state = {
-            dataResource: []
-        }
+        // this.state = {
+        //     dataResource: []
+        // }
+
         console.disableYellowBox = true
     }
 
     componentDidMount(){
-        this.fetchData()
+        // this.fetchData()
+        this.loadData();
     }
 
-
-    fetchData = () => {
-        getResource.getUsersShots().then(data => {
-            if(data.length> 0){
-                this.setState( {dataResource: this.state.dataResource.concat(data)})
-            }
-        })
+    //刷新数据
+    loadData = () => {
+        const {onRefreshShowWorks} = this.props;
+        onRefreshShowWorks(URL);
     }
+
+    // fetchData = () => {
+    //     getResource.getUsersShots().then(data => {
+    //         if(data.length> 0){
+    //             this.setState( {dataResource: this.state.dataResource.concat(data)})
+    //         }
+    //     })
+    // }
 
     _onPress = (item) => {
         const  {navigation} = this.props;
@@ -43,12 +57,14 @@ export default class HomePage extends Component {
         )
         
     }
+
     render(){
+        let {showWorks} = this.props
+        console.log(showWorks)
         return (
             <View style={styles.container}>
                     <FlatList
-                        extraData={this.state}
-                        data={this.state.dataResource}
+                        data={showWorks.items[0]}
                         renderItem={this._renderItem}
                         keyExtractor={(item) => `${item.id}`}
                         refreshControl={
@@ -63,6 +79,17 @@ export default class HomePage extends Component {
     }
 }
 
+const mapStateToProps = (state) => ({
+    showWorks: state.showWorks
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    onRefreshShowWorks: (url) => dispatch(actions.onRefreshShowWorks(url))
+});
+
+export default WrappedShowPage =  connect(mapStateToProps, mapDispatchToProps)(ShowPage);
+ 
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -71,3 +98,4 @@ const styles = StyleSheet.create({
         backgroundColor: '#F4F4F4',
       },
 })
+

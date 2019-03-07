@@ -1,4 +1,5 @@
 import {AsyncStorage} from 'react-native';
+import getResource from '../../utils/api';
 
 export default class DataStore {
     /**
@@ -14,12 +15,18 @@ export default class DataStore {
                     resolve(wrappedData);
                 }else{
                     this.fetchNetData(url).then((data) => {
-                        resolve(this._wrapData(data));
+                        resolve(this._wrapData(data));  
                     }).catch((e) => {
                         console.error(e)
                         reject(e);
                     })
                 }
+            }).catch(e => {
+                this.fetchNetData(url).then(data => {
+                    resolve(this._wrapData(data));
+                }).catch(err => {
+                    reject(err)
+                })
             })
         })
     }
@@ -29,10 +36,10 @@ export default class DataStore {
      */
     fetchNetData(url){
         return new Promise((resolve, reject) => {
-            fetch(url)
-                .then((response) => {
-                    if (response.ok) {
-                        return response.json();
+            getResource.getUsersShots(url)
+                .then((data) => {
+                    if (data.length>0) {
+                        return data;
                     }
                     throw new Error('Network problems');
                 })
