@@ -12,15 +12,13 @@ export default class MyPage extends Component {
     render(){
         return (
             <ParallaxScrollView
-  windowHeight={SCREEN_HEIGHT * 0.4}
-  backgroundSource={{uri: 'http://i.imgur.com/UyjQBkJ.png'}}
-  navBarTitle='John Oliver'
-  userName='John Oliver'
-  userTitle='Comedian'
-  userImage='http://i.imgur.com/RQ1iLOs.jpg'
-  leftIcon={{name: 'rocket', color: 'rgba(131, 175, 41, 1)', size: 30, type: 'font-awesome'}}
-  rightIcon={{name: 'user', color: 'rgba(193, 193, 193, 1)', size: 30, type: 'font-awesome'}}
-/>
+                windowHeight={SCREEN_HEIGHT * 0.4}
+                backgroundSource={{uri: 'http://i.imgur.com/UyjQBkJ.png'}}
+                navBarTitle='John Oliver'
+                userName='John Oliver'
+                userTitle='Comedian'
+                userImage='http://i.imgur.com/RQ1iLOs.jpg'
+            />
         )
     }
 }

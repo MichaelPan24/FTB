@@ -25,7 +25,8 @@ const DemandsStack = createStackNavigator({
       screen: DemandsDetailPage,
       navigationOptions: ({navigation}) => {
         return {
-          title: `${navigation.state.params.info&&navigation.state.params.info||''}详情`
+          title: `${navigation.state.params.info&&navigation.state.params.info||''}详情`,
+          gesturesEnabled: true
         }
       }
     }
@@ -42,12 +43,12 @@ const DemandsStack = createStackNavigator({
             }
         }
     },
-    ShowDetails: {
+    ShowDetail: {
         screen: ShowDetailPage,
         navigationOptions: ({navigation}) => {
             return {
                 title: `${navigation.state.params.name?navigation.state.params.name:'项目'}详情`,
-
+                gesturesEnabled: true
             }
         }
     }

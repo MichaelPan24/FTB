@@ -8,13 +8,13 @@ export default class DataStore {
      * @return <Promise>
      */
     
-    fetchData(url){
+    fetchData(url, type){
         return new Promise((resolve, reject) => {
             this.fetchLocalData(url).then((wrappedData) => {
                 if(wrappedData && DataStore.checkTimeStampValid(wrappedData.timeStamp)){
                     resolve(wrappedData);
                 }else{
-                    this.fetchNetData(url).then((data) => {
+                    this.fetchNetData(url, type).then((data) => {
                         resolve(this._wrapData(data));  
                     }).catch((e) => {
                         console.error(e)
@@ -22,7 +22,7 @@ export default class DataStore {
                     })
                 }
             }).catch(e => {
-                this.fetchNetData(url).then(data => {
+                this.fetchNetData(url, type).then(data => {
                     resolve(this._wrapData(data));
                 }).catch(err => {
                     reject(err)
@@ -34,9 +34,9 @@ export default class DataStore {
     /**
      * 获取网络数据
      */
-    fetchNetData(url){
+    fetchNetData(url, type){
         return new Promise((resolve, reject) => {
-            getResource.getUsersShots(url)
+            getResource.getResources(url, type)
                 .then((data) => {
                     if (data.length>0) {
                         return data;

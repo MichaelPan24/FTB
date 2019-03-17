@@ -1,6 +1,5 @@
 import  React, {Component}  from 'react';
 import {View, StyleSheet, TouchableOpacity, Image, Dimensions, Text} from 'react-native';
-import HTMLView from 'react-native-htmlview'
 
 const ScreenWidth = Dimensions.get('window');
 
