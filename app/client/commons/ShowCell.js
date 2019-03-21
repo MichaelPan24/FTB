@@ -16,6 +16,7 @@ export default class HomeCell extends Component{
             <View style={styles.container}>
                 <TouchableOpacity
                     onPress = {onPress}
+                    underlayColor = 'transparent'
                 >
                     <View style={styles.cell_container}>
                         <View style={styles.description_container}>
@@ -51,6 +52,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 10,
+        marginTop: 10
     },
     cell_container: {
         backgroundColor: 'white',

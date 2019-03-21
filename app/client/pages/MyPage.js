@@ -14,11 +14,14 @@ export default class MyPage extends Component {
             <ParallaxScrollView
                 windowHeight={SCREEN_HEIGHT * 0.4}
                 backgroundSource={{uri: 'http://i.imgur.com/UyjQBkJ.png'}}
-                navBarTitle='John Oliver'
-                userName='John Oliver'
-                userTitle='Comedian'
-                userImage='http://i.imgur.com/RQ1iLOs.jpg'
+                navBarTitle='Michael Pan'
+                userName='Michael Pan'
+                userTitle='SoftWare Engineer'
+                userImage = {require('../../../img/userAvatar.jpg')}
+                // userImage='http://i.imgur.com/RQ1iLOs.jpg'
             />
+        
+            
         )
     }
 }

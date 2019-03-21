@@ -8,9 +8,8 @@ export default class DemandCell extends Component{
     }
 
 
-    _genImage= (data) => {
-        const {image} = data;
-        const imgArr = [];
+    _genImage= ({image}) => {
+        let imgArr = [];
         for(var i=0; i< image.length; i++){
             imgArr.push(
                 <Image
@@ -53,9 +52,7 @@ export default class DemandCell extends Component{
                             <Text style={styles.text}>
                                 {data.companyName}
                             </Text>
-                            
                         </View>
-                      
                         <Text style={styles.header_title}>
                             {data.title}
                         </Text>
@@ -106,7 +103,8 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     nameContainer: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginBottom: 5
     },
     avatar: {
         width: 36,

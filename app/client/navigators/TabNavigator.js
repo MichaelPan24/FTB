@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/AntDesign'
 
 import DemandsPage from '../pages/DemandsPage';
 import DemandsDetailPage from '../pages/DemandsDetailPage'
+import NewDemandPage from '../pages/NewDemandPage';
 import ShowPage from '../pages/ShowPage'
 import ShowDetailPage from '../pages/ShowDetailPage'
 import MyPage from '../pages/MyPage';
@@ -15,9 +16,10 @@ const DemandsStack = createStackNavigator({
       screen: DemandsPage,
       navigationOptions: ({navigation}) =>{
         return {
-          title: `热门需求`,
-          headerTitleContainerStyle:{justifyContent: 'center'},
-          headerStyle: {opacity: 0.7},
+          // title: `热门需求`,
+          header: null,
+          // headerTitleContainerStyle:{justifyContent: 'center'},
+          // headerStyle: {opacity: 0.7},
         }
       }
     },
@@ -25,7 +27,17 @@ const DemandsStack = createStackNavigator({
       screen: DemandsDetailPage,
       navigationOptions: ({navigation}) => {
         return {
-          title: `${navigation.state.params.info&&navigation.state.params.info||''}详情`,
+          header: null,
+          // title: `${navigation.state.params.info&&navigation.state.params.info||''}详情`,
+          gesturesEnabled: true
+        }
+      }
+    },
+    newDemand: {
+      screen: NewDemandPage,
+      navigationOptions: ({navigation} ) => {
+        return {
+          header: null,
           gesturesEnabled: true
         }
       }
@@ -37,9 +49,10 @@ const DemandsStack = createStackNavigator({
         screen: ShowPage,
         navigationOptions: ({navigation}) => {
             return {
-                headerTitle: "展示",
-                headerTitleContainerStyle:{justifyContent: 'center'},
-                headerStyle: {opacity: 0.8, backgroundColor:'#F9F9F9'},
+              header: null
+                // headerTitle: "展示",
+                // headerTitleContainerStyle:{justifyContent: 'center'},
+                // headerStyle: {opacity: 0.8, backgroundColor:'#F9F9F9'},
             }
         }
     },
@@ -47,7 +60,8 @@ const DemandsStack = createStackNavigator({
         screen: ShowDetailPage,
         navigationOptions: ({navigation}) => {
             return {
-                title: `${navigation.state.params.name?navigation.state.params.name:'项目'}详情`,
+                header: null,
+                // title: `${navigation.state.params.name?navigation.state.params.name:'项目'}详情`,
                 gesturesEnabled: true
             }
         }
@@ -59,9 +73,10 @@ const MyStack = createStackNavigator({
       screen: MyPage,
       navigationOptions: ({navigation}) =>{
         return {
+          header: null ,
           title: `我的`,
-          headerTitleContainerStyle:{justifyContent: 'center'},
-          headerStyle: {opacity: 0.7},
+          // headerTitleContainerStyle:{justifyContent: 'center'},
+          // headerStyle: {opacity: 0.7},
         }
       }
     }

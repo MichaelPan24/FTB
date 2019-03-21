@@ -1,5 +1,6 @@
 import {onRefreshShowWorks, } from './showWorks';
-import {onRefreshDemands} from './demands/index';
+import {onRefreshDemands} from './demands';
+import {onUploadNew} from './upload';
 
 
-export default {onRefreshShowWorks,onRefreshDemands};
+export default {onRefreshShowWorks, onRefreshDemands, onUploadNew};

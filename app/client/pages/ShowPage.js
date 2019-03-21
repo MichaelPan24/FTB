@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, FlatList, RefreshControl} from 'react-native';
+import {View, StyleSheet, FlatList, RefreshControl, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
-
+import Icon from 'react-native-vector-icons/AntDesign';
 import actions from '../action';
 
-
+import NavigationBar from '../commons/NavigationBar';
 import ShowCell from '../commons/ShowCell';
 
 
@@ -42,11 +42,40 @@ export  class ShowPage extends Component {
         
     }
 
+    renderRightButton = () => {
+        return <TouchableOpacity
+            onPress={() => {
+                
+            }}
+        >
+            <View style={{padding: 5, marginRight: 8}}>
+                <Icon
+                    name={"pluscircle"}
+                    size={24}
+                    style={{
+                        marginRight: 8,
+                        alignSelf: 'center',
+                        // color: 'white',
+                    }}/>
+            </View>
+        </TouchableOpacity>
+    }
+
     render(){
-        let {showWorks} = this.props
+        const statusBar = {
+            barStyle: 'light-content',
+        };
+        let navigationBar = <NavigationBar
+            title={'展示'}
+            statusBar={statusBar}
+            rightButton={this.renderRightButton()}
+        />;
+        const {showWorks} = this.props
         console.log(showWorks)
         return (
-            <View style={styles.container}>
+            <View style={{flex: 1}}>
+                {navigationBar}
+                <View style={styles.container}>
                     <FlatList
                         data={showWorks.data}
                         renderItem={this._renderItem}
@@ -59,7 +88,9 @@ export  class ShowPage extends Component {
                             />
                         }             
                     />
+                </View>
             </View>
+            
         )
     }
 }

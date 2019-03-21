@@ -1,17 +1,21 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, FlatList, RefreshControl} from 'react-native';
+import {View, StyleSheet, FlatList, RefreshControl, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
+import  Icon from 'react-native-vector-icons/AntDesign'
 
+import NavigationBar from '../commons/NavigationBar';
 import DemandCell from '../commons/DemandCell';
+import Dialog from '../commons/Dialog';
 
 import actions from '../action';
 
-const URL = "http://192.168.1.104:3301/";
+const URL = "http://192.168.1.130:3301/";
 const type = 'demands';
 
 export class InfoPage extends Component {
     constructor(props){
-        super(props)
+        super(props);
+        this.dialog = null;
     }
 
     componentDidMount(){
@@ -25,7 +29,7 @@ export class InfoPage extends Component {
 
     _onPress = (item) => {
         const {navigation} = this.props;
-        navigation.navigate('DemandsDetail', {info:'需求', item})
+        navigation.navigate('DemandsDetail', {info:'需求', data: item})
     }
 
     _renderItem = ({item}) => {
@@ -36,23 +40,67 @@ export class InfoPage extends Component {
             />
         )
     }
+    //方案一: 使用model弹出建立新需求
+    // renderDialog = () => {
+    //     return <Dialog
+    //                 ref = {dialog => this.dialog = dialog}
+    //             />
+    // }
+
+    //方案二: 直接跳转至新需求页面
+    addNewDemand = () => {
+        const {navigation} = this.props;
+        navigation.navigate('newDemand')
+    }
+
+    renderRightButton = () => {
+        return <TouchableOpacity
+                    onPress={() => {
+                        this.addNewDemand()
+                        // this.dialog.show()
+                                    }}  
+                >
+            <View style={{padding: 5, marginRight: 8}}>
+                <Icon
+                    name={"pluscircle"}
+                    size={24}
+                    style={{
+                        marginRight: 8,
+                        alignSelf: 'center',
+                        // color: 'white',
+                    }}/>
+            </View>
+        </TouchableOpacity>
+    }
 
     render(){
         const {demands} = this.props;
+        const statusBar = {
+            barStyle: 'light-content',
+        };
+        let navigationBar = <NavigationBar
+                                title={'热门需求'}
+                                statusBar={statusBar}
+                                rightButton={this.renderRightButton()}
+                            />;
         return (
-            <View style={styles.container}>
-                <FlatList
-                    data={demands.data}
-                    renderItem={this._renderItem}
-                    keyExtractor={(item) => `${item.id}`}
-                    refreshControl={
-                        <RefreshControl
-                            title={'loading'}
-                            refreshing={demands.isLoading}
-                        />
-                    }
-                />
+            <View style={{flex: 1}}>
+                {navigationBar}
+                <View style={styles.container}>
+                    <FlatList
+                        data={demands.data}
+                        renderItem={this._renderItem}
+                        keyExtractor={(item) => `${item._id}`}
+                        refreshControl={
+                            <RefreshControl
+                                title={'loading'}
+                                refreshing={demands.isLoading}
+                            />
+                        }
+                    />
+                 </View>
             </View>
+            
         )
     }
 }

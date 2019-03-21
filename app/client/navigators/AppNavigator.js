@@ -19,7 +19,12 @@ import HomeCell from '../commons/ShowCell'
 
 const InitStack = createStackNavigator({
   Welcome: {
-    screen: WelcomePage
+    screen: WelcomePage,
+    navigationOptions: ({navigation}) => {
+      return {
+        header: null
+      }
+    }
   },
   Login: {
     screen: LoginPage

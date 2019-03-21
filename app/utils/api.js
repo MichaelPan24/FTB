@@ -1,7 +1,7 @@
 const API_URL = "https://api.dribbble.com/v2/",
     ACCESS_TOKEN = "9f061d26c5a8be96b17a81718959a67dd54ca9669ca41752777193f7cc5be7c3";
 
-const LocalURL = "http://192.168.1.104:3301/";
+const LocalURL = "http://192.168.1.130:3301/";
 
 const User = 'user',
     shots = '/shots';
@@ -26,10 +26,10 @@ function getUsersShots(type=(User+shots)) {
 }
 
 //获取具体的用户作品
-function getExactShots(type=shots,id) {
-  const URL = API_URL + type + `:${id}`;
-  return fetchData(URL);
-}
+// function getExactShots(type=shots,id) {
+//   const URL = API_URL + type + `:${id}`;
+//   return fetchData(URL);
+// }
 
 export default {
       //根据类型获得所需资源
