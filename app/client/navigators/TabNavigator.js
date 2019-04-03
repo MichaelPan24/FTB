@@ -12,6 +12,7 @@ import LoginPage from '../pages/login/LoginPage';
 import RegisterPage from '../pages/login/RegisterPage';
 import FavoritePage from '../pages/FavoritePage';
 import MyProjectPage from '../pages/MyProjectPage';
+import AboutMePage from '../pages/AboutMePage';
 
 //配置底部导航栏每一栏模块栈
 const DemandsStack = createStackNavigator({
@@ -108,7 +109,7 @@ const MyStack = createStackNavigator({
         }
       }
     },
-    Project: {
+    MyProject: {
       screen: MyProjectPage,
       navigationOptions: ({navigation}) => {
         return {
@@ -119,16 +120,18 @@ const MyStack = createStackNavigator({
     AboutMe: {
       screen: AboutMePage,
       navigationOptions: ({navigation}) => {
+        tabBarVisible = true;
         return {
-          header: null
+          header: null,
+          tabBarVisible
         }
       }
     }
   },{
     navigationOptions: ({navigation}) => {
       let tabBarVisible = true;
-      if(navigation.state.index>0){
-        tabBarVisible = false;
+      if(navigation.state.index>0 && (navigation.state.routes[1].routeName==='Login')){ 
+          tabBarVisible = false
       }
       return {
         tabBarVisible

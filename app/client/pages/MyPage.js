@@ -31,13 +31,13 @@ export class MyPage extends Component {
       const {navigate} = navigation;
       switch(title){
         case '关于我':
-          navigate('');
+          navigate('AboutMe');
         case '我的项目':
-          navigate('Project');
+          navigate('MyProject');
         case '收藏':
           navigate('Favorite');
-        case '修改个人信息':
-          navigate();
+        // case '修改个人信息':
+        //   navigate();
       }
     }
 
@@ -76,7 +76,7 @@ export class MyPage extends Component {
 
                     <List>
                     {
-                      Slack_LIST.map((item, index) => (
+                      SLACK_LIST.map((item, index) => (
                         <ListItem
                           key={index}
                           onPress={() => this.onPressItem(item.title)}
