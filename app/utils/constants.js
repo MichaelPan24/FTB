@@ -15,25 +15,25 @@ export const USER = {
 
 export const FACEBOOK_LIST = [
   {
-    title: '收藏',
+    title: '关于我',
     icon: 'people'
   },
   {
     title: '我的项目',
-    icon: 'wallpaper'
+    icon: 'ondemand-video'
   },
   {
-    title: '修改个人信息',
-    icon: 'credit-card'
+    title: '我的收藏',
+    icon: 'favorite'
   },
   {
-    title: 'Nearby',
-    icon: 'location-city'
+    title: '通知',
+    icon: 'notifications'
   },
-  {
-    title: 'Games',
-    icon: 'videogame-asset'
-  },
+  // {
+  //   title: 'Games',
+  //   icon: 'videogame-asset'
+  // },
 ];
 
 export const SLACK_LIST = [

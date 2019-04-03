@@ -36,6 +36,8 @@ export class MyPage extends Component {
           navigate('MyProject');
         case '收藏':
           navigate('Favorite');
+        case '通知':
+          navigate('Notification')
         // case '修改个人信息':
         //   navigate();
       }
@@ -73,7 +75,7 @@ export class MyPage extends Component {
                       ))
                     }
                     </List>
-
+                    
                     <List>
                     {
                       SLACK_LIST.map((item, index) => (

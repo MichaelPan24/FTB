@@ -13,6 +13,7 @@ import RegisterPage from '../pages/login/RegisterPage';
 import FavoritePage from '../pages/FavoritePage';
 import MyProjectPage from '../pages/MyProjectPage';
 import AboutMePage from '../pages/AboutMePage';
+import NotificationPage from '../pages/NotificationPage';
 
 //配置底部导航栏每一栏模块栈
 const DemandsStack = createStackNavigator({
@@ -125,6 +126,12 @@ const MyStack = createStackNavigator({
           header: null,
           tabBarVisible
         }
+      }
+    },
+    Notification: {
+      screen: NotificationPage,
+      navigationOptions: ({navigation}) => {
+        
       }
     }
   },{
