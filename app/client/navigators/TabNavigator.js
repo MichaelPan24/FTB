@@ -8,7 +8,10 @@ import NewDemandPage from '../pages/NewDemandPage';
 import ShowPage from '../pages/ShowPage'
 import ShowDetailPage from '../pages/ShowDetailPage'
 import MyPage from '../pages/MyPage';
-
+import LoginPage from '../pages/login/LoginPage';
+import RegisterPage from '../pages/login/RegisterPage';
+import FavoritePage from '../pages/FavoritePage';
+import MyProjectPage from '../pages/MyProjectPage';
 
 //配置底部导航栏每一栏模块栈
 const DemandsStack = createStackNavigator({
@@ -79,6 +82,57 @@ const MyStack = createStackNavigator({
           // headerStyle: {opacity: 0.7},
         }
       }
+    },
+    Login: {
+      screen: LoginPage,
+      navigationOptions: ({navigation}) => {
+        return {
+          header: null,
+          
+        }
+      }
+    },
+    Register: {
+      screen: RegisterPage,
+      navigationOptions: ({navigation}) => {
+        return {
+          header: null
+        }
+      }
+    },
+    Favorite: {
+      screen: FavoritePage,
+      navigationOptions: ({navigation}) => {
+        return {
+          header: null
+        }
+      }
+    },
+    Project: {
+      screen: MyProjectPage,
+      navigationOptions: ({navigation}) => {
+        return {
+          header: null
+        }
+      }
+    },
+    AboutMe: {
+      screen: AboutMePage,
+      navigationOptions: ({navigation}) => {
+        return {
+          header: null
+        }
+      }
+    }
+  },{
+    navigationOptions: ({navigation}) => {
+      let tabBarVisible = true;
+      if(navigation.state.index>0){
+        tabBarVisible = false;
+      }
+      return {
+        tabBarVisible
+      }
     }
   })
 
@@ -122,8 +176,8 @@ export default BottomTab = createBottomTabNavigator({
     }
 },{
   tabBarOptions: {
-    inactiveTintColor: 'white',
-    activeTintColor: 'gray',
+    // inactiveTintColor: 'white',
+    activeTintColor: 'black',
   },
 })
 

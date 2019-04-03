@@ -1,7 +1,7 @@
 const API_URL = "https://api.dribbble.com/v2/",
     ACCESS_TOKEN = "9f061d26c5a8be96b17a81718959a67dd54ca9669ca41752777193f7cc5be7c3";
 
-const LocalURL = "http://192.168.1.130:3301/";
+const LocalURL = "http://localhost:3301/";
 
 const User = 'user',
     shots = '/shots';
@@ -17,7 +17,7 @@ function fetchData(URL) {
 
 function getDemands(URL= LocalURL) {
     return fetch(URL)
-      .then(data => data.json())
+      .then(response => {if(response.ok) return response.json()})
 }
 
 function getUsersShots(type=(User+shots)) {

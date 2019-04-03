@@ -10,7 +10,6 @@ import {Provider, connect} from 'react-redux';
 import BottomTab from './TabNavigator'
 
 import WelcomePage from '../pages/WelcomePage';
-import LoginPage from '../pages/LoginPage';
 import HomeCell from '../commons/ShowCell'
 
 
@@ -25,9 +24,6 @@ const InitStack = createStackNavigator({
         header: null
       }
     }
-  },
-  Login: {
-    screen: LoginPage
   }
 })
 

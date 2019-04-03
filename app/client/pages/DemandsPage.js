@@ -5,12 +5,12 @@ import  Icon from 'react-native-vector-icons/AntDesign'
 
 import NavigationBar from '../commons/NavigationBar';
 import DemandCell from '../commons/DemandCell';
-import Dialog from '../commons/Dialog';
 
 import actions from '../action';
 
-const URL = "http://192.168.1.130:3301/";
+const URL = "http://125.220.218.237:3301/";
 const type = 'demands';
+let count = 0;
 
 export class InfoPage extends Component {
     constructor(props){
@@ -90,7 +90,7 @@ export class InfoPage extends Component {
                     <FlatList
                         data={demands.data}
                         renderItem={this._renderItem}
-                        keyExtractor={(item) => `${item._id}`}
+                        keyExtractor={(item, index) =>`${ item._id}`}
                         refreshControl={
                             <RefreshControl
                                 title={'loading'}

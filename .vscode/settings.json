@@ -1,4 +1,6 @@
 {
     "files.autoSaveDelay": 3000,
-    "files.enableTrash": false
+    "files.enableTrash": false,
+    "javascript.referencesCodeLens.enabled": true,
+    "typescript.referencesCodeLens.enabled": true
 }
