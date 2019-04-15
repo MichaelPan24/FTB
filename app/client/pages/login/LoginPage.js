@@ -2,29 +2,30 @@ import React, {Component} from 'react';
 import {View, StyleSheet, ImageBackground, TextInput, Button, Text} from 'react-native';
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
-import Loading from '../../commons/Loading';
+// import Loading from '../../commons/Loading';
 
 import actions from '../../action/index';
 
 export class LoginPage extends Component{
     constructor(props){
         super(props);
-        console.disableYellowBox = false;
+        console.disableYellowBox = true;
         this.state={
             email: '',
             pass: '',
+            isLoading: false
         }
     }
 
-    // static getDerivedStateFromProps(nextProps, prevState){
-    //     if(nextProps.user.isLoading === prevState.isLoading){
-    //         return null
-    //     }
-    //     return {
-    //         isLoading: nextProps.user.isLoading,
-    //         isLogin: nextProps.user.isLogin
-    //     }
-    // }
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.user.isLoading === prevState.isLoading){
+            return null
+        }
+        return {
+            isLoading: nextProps.user.isLoading,
+            // isLogin: nextProps.user.isLogin
+        }
+    }
     /**
      * 登录提交
      */
@@ -38,6 +39,10 @@ export class LoginPage extends Component{
             return true
         }
         
+     }
+
+     componentDidUpdate(prevProps, prevStates){
+        this.loadingLogin(this.props.user.isLoading, this.props.user.isLogin)
      }
 
     submit = () => {
@@ -130,8 +135,9 @@ export class LoginPage extends Component{
             <Spinner
                 visible={isLoading}
                 textContent={'请稍等'}
+                cancelable={true}
             />
-                 {this.loadingLogin(isLoading, isLogin)}
+                 {this._renderForm()}
                 
             </ImageBackground>
         )

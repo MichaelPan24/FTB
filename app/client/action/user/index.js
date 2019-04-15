@@ -18,19 +18,13 @@ export function onLogin(formData){
                     identify: data.user.identify,
                     user: data.user
                 })
-            }, err => {
-                dispatch({
-                    type: Types.LOGIN_FAIL,
-                    isLogin: false,
-                    errType: err,
-                    msg: err
-                })
             })
             .catch(err => {
                 dispatch({
                     type: Types.LOGIN_FAIL,
                     isLogin: false,
-                    msg: action.msg
+                    errType: err,
+                    msg: err
                 })
             })
     }
@@ -58,18 +52,13 @@ export function onLogout(){
 
 export function onRegister(formData){
     return dispatch => {
-        dispatch({type: Types.REGISTER});
+        dispatch({type: Types.REGISTER, });
         let user = new User(formData);
         user.register()
             .then(data => {
                 dispatch({
                     type: Types.REGISTER_SUCCESS,
-                })
-            }, err => {
-                dispatch({
-                    type: Types.REGISTER_FAIL,
-                    status: err.status,
-                    msg: err.msg
+                    isUploaded: true
                 })
             }).catch(err => {
                 dispatch({
@@ -84,18 +73,19 @@ export function onRegister(formData){
 //上传新的需求或作品展示时将会派发的action
 export function onUploadNew(identify, formData){
     return dispatch => {
-        dispatch({type: Types.UPLOAD_NEW, isLoading: true})     //上传图片中
+        dispatch({type: Types.UPLOAD_NEW})     //上传图片中
         let uploadNew = new UploadNew(identify, formData);
         uploadNew.uploadData().then( result => {
                 dispatch({
                     type: Types.UPLOAD_NEW_SUCCESS,
-                    isLoading: false,
-                    uploaded: result
+                    uploaded: result,
+                    isUploaded: true
                 })
         }).catch((err) => {
             dispatch({
                 type: Types.UPLOAD_NEw_FAIL,
-                isLoading: false
+                isUploaded: false,
+                msg: err
             })   
         });
     }

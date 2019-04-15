@@ -8,7 +8,7 @@ import DemandCell from '../commons/DemandCell';
 
 import actions from '../action';
 
-const URL = "http://125.220.218.237:3301/";
+const URL = "http://192.168.1.102:3301/";
 const type = 'demands';
 let count = 0;
 
@@ -90,13 +90,15 @@ export class InfoPage extends Component {
                     <FlatList
                         data={demands.data}
                         renderItem={this._renderItem}
-                        keyExtractor={(item, index) =>`${ item._id}`}
+                        keyExtractor={(item, index) =>`${item._id.toString()}`}
                         refreshControl={
                             <RefreshControl
                                 title={'loading'}
                                 refreshing={demands.isLoading}
+                                onRefresh={() => this.loadData()}
                             />
                         }
+                        
                     />
                  </View>
             </View>

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {View, StyleSheet, FlatList, RefreshControl, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Swiper from 'react-native-swiper';
+
 import actions from '../action';
 
 import NavigationBar from '../commons/NavigationBar';
@@ -37,28 +39,34 @@ export  class ShowPage extends Component {
             <ShowCell
                 data = {item}
                 onPress = {() => (this._onPress(item))}
+                key={`${item.id}`}
             />
         )
         
     }
 
+    addNewShow = () => {
+        const {navigation} = this.props;
+        navigation.navigate('newShow');
+    }
+
     renderRightButton = () => {
         return <TouchableOpacity
-            onPress={() => {
-                
-            }}
-        >
-            <View style={{padding: 5, marginRight: 8}}>
-                <Icon
-                    name={"pluscircle"}
-                    size={24}
-                    style={{
-                        marginRight: 8,
-                        alignSelf: 'center',
-                        // color: 'white',
-                    }}/>
-            </View>
-        </TouchableOpacity>
+                onPress={() => {
+                this.addNewShow()
+                    }}
+                >
+                    <View style={{padding: 5, marginRight: 8}}>
+                        <Icon
+                            name={"pluscircle"}
+                            size={24}
+                            style={{
+                                marginRight: 8,
+                                alignSelf: 'center',
+                                // color: 'white',
+                            }}/>
+                    </View>
+                </TouchableOpacity>
     }
 
     render(){
@@ -83,8 +91,8 @@ export  class ShowPage extends Component {
                         refreshControl={
                             <RefreshControl
                                 title={'loading'}
-                                titleColor={'yellow'}
                                 refreshing ={showWorks.isLoading}
+                                onRefresh= {() => this.loadData()}
                             />
                         }             
                     />

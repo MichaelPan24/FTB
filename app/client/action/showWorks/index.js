@@ -12,15 +12,13 @@ export function onRefreshShowWorks(url, type, pageSize, pageIndex){
                 dispatch({
                     type: Types.SHOW_REFRESH_SUCCESS,
                     data: data && data.data ,
-                    isLoading: false,
                     // currentItems: handleData()
                 })  
             })
             .catch(err => {
                 dispatch({
                     type: Types.SHOW_REFRESH_FAIL,
-                    err,
-                    isLoading: false
+                    err: err,
                 })
             })
     }

@@ -15,17 +15,17 @@ export const USER = {
 
 export const FACEBOOK_LIST = [
   {
-    title: '关于我',
+    title: '关于本项目',
     icon: 'people'
   },
   {
-    title: '我的项目',
+    title: '我发布的项目',
     icon: 'ondemand-video'
   },
-  {
-    title: '我的收藏',
-    icon: 'favorite'
-  },
+  // {
+  //   title: '我的收藏',
+  //   icon: 'favorite'
+  // },
   {
     title: '通知',
     icon: 'notifications'
@@ -38,20 +38,20 @@ export const FACEBOOK_LIST = [
 
 export const SLACK_LIST = [
   {
-    title: 'Activity',
+    title: '收藏的需求',
     icon: 'bookmark-border'
   },
   {
-    title: 'Notifications',
-    icon: 'notifications-none'
+    title: '喜欢的作品',
+    icon: 'favorite'
   },
+  // {
+  //   title: 'Starred Items',
+  //   icon: 'star-border'
+  // },
   {
-    title: 'Starred Items',
-    icon: 'star-border'
-  },
-  {
-    title: 'Your Files',
-    icon: 'cloud-queue'
+    title: '我的资料',
+    icon: 'assignment-ind'
   },
 ];
 

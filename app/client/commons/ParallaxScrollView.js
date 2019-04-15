@@ -286,7 +286,7 @@ export default class ParallaxScrollView extends Component {
 
 ParallaxScrollView.defaultProps = {
   userImage: {uri: 'http://i.imgur.com/RQ1iLOs.jpg'},
-  backgroundSource: {uri: 'http://i.imgur.com/6Iej2c3.png'},
+  // backgroundSource: {uri: 'http://i.imgur.com/6Iej2c3.png'},
   windowHeight: SCREEN_HEIGHT * DEFAULT_WINDOW_MULTIPLIER,
   leftIconOnPress: () => console.log('Left icon pressed'),
   rightIconOnPress: () => console.log('Right icon pressed')
@@ -295,7 +295,7 @@ ParallaxScrollView.defaultProps = {
 ParallaxScrollView.propTypes = {
   isLogin: PropTypes.string,
   ...ScrollViewPropTypes,
-  backgroundSource: PropTypes.object,
+  // backgroundSource: PropTypes.object,
   windowHeight: PropTypes.number,
   navBarTitle: PropTypes.string,
   navBarTitleColor: PropTypes.string,

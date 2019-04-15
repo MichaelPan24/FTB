@@ -29,7 +29,7 @@ export default function onAction(state= defaultState, action){
         case Types.DEMANDS_REFRESH_SUCCESS:     //下拉刷新成功
             return {
                 ...state,
-                data: [...state[`data`], ...action.data],
+                data: [ ...action.data],
                 isLoading: false
             };
         case Types.DEMANDS_REFRESH:     //下拉刷新

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, ImageBackground, TextInput, Text, Button, Picker} from 'react-native';
 import {connect} from 'react-redux';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import Loading from '../../commons/Loading';
 import actions from '../../action/index';
@@ -14,6 +15,7 @@ export class RegisterPage extends Component{
             uName: '',
             identify: ''
         }
+        console.disableYellowBox=true;
     }
 
     shouldComponentUpdate(nextProps, nextState){
@@ -28,7 +30,11 @@ export class RegisterPage extends Component{
     loadingRegister = (isLoading, isRegistered) => {
         const {navigation, user} = this.props;
         if(isLoading && !isRegistered){
-            return <Loading/>;
+            return <Spinner
+                        textContent={'请稍等'}
+                        visible={isLoading}
+                        cancelable={true}
+            />;
         }else if(!isLoading && isRegistered){
             window.alert('注册成功');
             //登陆成功导航到我的页面
@@ -44,7 +50,6 @@ export class RegisterPage extends Component{
 
     _renderForm = () => {
         return (
-          
                 <View style={styles.container}>
                     <View style={styles.formContainer}>
                         <View style={[styles.emailContainer,] }>

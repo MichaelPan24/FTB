@@ -1,5 +1,7 @@
 import  React, {Component}  from 'react';
 import {View, StyleSheet, TouchableOpacity, Image, Dimensions, Text} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
+import Swiper from 'react-native-swiper';
 
 const ScreenWidth = Dimensions.get('window');
 
@@ -9,7 +11,9 @@ export default class HomeCell extends Component{
         console.disableYellowBox = true;
     }
 
-
+    /**
+     * 图片作品展示使用轮播图进行
+     */
     render(){
         const {data, onPress} = this.props
         return (
@@ -38,7 +42,14 @@ export default class HomeCell extends Component{
                                 stylesheet={styles.html_container}
                             />
                         </View> */}
-                    </View> 
+                    </View>
+                    <Icon
+                        size={20}
+                        name={'hearto'}
+                        onPress={()=> this._favoriteProject}
+                        style={{position: 'absolute', right: 15, top: 10}} 
+                        // color={}
+                        /> 
                 </TouchableOpacity>
             </View>
         )     
@@ -48,7 +59,7 @@ export default class HomeCell extends Component{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'center', 
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 10,

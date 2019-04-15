@@ -1,6 +1,6 @@
 import {handleFormData} from '../../utils/handleForm';
 
-const URL = "http://125.220.218.237:3301";
+const URL = "http://192.168.1.102:3301";
 export default class User{
     constructor(formBody){
         this.formBody = formBody;
@@ -36,7 +36,7 @@ export default class User{
 
     logOut(){
         return new Promise((resolve, reject) => {
-            handleFormData(this.formBody, URL+'/api/user/logout', {method: 'get', headers: null, body: null, credentials: 'include'})
+            handleFormData(this.formBody, URL+'/api/user/logout', {method: 'get',  body: null, credentials: 'include'})
                 .then(response => {
                     if(response.ok){
                         resolve('已登出')
@@ -44,4 +44,36 @@ export default class User{
                 }).catch(err => reject(err))
         })
     }
+
+    /**
+     * 
+     * @param {String} userId get请求中 URl的参数,传入用户的id
+     * @param {String} identify  get请求中的 URL的参数, 传入用户身份
+     */
+    getProject(userId, identify){
+        return new Promise((resolve, reject) => {
+            handleFormData(null, `${URL}/api/user/${userId}/${identify}/projects`, {method: 'get', body: null, credentials: 'include'})
+                .then(response => {
+                    if(response.ok){
+                        resolve(response.json())
+                    }
+                }).catch(err => reject(err))  
+        })
+    }
+    /**
+     * 
+     * @param {String} userId   get请求中 URL参数, 传入用户的id 
+     * @param {String} type     get请求中 URL参数, 传入用户收藏的类型
+     */
+    getFavorite(userId, type){
+        return new Promise((resolve, reject) => {
+            handleFormData(null, `${URL}/api/user/${userId}/favorite/${type}`)
+                .then(response => {
+                    if(response.ok){
+                        resolve(response.json())
+                    }
+                }).catch(err => reject(err))
+        })
+    }
 }
+       

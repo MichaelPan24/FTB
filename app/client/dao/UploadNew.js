@@ -5,7 +5,7 @@ import {handleFormData} from '../../utils/handleForm';
  * @param handleFormData要上传的表单数据
  * 
 */
-const URL = "http://192.168.1.103:3301"
+const URL = "http://192.168.1.102:3301"
 export default class UploadNew{
     constructor(identify, formBody){
         this.identify = identify;
@@ -14,16 +14,16 @@ export default class UploadNew{
 
     //根据字段选择远程上传的路径返回一个promise对象
     uploadData(){
-        const uploadData = this.identify === '0' ? this.addNewDemand(this.formBody) : this.addNewShow(this.formBody);
-        return uploadData;
+        return this.identify === '0' ? this.addNewDemand() : this.addNewShow();
     }
 
     //企业用户上传需求
-    addNewDemand(formObj){
+    addNewDemand(){
         return new Promise((resolve, reject) => {
-            handleFormData(formObj, URL +'/api/project/upload')
+            handleFormData(this.formBody, URL+'/api/project/upload', {credentials: 'include'})
                 .then(response => {
-                    if(response.ok && response.status ===200){
+                    console.log(response)
+                    if(response.ok ){
                         resolve(response.json())
                     }else{
                         reject('上传失败');
@@ -33,11 +33,11 @@ export default class UploadNew{
     }
 
     //学生用户上传作品
-    addNewShow(formObj){
+    addNewShow(){
         return new Promise((resolve, reject) => {
-            handleFormData(formObj, URL +'/api/project/upload')
+            handleFormData(this.formBody, URL +'/api/show/upload',{credentials: 'include'})
                 .then(response => {
-                    if(response.ok && response.status ===200){
+                    if(response.ok ){
                         resolve('上传成功!')
                     }else{
                         reject('上传失败');

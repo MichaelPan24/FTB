@@ -6,15 +6,17 @@ import DemandsPage from '../pages/DemandsPage';
 import DemandsDetailPage from '../pages/DemandsDetailPage'
 import NewDemandPage from '../pages/NewDemandPage';
 import ShowPage from '../pages/ShowPage'
+import NewShowPage from '../pages/NewShowPage';
 import ShowDetailPage from '../pages/ShowDetailPage'
 import MyPage from '../pages/MyPage';
 import LoginPage from '../pages/login/LoginPage';
 import RegisterPage from '../pages/login/RegisterPage';
-import FavoritePage from '../pages/FavoritePage';
-import MyProjectPage from '../pages/MyProjectPage';
-import AboutMePage from '../pages/AboutMePage';
-import NotificationPage from '../pages/NotificationPage';
-
+import FavoriteProjectPage from '../pages/Me/FavoriteProjectPage';
+import FavoriteWorkPage from '../pages/Me/FavoriteWorkPage';
+import MyProjectPage from '../pages/Me/MyProjectPage';
+import AboutMePage from '../pages/Me/AboutMePage';
+import NotificationPage from '../pages/Me/NotificationPage';
+import MyInfoPage from '../pages/Me/MyInfoPage';
 //配置底部导航栏每一栏模块栈
 const DemandsStack = createStackNavigator({
     Demands: {
@@ -40,7 +42,7 @@ const DemandsStack = createStackNavigator({
     },
     newDemand: {
       screen: NewDemandPage,
-      navigationOptions: ({navigation} ) => {
+      navigationOptions: ({navigation}) => {
         return {
           header: null,
           gesturesEnabled: true
@@ -70,6 +72,15 @@ const DemandsStack = createStackNavigator({
                 gesturesEnabled: true
             }
         }
+    },
+    newShow: {
+      screen: NewShowPage,
+      navigationOptions: ({navigation}) => {
+        return {
+          header: null,
+          gesturesEnabled: true
+        }
+      }
     }
 })
 
@@ -102,12 +113,20 @@ const MyStack = createStackNavigator({
         }
       }
     },
-    Favorite: {
-      screen: FavoritePage,
+    FavoriteProject: {
+      screen: FavoriteProjectPage,
       navigationOptions: ({navigation}) => {
-        return {
-          header: null
-        }
+        // return {
+        //   header: null
+        // }
+      }
+    },
+    FavoriteWork: {
+      screen: FavoriteWorkPage,
+      navigationOptions: ({navigation}) => {
+        // return {
+        //   header: null
+        // }
       }
     },
     MyProject: {
@@ -132,6 +151,12 @@ const MyStack = createStackNavigator({
       screen: NotificationPage,
       navigationOptions: ({navigation}) => {
         
+      }
+    },
+    MyInfo: {
+      screen: MyInfoPage,
+      navigation: ({navigation}) => {
+
       }
     }
   },{

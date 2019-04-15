@@ -13,9 +13,10 @@ export default  class InfoDetail extends Component{
 
     _genImage = ({image}) => {
         let imgArr = [];
-        image.forEach(img => {
+        image.forEach((img, index) => {
             imgArr.push(
                 <Image
+                    key={index}
                     source={{uri:img}}
                     style={styles.image}   
                 />)
@@ -49,7 +50,7 @@ export default  class InfoDetail extends Component{
     render(){
         const {getParam} = this.props.navigation;
         const data = getParam('data');
-        const avatar = data.avatar || require('../../../img/AuthorAvatar.png');
+        const avatar = data.avatar ;
         const date = new Date(data.date);
         let navigationBar = <NavigationBar
                                 leftButton={this.renderLeftButton()}
@@ -65,7 +66,7 @@ export default  class InfoDetail extends Component{
                         style={styles.detailContainer}>
                             <View style={styles.header}>
                                 <Image
-                                    source={{uri: avatar}}
+                                    source={avatar!==undefined ? {uri: avatar} : require('../../../img/AuthorAvatar.png')}
                                     style={styles.avatar}
                                 />
                                 <Text style={styles.companyName}>{data.companyName}</Text>

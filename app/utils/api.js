@@ -1,3 +1,5 @@
+import fetch from 'cross-fetch';
+
 const API_URL = "https://api.dribbble.com/v2/",
     ACCESS_TOKEN = "9f061d26c5a8be96b17a81718959a67dd54ca9669ca41752777193f7cc5be7c3";
 
@@ -16,7 +18,7 @@ function fetchData(URL) {
 }
 
 function getDemands(URL= LocalURL) {
-    return fetch(URL)
+    return fetch(URL, {mode: 'same-origin', credentials:'include'})
       .then(response => {if(response.ok) return response.json()})
 }
 

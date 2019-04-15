@@ -12,6 +12,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height
 export class MyPage extends Component {
     constructor(props){
         super(props)
+        console.disableYellowBox=true;
     }
 
     _toggleLogin = (isLogin) => {
@@ -30,16 +31,24 @@ export class MyPage extends Component {
       const {navigation} = this.props;
       const {navigate} = navigation;
       switch(title){
-        case '关于我':
+        case '关于本项目':
           navigate('AboutMe');
-        case '我的项目':
+          break;
+        case '我发布的项目':
           navigate('MyProject');
-        case '收藏':
-          navigate('Favorite');
+          break;
         case '通知':
-          navigate('Notification')
-        // case '修改个人信息':
-        //   navigate();
+          navigate('Notification');
+          break;
+        case '收藏的需求':
+          navigate('FavoriteProject');
+          break;
+        case '喜欢的作品':
+          navigate('FavoriteWork');
+          break;
+        case '我的资料':
+          navigate('MyInfo');
+          break;
       }
     }
 
@@ -53,12 +62,13 @@ export class MyPage extends Component {
             <Spinner
               visible={isLoading}
               textContent={'请稍等...'}
+              cancelable={true}
             />
             <ParallaxScrollView
                 windowHeight={SCREEN_HEIGHT * 0.4}
                 backgroundSource={require('../../../img/backGround.jpg')}
                 navBarTitle='Michael Pan'
-                userName={isLogin? user.name: null}
+                userName={isLogin? user.user.name: null}
                 userTitle={isLogin? user.identify==='0'? '企业用户': '个人用户': null}
                 userImage = {require('../../../img/userAvatar.jpg')}
                 // userImage='http://i.imgur.com/RQ1iLOs.jpg'  //会在以后根据需要考虑增添用户头像
@@ -93,7 +103,7 @@ export class MyPage extends Component {
                         key={1}
                         hideChevron={true}
                         onPress={this._toggleLogin(isLogin)}
-                        title={this.isLogin?'登出': '登入'}
+                        title={isLogin?'登出': '登入'}
                         titleStyle={styles.logoutText}
                         icon={{name: ''}} />
                     </List>

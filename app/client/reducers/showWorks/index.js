@@ -2,10 +2,10 @@ import Types from '../../action/types'
 
 const defaultState = {
     // ShowWorks: {
-        data: [
+        // data: [
             
-        ],
-        isLoading: false,
+        // ],
+        // isLoading: false,
         
     }
         
@@ -16,8 +16,8 @@ export default function LoadingWorks(state= defaultState, action){
         case Types.SHOW_REFRESH_SUCCESS:     //下拉刷新成功
             return {
                 ...state,
-                data:  [...state[`data`],  ...action.data],   //原始数据
-                currentItems: action.currentItem,    //此次要显示的数据
+                data:  [  ...action.data],   //原始数据
+                // currentItems: action.currentItem,    //此次要显示的数据
                 isLoading: false
             };
         case Types.SHOW_REFRESH:    //下拉刷新
@@ -29,7 +29,7 @@ export default function LoadingWorks(state= defaultState, action){
             return {
                 ...state,
                 isLoading: false,
-                info: action.info
+                info: action.err
             };
         case Types.SHOW_LOAD:   //上拉加载更多
             return {

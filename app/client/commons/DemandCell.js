@@ -1,6 +1,6 @@
 import  React, {Component}  from 'react';
 import {View, StyleSheet, TouchableOpacity, Image, Text} from 'react-native';
-
+import Icon from 'react-native-vector-icons/AntDesign'
 export default class DemandCell extends Component{
     constructor(props){
         super(props)
@@ -15,6 +15,7 @@ export default class DemandCell extends Component{
                 <Image
                     source={{uri: image[i]}}
                     style = {styles.img}
+                    key={`${image[i]}-${i}`}
                 />
             )
         }
@@ -37,6 +38,10 @@ export default class DemandCell extends Component{
             }
             return description.toString.subStr(0, 100);
     }
+
+    _favoriteProject = () => {
+        
+    }
     render(){
         const {data, onPress} = this.props
         const date = new Date(data.date);
@@ -46,13 +51,15 @@ export default class DemandCell extends Component{
                     <View style={styles.header}>
                         <View style={styles.nameContainer}>
                             <Image
-                                source={{uri:data.avatar}}
+                                source={data.avatar !== undefined ? {uri: data.avatar} : require('../../../img/AuthorAvatar.png')}
                                 style={styles.avatar}
                             />
                             <Text style={styles.text}>
                                 {data.companyName}
                             </Text>
+                            
                         </View>
+                        
                         <Text style={styles.header_title}>
                             {data.title}
                         </Text>
@@ -68,9 +75,16 @@ export default class DemandCell extends Component{
                     </View>
                     <View style={styles.footer}> 
                         <Text>
-                            {`${date.getFullYear().toString()}-${date.getMonth().toString()}-${date.getDay().toString()}`}
+                            {`${date.getFullYear().toString()}-${(date.getMonth()+1).toString()}-${date.getDay().toString()}`}
                         </Text>
                     </View>
+                    <Icon
+                        size={20}
+                        name={'tago'}
+                        onPress={()=> this._favoriteProject}
+                        style={{position: 'absolute', right: 15, top: 10}} 
+                        // color={}
+                        />
                 </TouchableOpacity>
             </View>
         )     
@@ -103,12 +117,14 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     nameContainer: {
+        flex: 1,
         flexDirection: 'row',
         marginBottom: 5
     },
     avatar: {
         width: 36,
-        height: 36
+        height: 36,
+        borderRadius: 20
     },
     text: {
         textAlignVertical: 'center',
