@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {Dimensions, View, Text, ScrollView, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { Icon, List, ListItem } from 'react-native-elements';
+import { List, ListItem } from 'react-native-elements';
 
 import actions from '../action/index';
 
 import ParallaxScrollView from '../commons/ParallaxScrollView';
-import {FACEBOOK_LIST, SLACK_LIST} from '../../utils/constants';
+import {MY_PROJECT_LIST, MY_FAVORITE_LIST} from '../../utils/constants';
 const SCREEN_HEIGHT = Dimensions.get('window').height
 export class MyPage extends Component {
     constructor(props){
@@ -28,20 +28,20 @@ export class MyPage extends Component {
     }
 
     onPressItem(title){
-      const {navigation} = this.props;
+      const {navigation, user} = this.props;
       const {navigate} = navigation;
       switch(title){
         case '关于本项目':
           navigate('AboutMe');
           break;
-        case '我发布的项目':
-          navigate('MyProject');
+        case '我发布的项目/需求':
+          navigate('MyProject',{user: user.user || undefined, identify: user.identify});
           break;
         case '通知':
           navigate('Notification');
           break;
         case '收藏的需求':
-          navigate('FavoriteProject');
+          navigate('FavoriteDemand');
           break;
         case '喜欢的作品':
           navigate('FavoriteWork');
@@ -60,7 +60,7 @@ export class MyPage extends Component {
         return (
           <View style={{flex: 1}}>
             <Spinner
-              visible={isLoading}
+              visible={!isLogin && isLoading}
               textContent={'请稍等...'}
               cancelable={true}
             />
@@ -76,7 +76,7 @@ export class MyPage extends Component {
                   <View style={styles.listView}>
                     <List>
                     {
-                      FACEBOOK_LIST.map((item, index) => (
+                      MY_PROJECT_LIST.map((item, index) => (
                         <ListItem
                           key={index}
                           onPress={() => this.onPressItem(item.title)}
@@ -88,7 +88,7 @@ export class MyPage extends Component {
                     
                     <List>
                     {
-                      SLACK_LIST.map((item, index) => (
+                      MY_FAVORITE_LIST.map((item, index) => (
                         <ListItem
                           key={index}
                           onPress={() => this.onPressItem(item.title)}
@@ -105,7 +105,7 @@ export class MyPage extends Component {
                         onPress={this._toggleLogin(isLogin)}
                         title={isLogin?'登出': '登入'}
                         titleStyle={styles.logoutText}
-                        icon={{name: ''}} />
+                        />
                     </List>
                   </View>  
             </ParallaxScrollView>

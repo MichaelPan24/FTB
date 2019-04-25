@@ -8,7 +8,7 @@ import DemandCell from '../commons/DemandCell';
 
 import actions from '../action';
 
-const URL = "http://192.168.1.102:3301/";
+const URL = "http://119.23.227.22:3303/";
 const type = 'demands';
 let count = 0;
 
@@ -98,7 +98,6 @@ export class InfoPage extends Component {
                                 onRefresh={() => this.loadData()}
                             />
                         }
-                        
                     />
                  </View>
             </View>

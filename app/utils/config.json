@@ -1,0 +1,60 @@
+{
+    "aboutMe": {
+        "Blog": {
+            "name": "技术博客",
+            "icon": "laptop",
+            "items": [
+                {
+                    "title": "掘金",
+                    "url": "https://juejin.im/user/5bba30aef265da0aef4e2670"
+                },
+                {
+                    "title": "segmentfault",
+                    "url": "segmentfault.com/u/mamba_py24"
+                },
+                {
+                    "title": "github",
+                    "url": "https://github.com/MichaelPan24"
+                }
+            ]
+        },
+        "Website": {
+            "name": "我的网站",
+            "icon": "web",
+            "items": [
+                {
+                    "title": "阳仔的小站",
+                    "url": "https://www.pyslife.club"
+                }
+            ]
+        },
+        "Sponsor": {
+            "name": "赞助本项目",
+            "icon": "tag-faces",
+            "items": [
+                {
+                    "title": "微信",
+                    "url": "../../img/weChat.jpg"
+                },
+                {
+                    "title": "支付宝",
+                    "url": "../../img/alipay.jpg"
+                }
+            ]
+        },
+        "Contact": {
+            "name": "联系我",
+            "icon": "contacts",
+            "items": [
+                {
+                    "title": "Email",
+                    "account": "1102847670py@gmail.com"
+                },
+                {
+                    "title": "qq",
+                    "account": "1102847670"
+                }
+            ]
+        }
+    }
+}

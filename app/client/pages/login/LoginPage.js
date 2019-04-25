@@ -133,7 +133,7 @@ export class LoginPage extends Component{
                 style={styles.backGround}
             >
             <Spinner
-                visible={isLoading}
+                visible={!isLogin && isLoading}
                 textContent={'请稍等'}
                 cancelable={true}
             />
@@ -172,6 +172,12 @@ const styles = StyleSheet.create({
         width: 300,
         paddingBottom: 0 
     },
+    email: {
+        flex: 1
+    },
+    pass: {
+        flex: 1
+    },
     emailContainer: {
         flex: 1,
         flexDirection: 'row'
@@ -190,7 +196,6 @@ const styles = StyleSheet.create({
     registerContainer: {
         height: 20,
         width: 300,
-        height: 10
     },
     register: {
         color: 'transparent',

@@ -6,7 +6,7 @@ const defaultState = {
     // isLogin: false, //是否登录
     // identify: '0',  //用户的身份
     uploaded: [],   //用户上传的项目
-    favorite: []    //用户收藏的项目
+    favorite: {demands: [], works: []}    //用户收藏的项目
 }
 
 
@@ -73,20 +73,20 @@ export default function userAction(state = defaultState, action){
             };
         case Types.UPLOAD_NEW_SUCCESS:  //发布新需求或者是作品
             if(state['isLogin']){
-                if(state['uploaded']){
+                // if(state['uploaded']){
                     return {
                         ...state,
-                        uploaded: state['uploaded'].concat(action.uploaded),
+                        uploaded:   action.uploaded,//state['uploaded'].concat(action.uploaded),
                         isLoading: false,
                         isUploaded: true
                     };
-                }
-                return {
-                    ...state,
-                    uploaded: action.uploaded,
-                    isLoading: false,
-                    isUploaded: true
-                }
+                // }
+                // return {
+                //     ...state,
+                //     uploaded: action.uploaded,
+                //     isLoading: false,
+                //     isUploaded: true
+                // }
             }
         case Types.UPLOAD_NEW:      //加载发布状态
             if(state['isLogin']){
@@ -103,6 +103,65 @@ export default function userAction(state = defaultState, action){
                     isUploaded: false,
                     msg: action.msg
                 };
+        case Types.GET_PROJECT:
+                return {
+                    ...state,
+                    isLoading: true,
+                };
+        case Types.GET_PROJECT_SUCCESS:
+                return {
+                    ...state,
+                    isLoading: false,
+                    uploaded: action.userProject
+                };
+        case Types.GET_PROJECT_FAIL:
+                return {
+                    ...state,
+                    isLoading: false,
+                    msg: actions.msg
+                };
+        case Types.GET_FAVORITE:
+                return {
+                    ...state,
+                    isLoading: true,
+                };
+        case Types.GET_FAVORITE_SUCCESS:
+                if(action.userFavoriteDemand){
+                    return {
+                        ...state,
+                        isLoading: false,
+                        favorite: {...state['favorite'], demands: action.userFavoriteDemand}
+                    }
+                }else if(action.userFavoriteWork){
+                    return {
+                        ...state,
+                        isLoading: false,
+                        favorite: {...state['favorite'], works: action.userFavoriteWork}
+                    }
+                }else if(!action.userFavoriteDemand || !action.userFavoriteWork){
+                    return {
+                        ...state,
+                        isLoading: false,
+                        favorite: {...state['favorite']}
+                    }
+                }
+        case Types.UPDATE_INFO:
+                return {
+                    ...state,
+                    isLoading: true
+                };
+        case Types.UPDATE_INFO_SUCCESS:
+                return {
+                    ...state,
+                    isLoading: false,
+                    user: action.updateUser
+                };
+        case Types.UPDATE_INFO_FAIL:
+                return {
+                    ...state,
+                    isLoading: false,
+                    msg: action.msg
+                }
         default:
             return state;
     }

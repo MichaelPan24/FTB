@@ -100,7 +100,7 @@ export default class BaseAddItem extends Component {
             multiple: true
         }).then(images => {
             console.log(images);
-            let imgContainer = images.map((img) =>({uri: img.path, type:'multipart/form-data', name:encodeURI(img.path.slice(img.path.lastIndexOf('/')+1))}))//需要更改
+            let imgContainer = images.map((img) =>({uri: img.path, type:'multipart/form-data', name:escape(img.path.slice(img.path.lastIndexOf('/')+1))}))//需要更改
             images.length ? this.setState({isPicked: true, imgArr: this.state.imgArr.concat(imgContainer)}) : this.state;
         })
     }
@@ -129,7 +129,7 @@ export default class BaseAddItem extends Component {
      }
 
     render(){
-        const {identify, isLoading } = this.props;
+        const {identify, user} = this.props;
         let navigationBar = <NavigationBar
             title={identify ==='0' ? '新需求' :'新作品'}
             leftButton={this.renderLeftButton()}
@@ -138,7 +138,7 @@ export default class BaseAddItem extends Component {
         return (
                 <View style={styles.container}>
                     <Spinner
-                        visible={isLoading}
+                        visible={user.isLoading}
                         textContent={'请稍等...'}
                         cancelable={true}
                     />

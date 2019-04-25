@@ -3,7 +3,6 @@ import {View, StyleSheet, ImageBackground, TextInput, Text, Button, Picker} from
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-import Loading from '../../commons/Loading';
 import actions from '../../action/index';
 export class RegisterPage extends Component{
     constructor(props){
@@ -19,7 +18,7 @@ export class RegisterPage extends Component{
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        if(this.state.email !== nextState.email || this.state.pass !== nextState.pass || this.state.uName !== nextState.uName){
+        if(this.state.email !== nextState.email || this.state.pass !== nextState.pass || this.state.uName !== nextState.uName || this.state.identify !== nextState.identify){
             return false;
         }else{
             return true;
@@ -27,25 +26,21 @@ export class RegisterPage extends Component{
 
     }
 
+    componentDidUpdate(prevProps, prevStates){
+        this.loadingRegister(this.props.user.isLoading, this.props.user.isRegistered)
+    }
+
     loadingRegister = (isLoading, isRegistered) => {
         const {navigation, user} = this.props;
-        if(isLoading && !isRegistered){
-            return <Spinner
-                        textContent={'请稍等'}
-                        visible={isLoading}
-                        cancelable={true}
-            />;
-        }else if(!isLoading && isRegistered){
+        if(!isLoading && isRegistered){
             window.alert('注册成功');
-            //登陆成功导航到我的页面
-            navigation.navigate('Login');
-        }else if(!isLoading && !isRegistered ){
-            if(user.status && user.status === 400){
-                window.alert(user.msg);
-                return this._renderForm();
-            }
+        }else if(!isLoading && !isRegistered && user.msg !==undefined){
+            window.alert(user.msg);
+            return this._renderForm();
+        }else{
             return this._renderForm();
         }
+        
     }
 
     _renderForm = () => {
@@ -131,7 +126,13 @@ export class RegisterPage extends Component{
                         source={require('../../../../img/backGround.jpg')}
                         style={styles.backGround}
                     >
-                        {this.loadingRegister(isLoading, isRegistered)}
+                        <Spinner
+                            visible={!isRegistered && isLoading}
+                            textContent={'请稍等'}
+                            cancelable={true}
+                        />
+                        {this._renderForm()}
+                        {/* {this.loadingRegister(isLoading, isRegistered)} */}
                     </ImageBackground>
         )
     }

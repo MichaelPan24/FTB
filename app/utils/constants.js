@@ -13,30 +13,30 @@ export const USER = {
   image: 'http://i.imgur.com/uma9OfG.jpg',
 };
 
-export const FACEBOOK_LIST = [
+export const MY_PROJECT_LIST = [
   {
     title: '关于本项目',
     icon: 'people'
   },
   {
-    title: '我发布的项目',
+    title: '我发布的项目/需求',
     icon: 'ondemand-video'
   },
   // {
   //   title: '我的收藏',
   //   icon: 'favorite'
   // },
-  {
-    title: '通知',
-    icon: 'notifications'
-  },
+  // {
+  //   title: '通知',
+  //   icon: 'notifications'
+  // },
   // {
   //   title: 'Games',
   //   icon: 'videogame-asset'
   // },
 ];
 
-export const SLACK_LIST = [
+export const MY_FAVORITE_LIST = [
   {
     title: '收藏的需求',
     icon: 'bookmark-border'
@@ -55,25 +55,3 @@ export const SLACK_LIST = [
   },
 ];
 
-export const GENERIC_LIST = [
-  {
-    title: 'Edit Profile',
-    icon: 'person'
-  },
-  {
-    title: 'Change Password',
-    icon: 'fingerprint'
-  },
-  {
-    title: 'Settings',
-    icon: 'settings'
-  },
-  {
-    title: 'History',
-    icon: 'history'
-  },
-  {
-    title: 'Help',
-    icon: 'help'
-  },
-];

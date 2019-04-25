@@ -3,7 +3,7 @@ import fetch from 'cross-fetch';
 const API_URL = "https://api.dribbble.com/v2/",
     ACCESS_TOKEN = "9f061d26c5a8be96b17a81718959a67dd54ca9669ca41752777193f7cc5be7c3";
 
-const LocalURL = "http://localhost:3301/";
+const getURL = "http://119.23.227.22:3303"; 
 
 const User = 'user',
     shots = '/shots';
@@ -17,14 +17,17 @@ function fetchData(URL) {
     }).then((response) => response.json())
 }
 
-function getDemands(URL= LocalURL) {
-    return fetch(URL, {mode: 'same-origin', credentials:'include'})
-      .then(response => {if(response.ok) return response.json()})
+function getDemands(URL= getURL) {
+    return fetch(URL, {mode: 'cors', credentials:'include'})
+            .then(response => {if(response.ok) return response.json()})
 }
 
 function getUsersShots(type=(User+shots)) {
-  const URL = API_URL + type;
-  return fetchData(URL);
+  // const URL = API_URL + type;
+  // return fetchData(URL);
+  const URL = getURL + '/api/show/current'
+  return fetch(URL, {mode: 'cors', credentials:'include'})
+          .then(response => {if(response.ok) return response.json()})
 }
 
 //获取具体的用户作品

@@ -5,7 +5,7 @@ import {handleFormData} from '../../utils/handleForm';
  * @param handleFormData要上传的表单数据
  * 
 */
-const URL = "http://192.168.1.102:3301"
+const URL = "http://119.23.227.22:3303"
 export default class UploadNew{
     constructor(identify, formBody){
         this.identify = identify;
@@ -38,7 +38,7 @@ export default class UploadNew{
             handleFormData(this.formBody, URL +'/api/show/upload',{credentials: 'include'})
                 .then(response => {
                     if(response.ok ){
-                        resolve('上传成功!')
+                        resolve(response.json())
                     }else{
                         reject('上传失败');
                     }

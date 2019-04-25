@@ -108,8 +108,9 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     avatar: {
-            width: 36,
-            height: 36
+        width: 36,
+        height: 36,
+        borderRadius: 20
     },  
     companyName: {
         fontWeight: 'bold',

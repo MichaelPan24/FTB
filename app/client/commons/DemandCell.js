@@ -47,7 +47,7 @@ export default class DemandCell extends Component{
         const date = new Date(data.date);
         return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={onPress} style={styles.cellContainer}>
+                <TouchableOpacity onPress={onPress} style={styles.cellContainer} activeOpacity={0.8}>
                     <View style={styles.header}>
                         <View style={styles.nameContainer}>
                             <Image

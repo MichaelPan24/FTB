@@ -11,7 +11,7 @@ import ShowDetailPage from '../pages/ShowDetailPage'
 import MyPage from '../pages/MyPage';
 import LoginPage from '../pages/login/LoginPage';
 import RegisterPage from '../pages/login/RegisterPage';
-import FavoriteProjectPage from '../pages/Me/FavoriteProjectPage';
+import FavoriteDemandPage from '../pages/Me/FavoriteDemandPage';
 import FavoriteWorkPage from '../pages/Me/FavoriteWorkPage';
 import MyProjectPage from '../pages/Me/MyProjectPage';
 import AboutMePage from '../pages/Me/AboutMePage';
@@ -113,27 +113,33 @@ const MyStack = createStackNavigator({
         }
       }
     },
-    FavoriteProject: {
-      screen: FavoriteProjectPage,
+    FavoriteDemand: {
+      screen: FavoriteDemandPage,
       navigationOptions: ({navigation}) => {
-        // return {
-        //   header: null
-        // }
+        return {
+          header: null
+        }
       }
     },
     FavoriteWork: {
       screen: FavoriteWorkPage,
       navigationOptions: ({navigation}) => {
-        // return {
-        //   header: null
-        // }
+        return {
+          header: null
+        }
       }
     },
     MyProject: {
       screen: MyProjectPage,
       navigationOptions: ({navigation}) => {
+        // let tabBarVisible = true;
+        // console.log(navigation.state)
+        // if(navigation.state.index>0 ){ 
+        //     tabBarVisible = false
+        // }
         return {
-          header: null
+          header: null,
+          // tabBarVisible
         }
       }
     },
@@ -155,8 +161,10 @@ const MyStack = createStackNavigator({
     },
     MyInfo: {
       screen: MyInfoPage,
-      navigation: ({navigation}) => {
-
+      navigationOptions: ({navigation}) => {
+          return {
+            header: null
+          }
       }
     }
   },{

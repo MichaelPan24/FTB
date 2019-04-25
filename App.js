@@ -12,7 +12,6 @@ export default class App extends Component{
           <PersistGate loading={null} persistor={store().persistor}>
             <AppNavigator/>
           </PersistGate>
-            
         </Provider>
       )
     }

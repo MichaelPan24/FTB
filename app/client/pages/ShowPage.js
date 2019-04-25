@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {View, StyleSheet, FlatList, RefreshControl, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Swiper from 'react-native-swiper';
 
 import actions from '../action';
 
@@ -39,7 +38,7 @@ export  class ShowPage extends Component {
             <ShowCell
                 data = {item}
                 onPress = {() => (this._onPress(item))}
-                key={`${item.id}`}
+                // key={`${item._id.toString()}`}
             />
         )
         
@@ -87,7 +86,7 @@ export  class ShowPage extends Component {
                     <FlatList
                         data={showWorks.data}
                         renderItem={this._renderItem}
-                        keyExtractor={(item) => `${item.id}`}
+                        keyExtractor={(item) => `${item._id.toString()}`}
                         refreshControl={
                             <RefreshControl
                                 title={'loading'}

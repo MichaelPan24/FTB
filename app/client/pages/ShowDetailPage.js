@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, ScrollView, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, ScrollView, TouchableOpacity, FlatList, PixelRatio} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 import NavigationBar from '../commons/NavigationBar';
@@ -19,6 +19,22 @@ export default class DetailsPage extends Component {
     goBack = () => {
         const {navigation} = this.props;
         navigation.goBack();
+    }
+
+    _renderCommentItem = ({item}) => {
+
+    }
+    _renderCommentList = () => {
+        return <View style={styles.sectionSpacing}>
+                    <View style={styles.separator} />
+                    <Text style={styles.heading}>Comments</Text>
+                    <View style={styles.separator} />
+                    <FlatList
+                        ref="commentsView"
+                        data={data}
+                        renderItem={this._renderCommentItem}
+                    />
+                </View>
     }
 
     renderLeftButton = () => {
@@ -81,5 +97,17 @@ const styles = StyleSheet.create({
       detail_container: {
           flexDirection: 'column',
 
+      },
+      sectionSpacing: {
+        marginTop: 20
+      },
+      separator: {
+        backgroundColor: "rgba(0, 0, 0, 0.1)",
+        height: 1 / PixelRatio.get(),
+        marginVertical: 10,
+      },
+      heading: {
+        fontWeight: "700",
+        fontSize: 16
       }
 })

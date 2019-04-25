@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import {connect} from 'react-redux';
-import ImagePicker from 'react-native-image-crop-picker';
 import actions from '../action/index';
 import BaseAddItem from '../commons/BaseAddItem';
 
@@ -25,7 +24,6 @@ export  class NewDemand extends Component{
                 navigation={navigation}
             />
         )
-        
     }
 }
 /**
@@ -48,37 +46,37 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(NewDemand);
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1, 
-        backgroundColor: '#F4F4F4',
+    // container: {
+    //     flex: 1, 
+    //     backgroundColor: '#F4F4F4',
         
-    },
-    img:{
-        width: 60,
-        height: 60,
-        marginLeft: 5
-    },
-    formContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        borderBottomColor: '#fff',
-        backgroundColor: '#fff',
-        borderBottomWidth: 1,
-        // padding: 20
-    },
-    inputContainer: {
-        flex: 1,
-        flexDirection: 'row'
-    },  
-    textInput: {
+    // },
+    // img:{
+    //     width: 60,
+    //     height: 60,
+    //     marginLeft: 5
+    // },
+    // formContainer: {
+    //     flex: 1,
+    //     flexDirection: 'column',
+    //     borderBottomColor: '#fff',
+    //     backgroundColor: '#fff',
+    //     borderBottomWidth: 1,
+    //     // padding: 20
+    // },
+    // inputContainer: {
+    //     flex: 1,
+    //     flexDirection: 'row'
+    // },  
+    // textInput: {
 
-    },
-    imagePickerContainer: {
-        flex: 1,
-        flexDirection: 'row'
-    },  
+    // },
+    // imagePickerContainer: {
+    //     flex: 1,
+    //     flexDirection: 'row'
+    // },  
  
-    publish: {
-        marginRight: 15
-    }
+    // publish: {
+    //     marginRight: 15
+    // }
 })

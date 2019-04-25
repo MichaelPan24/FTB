@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet, Text, FlatList, RefreshControl} from 'react-native';
 import {connect} from 'react-redux';
 
 import actions from '../../action/index';
+import DemandCell from '../../commons/DemandCell';
+import ShowCell from '../../commons/ShowCell';
+import NavigationBar from '../../commons/NavigationBar';
 import UserItem from '../../commons/UserItem';
 
-export class FavoriteWorkPage extends Component{
+export  class FavoriteDemandPage extends Component{
     constructor(props){
         super(props)
     }
@@ -15,11 +18,11 @@ export class FavoriteWorkPage extends Component{
         return (
             <UserItem
                 type={'getFav'}
-                getFavType={'work'}
+                getFavType={'project'}
                 user={user}
                 onGetFavorite={onGetFavorite}
                 onRemoveProject={onRemoveProject}
-                NavigationTitle={'我收藏的作品'}
+                NavigationTitle={'我收藏的需求'}
             />
         )
     }
@@ -27,11 +30,24 @@ export class FavoriteWorkPage extends Component{
 
 const mapStateToProps = (state) => ({
     user: state.user
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
     onGetFavorite: (userId, type) => dispatch(actions.onGetFavorite(userId, type)),
     onRemoveProject: (userId, identify, projectId) => dispatch(actions.onRemoveProject(userId, identify, projectId))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(FavoriteWorkPage);
+export default connect(mapStateToProps, mapDispatchToProps)(FavoriteDemandPage)
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F4F4F4',
+      },
+      manage: {
+          marginRight: 15
+      }
+})

@@ -38,7 +38,7 @@ export default class DataStore {
         return new Promise((resolve, reject) => {
             getResource.getResources(url, type)
                 .then((data) => {
-                    if (data.length>0) {
+                    if (data) {
                         return data;
                     }
                     throw new Error('Network problems');

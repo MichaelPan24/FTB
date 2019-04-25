@@ -10,7 +10,7 @@ import {Provider, connect} from 'react-redux';
 import BottomTab from './TabNavigator'
 
 import WelcomePage from '../pages/WelcomePage';
-import HomeCell from '../commons/ShowCell'
+import ShowCell from '../commons/ShowCell'
 
 
 
@@ -31,9 +31,9 @@ const MainNavigator = createStackNavigator({
   MainPage: {
     screen: BottomTab
   },
-  HomeCell: {
-    screen: HomeCell
-  }
+  // HomeCell: {
+  //   screen: HomeCell
+  // }
 },{
   defaultNavigationOptions:{
     header: null
