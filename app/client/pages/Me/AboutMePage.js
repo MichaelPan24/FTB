@@ -33,10 +33,12 @@ export default class AboutMePage extends Component{
      *  @param {Array} items 要显示的栏目的子信息数组
      */
     renderItemDetail = (items) => {
+        const {navigation} = this.props;
        return items.map((item, index) => (
             <ListItem
                 key={index}
                 title={item.title}
+                onPress={()=> navigation.navigate('WebView', {url: item.url, title: item.title})}
             />
         ))
     }
@@ -62,12 +64,12 @@ export default class AboutMePage extends Component{
         const {data, showBlog, showWebsite, showSponsor, showContact} = this.state;
         return (
             <ParallaxScrollView
-                windowHeight={SCREEN_HEIGHT * 0.4}
+                windowHeight={SCREEN_HEIGHT * 0.6}
                 backgroundSource={require('../../../../img/Me.jpg')}
                 navBarTitle='潘阳'
                 userName='潘阳'
                 userTitle='软件工程师'
-                userImage='http://i.imgur.com/RQ1iLOs.jpg'
+                // userImage={require('../../../../img/AuthorAvatar.png')}
                 // leftIcon={{name: 'arrowleft', color: 'rgba(193, 193, 193, 1)', size: 30, type: 'font-awesome'}}
                 // rightIcon={{name: 'user', color: 'rgba(193, 193, 193, 1)', size: 30, type: 'font-awesome'}}
                 >

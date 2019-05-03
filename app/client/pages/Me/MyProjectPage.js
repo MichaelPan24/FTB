@@ -18,7 +18,7 @@ export class MyProjectPage extends Component{
 
    loadData = () => {
        const {user, onGetProject} = this.props;
-       return user.user && onGetProject(user.user._id, user.identify)
+       return user.isLogin && onGetProject(user.user._id, user.identify)
    }
     componentDidMount(){
         this.loadData();
@@ -75,7 +75,7 @@ export class MyProjectPage extends Component{
      * 如果登录则向用户展示发布列表,否则引导进入登录页
      */
     checkIsLogin = (user) => {
-        if(user.user) return this.renderList(user);
+        if(user.isLogin) return this.renderList(user);
         return window.alert('请先登录');
     }
 

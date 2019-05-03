@@ -2,14 +2,55 @@ import  React, {Component}  from 'react';
 import {View, StyleSheet, TouchableOpacity, Image, Dimensions, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Swiper from 'react-native-swiper';
-import Loading  from './Loading';
+import {connect} from 'react-redux';
 
+import actions from '../action/index';
 const ScreenWidth = Dimensions.get('window');
 
-export default class ShowCell extends Component{
+export class ShowCell extends Component{
     constructor(props){
         super(props)
         console.disableYellowBox = true;
+        this.state={
+            isFavorite: false
+        }
+    }
+
+    static getDerivedStateFromProps(nextProps, PrevState){
+        // console.log(typeof nextProps.user.user._id)
+        let _ID = nextProps.user.isLogin ? nextProps.user.user._id : '';
+        // console.log(_ID)
+        const {collectedUser} = nextProps.data;
+        let CollectedUser=[];
+        // for(let i in collectedUser){
+        //     console.log(typeof collectedUser[i]['_id'])
+        // }
+        if(_ID){
+            for(let i in collectedUser){
+                CollectedUser.push(collectedUser[i]['_id'])
+            }
+            if(CollectedUser.includes(_ID)){
+                return{
+                    isFavorite: true
+                }
+            }
+        }
+        return null
+    }
+
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if(this.state.isFavorite !== nextState.isFavorite){
+    //         return true
+    //     }
+    // }
+
+    componentDidMount(){
+        // const {data, user} = this.props;
+        // this.checkIsBeenFavorite(data, user) && this.setState({isFavorite: true})
+    }
+
+    componentDidUpdate(){
+
     }
 
     /**
@@ -35,11 +76,49 @@ export default class ShowCell extends Component{
         });
         return imgArr;
     }
+
+    /**
+     * @var {collectedUser} {_id, }
+     */
+    checkIsBeenFavorite = (data, user) => {
+        let _ID = nextProps.user.isLogin ? nextProps.user.user._id : '';
+        // console.log(_ID)
+        const {collectedUser} = nextProps.data;
+        let CollectedUser=[];
+        // for(let i in collectedUser){
+        //     console.log(typeof collectedUser[i]['_id'])
+        // }
+        if(_ID){
+            for(let i in collectedUser){
+                CollectedUser.push(collectedUser[i]['_id'])
+            }
+            if(CollectedUser.includes(_ID)){
+                return{
+                    isFavorite: true
+                }
+            }
+        }
+        // console.log(collectedUser)
+    }
+
+    onLike = (data, user) => {
+        const {onLike} = this.props;
+        const favItem = {
+            favWork: data._id
+        }
+        if(user.isLogin){
+            this.setState({isFavorite: !this.state.isFavorite})
+            // onLike('work', user.user._id, favItem);
+            return true;
+        }else{
+            window.alert('请先登录')
+        }
+    }
     /**
      * 图片作品展示使用轮播图进行
      */
     render(){
-        const {data, onPress} = this.props
+        const {data,  user} = this.props;
         return (
             <View style={styles.container} >
                 {/* <TouchableOpacity
@@ -51,14 +130,14 @@ export default class ShowCell extends Component{
                         <View style={styles.description_container}>
                             <View style={{padding: 10}}>
                                 <Image 
-                                    source = {data.avatar === undefined ? data.avatar : require('../../../img/AuthorAvatar.png')}
+                                    source = {data.avatar.avatar ? {uri:data.avatar.avatar} : require('../../../img/AuthorAvatar.png')}
                                     style = {styles.avatar}
                                 />
                             </View>
                             
                             <View style={styles.header_container}>
                                 <Text style={styles.title}>{data.title}</Text>
-                                <Text style={styles.author}>{data.author}</Text>
+                                <Text style={styles.author}>{data.author.name}</Text>
                             </View>
                             
                         </View>
@@ -74,18 +153,29 @@ export default class ShowCell extends Component{
                             />  */}
                         {/* </View> */}
                     </View>
-                    <Icon
+                   <Icon
+                        ref={(icon) => this.icon = icon}
                         size={20}
-                        name={'hearto'}
-                        onPress={()=> this._favoriteProject}
+                        name={this.state.isFavorite? 'heart': 'hearto'}
+                        onPress={()=> this.onLike(data, user )}
                         style={{position: 'absolute', right: 15, top: 15}} 
-                        // color={}
-                        /> 
+                        // color='#900'
+                        />
                 {/* </TouchableOpacity> */}
             </View>
         )     
     }
 }
+
+const mapStateToProps = (state) => ({
+    user: state.user
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    onLike: (type, userId, favItem) => dispatch(actions.onLike(type, userId, favItem))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowCell);
 
 const styles = StyleSheet.create({
     container: {
@@ -102,6 +192,7 @@ const styles = StyleSheet.create({
     avatar: {
         width: 36,
         height: 36,
+        borderRadius: 20
     },
     description_container: {
             flex: 1,

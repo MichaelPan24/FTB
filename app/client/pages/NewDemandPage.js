@@ -10,7 +10,8 @@ export  class NewDemand extends Component{
     }
     
     checkIdentify = ({identify}) => {
-        if(identify === '1') return window.alert('目前只有企业用户可以发布需求哦')
+        if(identify === '1') return {msg: '目前只有企业用户可以发布需求哦'};
+        return true;
     }
 
     render(){

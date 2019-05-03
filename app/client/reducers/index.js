@@ -1,13 +1,14 @@
-import {combineReducers} from 'redux';
+// import {combineReducers} from 'redux';
 
-import demands from './demands'
-import showWorks from './showWorks';
-import user from './user';
+import demandsReducer from './demands'
+import showWorksReducer from './showWorks';
+import userReducer from './user';
 
-const rootReducer = combineReducers({
-    demands: demands,
-    showWorks: showWorks,
-    user: user
-});
+// const rootReducer = combineReducers({
+//     demands: demands,
+//     showWorks: showWorks,
+//     user: user
+// });
 
-export default rootReducer;
+export default {demandsReducer, showWorksReducer, userReducer};
+// export default rootReducer;

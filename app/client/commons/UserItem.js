@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, FlatList, Text, RefreshControl} from 'react-native';
 import PropType from 'prop-types';
+import {connect} from 'react-redux';
 
 import actions from '../action/index';
 import NavigationBar from '../commons/NavigationBar';
 import DemandCell from '../commons/DemandCell';
 import ShowCell from '../commons/ShowCell';
 
-export default class UserItem extends Component{
+export class UserItem extends Component{
     constructor(props){
         super(props);
     }
@@ -15,7 +16,7 @@ export default class UserItem extends Component{
     static propTypes = {
         type: PropType.string.isRequired, //根据类型来决定是做何种操作(getProject, getFav)
         getFavType: PropType.string, //根据字段来请求收藏的需求或是作品列表(project, work)
-        user: PropType.object.isRequired,   //需要传入user state
+        // user: PropType.object.isRequired,   //需要传入user state
         onGetProject: PropType.func,    //获取发布项目的action
         onGetFavorite: PropType.func,   //获取收藏项目的action
         onRemoveProject: PropType.func,     //移除项目的action
@@ -24,7 +25,7 @@ export default class UserItem extends Component{
    loadData = () => {
        const {user, onGetProject, onGetFavorite, getFavType, type} = this.props;
        if(type === 'getProject')return user.user && onGetProject(user.user._id, user.identify)
-       return user.user && onGetFavorite(user.user._id, getFavType)
+       return user.isLogin && onGetFavorite(user.user._id, getFavType)
    }
     componentDidMount(){
         this.loadData();
@@ -113,7 +114,7 @@ export default class UserItem extends Component{
      * 如果登录则向用户展示发布列表,否则引导进入登录页
      */
     checkIsLogin = (user, type) => {
-        if(user.user) return this.renderList(user, type);
+        if(user.isLogin) return this.renderList(user, type);
         return window.alert('请先登录');
     }
 
@@ -145,6 +146,12 @@ export default class UserItem extends Component{
         )
     }
 }
+
+mapStateToProps = (state) => ({
+    user: state.user
+})
+
+export default connect(mapStateToProps)(UserItem);
 
 
 const styles = StyleSheet.create({

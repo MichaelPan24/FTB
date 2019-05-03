@@ -78,7 +78,7 @@ export  class ShowPage extends Component {
             rightButton={this.renderRightButton()}
         />;
         const {showWorks} = this.props
-        console.log(showWorks)
+        // console.log(showWorks)
         return (
             <View style={{flex: 1}}>
                 {navigationBar}

@@ -5,7 +5,7 @@ import DataStore from '../../dao/DataStore';
 //获取最新数据的异步action
 export function onRefreshShowWorks(url, type, pageSize, pageIndex){
     return dispatch => {
-        dispatch({type: Types.SHOW_REFRESH, isLoading: true});
+        dispatch({type: Types.SHOW_REFRESH});
         let dataStore = new DataStore();    //异步action和数据流
         dataStore.fetchData(url, type)
             .then(data => {

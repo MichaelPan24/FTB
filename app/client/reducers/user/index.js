@@ -2,8 +2,8 @@ import Types from '../../action/types';
 
 const defaultState = {
     // registered: false, //是否成功注册
-    // isLoading: false, //加载状态
-    // isLogin: false, //是否登录
+    isLoading: false, //加载状态
+    isLogin: false, //是否登录
     // identify: '0',  //用户的身份
     uploaded: [],   //用户上传的项目
     favorite: {demands: [], works: []}    //用户收藏的项目
@@ -14,7 +14,7 @@ export default function userAction(state = defaultState, action){
     switch(action.type){
         case Types.LOGIN:       //用户登录
             return {    
-                // ...state,
+                ...state,
                 isLoading: true,
                 isLogin: false,
                 // uploaded: action.uploaded,
@@ -22,7 +22,7 @@ export default function userAction(state = defaultState, action){
             };
         case Types.LOGIN_SUCCESS:       //登陆成功
             return {
-                // ...state,
+                ...state,
                 isLoading: false,
                 isLogin: true,
                 identify: action.identify,
@@ -37,12 +37,12 @@ export default function userAction(state = defaultState, action){
             }
         case Types.LOGOUT:      //用户登出
             return {
-                // ...state,
+                ...state,
                 isLoading: true,
             }
         case Types.LOGOUT_SUCCESS:      //登出成功
             return {
-                // ...state,
+                ...state,
                 isLoading: false,
                 isLogin: false
             }
@@ -154,13 +154,48 @@ export default function userAction(state = defaultState, action){
                 return {
                     ...state,
                     isLoading: false,
+                    isInfoChanged: true,
                     user: action.updateUser
                 };
         case Types.UPDATE_INFO_FAIL:
                 return {
                     ...state,
                     isLoading: false,
+                    isInfoChanged: false,
                     msg: action.msg
+                };
+        case Types.LIKE_PROJECT:
+                return {
+                    ...state,
+                    isLoading: true,
+                }
+        case Types.LIKE_PROJECT_FAIL: 
+                return {
+                    ...state,
+                    isLoading: false,
+                }
+        case Types.LIKE_PROJECT_SUCCESS:
+                return {
+                    ...state,
+                    isLoading: false,
+                    favorite: {...state['favorite'], demands: action.demands}
+                }
+        case Types.LIKE_WORK: 
+                return {
+                    ...state,
+                    isLoading: true,
+                    
+                }
+        case Types.LIKE_WORK_FAIL:
+                return {
+                    ...state,
+                    isLoading: false,
+                }
+        case Types.LIKE_WORK_SUCCESS:
+                return {
+                    ...state,
+                    isLoading: false,
+                    favorite: {...state['favorite'], works: action.works}
                 }
         default:
             return state;

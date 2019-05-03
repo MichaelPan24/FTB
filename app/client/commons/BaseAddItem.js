@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, TextInput, TouchableOpacity, Image, Text, ScrollView} from 'react-native';
+import {View, StyleSheet, TextInput, TouchableOpacity, Image, Text, ScrollView, Modal, TouchableHighlight} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import  Icon from 'react-native-vector-icons/AntDesign';
 import NavigationBar from './NavigationBar';
@@ -12,7 +12,8 @@ export default class BaseAddItem extends Component {
             isPicked : false,
             imgArr : [],
             des: '',
-            title: ''
+            title: '',
+            isPublished: false
         }
     }
 
@@ -55,6 +56,10 @@ export default class BaseAddItem extends Component {
         }else if(!title.trim()){
             window.alert('请输入标题')
             return;
+        }else if(title.length >=10){
+            window.alert('标题不能多于10个字')
+        }else if(imgArr.length>=10){
+            window.alert('不能选择超过9张图片')
         }else{
             //根据登录状态判断 if(this.props.isLogin == true)
             if(!isLogin){
@@ -62,11 +67,14 @@ export default class BaseAddItem extends Component {
                 window.alert('请先登录')
                 return;
             } else {
-                checkIdentify();
-                form['title'] = title;
-                form['description'] = des;
-                imgArr.length ? form['image'] = imgArr : null
-                onUploadNew(identify, form);
+                if(typeof checkIdentify() !== 'object'){
+                    form['title'] = title;
+                    form['description'] = des;
+                    imgArr.length ? form['image'] = imgArr : null
+                    onUploadNew(identify, form) && this.setState({isPublished: true});
+                }else{
+                    window.alert(checkIdentify().msg)
+                }
             }
         }
     }
@@ -99,7 +107,7 @@ export default class BaseAddItem extends Component {
         ImagePicker.openPicker({
             multiple: true
         }).then(images => {
-            console.log(images);
+            // console.log(images);
             let imgContainer = images.map((img) =>({uri: img.path, type:'multipart/form-data', name:escape(img.path.slice(img.path.lastIndexOf('/')+1))}))//需要更改
             images.length ? this.setState({isPicked: true, imgArr: this.state.imgArr.concat(imgContainer)}) : this.state;
         })
@@ -111,22 +119,36 @@ export default class BaseAddItem extends Component {
                 name={'picture'}
                 size={50}
                 onPress={this._pickImage}
+                style={styles.PickIcon}
             />
         )
     }
 
     _showImages = () => {
-        const imgArr =  this.state.imgArr.map((img, index) => 
-            <TouchableOpacity onPress={this._pickImage} key={index}>
-                <Image key={index}  source={{uri: img.uri}} style={styles.img} key={index}/>
-            </TouchableOpacity>
+        const imgArr =  this.state.imgArr.map((img, index) => {
+            console.log(this.state.imgArr)
+            return <TouchableOpacity onPress={(index)=> this._deleteImg(index)} key={index} style={styles.imgContainer}>
+                <Image key={`${img.path}`}  source={{uri: img.uri}} style={styles.img} key={index}/>
+            </TouchableOpacity>}
          )
         return imgArr
     }
 
-    renderImgPicker = () => {
-        return  this.state.isPicked ? this._showImages() : this._showPicker();
-     }
+    _deleteImg = (index) => {
+        this.setState((prevState) => {
+            let arr = prevState.imgArr;
+            arr.splice(index, 1)
+            return {
+                imgArr: arr
+            }
+        })
+    }
+
+    // renderImgPicker = () => {
+    //     let PickerContainer = [];
+    //     PickerContainer.push(this._showPicker())
+    //     return  this.state.isPicked ? this._showImages() : this._showPicker();
+    //  }
 
     render(){
         const {identify, user} = this.props;
@@ -136,17 +158,36 @@ export default class BaseAddItem extends Component {
             rightButton={this.renderRightButton()}
         />;
         return (
-                <View style={styles.container}>
+                <ScrollView style={styles.container}>
                     <Spinner
                         visible={user.isLoading}
                         textContent={'请稍等...'}
                         cancelable={true}
                     />
+                    <Modal
+                        animationType='slide'
+                        transparent={false}
+                        visible={this.state.isPublished}
+                        onRequestClose={()=>this.setState({isPublished: false})}
+                   >
+                        <View style={{ marginTop: 22 }}>
+                            <View>
+                                <Text>{user.isUploaded? '发布成功': '发布失败'}</Text>
+                                <TouchableHighlight
+                                    onPress={() => {
+                                    this.setModalVisible(!this.state.isPublished);
+                                    }}
+                                >
+                                    <Text>关闭</Text>
+                                </TouchableHighlight>
+                            </View>
+                        </View>
+                    </Modal>
                     {navigationBar}
-                    {/* <View style={styles.formContainer}> */}
+                    {/* <ScrollView style={styles.formContainer}> */}
                         <View style={styles.inputContainer}>
                             <TextInput
-                                placeholder={'请输入标题'}
+                                placeholder={'请输入标题(标题不多于10个字)'}
                                 style={styles.textInput}
                                 onChangeText={(title) => this.setState({title: title})}
                             />
@@ -162,14 +203,26 @@ export default class BaseAddItem extends Component {
                             />
                         </View>
                         
-                        <View
-                            style={styles.imagePickerContainer}
-                            scrollEnabled={true}
-                            showsHorizontalScrollIndicator={true}
-                        >
-                            {this.renderImgPicker()}
+                        <View style={styles.inputContainer}>
+                            <View style={styles.hint}>
+                                    <Text>最多选择9张图片</Text>
+                            </View>
+                            <ScrollView
+                                horizontal={true}
+                                style={styles.pickerContainer}
+                            >
+                                <View
+                                    style={styles.imagePickerContainer}
+                                    scrollEnabled={true}
+                                    showsHorizontalScrollIndicator={true}
+                                >
+                                    {this.state.isPicked && this._showImages()}
+                                    {this._showPicker()}
+                                </View>
+                            </ScrollView>
                         </View>
-                </View>
+                        
+                </ScrollView>
                 )
     }
 }
@@ -183,7 +236,13 @@ const styles = StyleSheet.create({
     img:{
         width: 60,
         height: 60,
-        marginLeft: 5
+        marginLeft: 15
+    },
+    imgContainer: {
+
+    },
+    PickIcon: {
+        marginLeft: 15
     },
     formContainer: {
         flex: 1,
@@ -195,15 +254,30 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'column',
+        marginLeft: 15,
+        marginTop: 10,
+        marginBottom: 20,
+        backgroundColor: 'white',
+        borderRadius: 20
+    },  
+    pickerContainer: {
+        marginBottom: 10
+        // backgroundColor: 'white'
+    },
+    hint: {
+        flex: 1,
+        marginLeft: 15,
+        marginTop: 10
     },  
     textInput: {
-
+        flex: 1,
+        padding: 15
     },
     imagePickerContainer: {
         flex: 1,
         flexDirection: 'row',
-        
+        marginTop: 10
     },  
  
     publish: {

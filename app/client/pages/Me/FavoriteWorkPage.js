@@ -16,7 +16,7 @@ export class FavoriteWorkPage extends Component{
             <UserItem
                 type={'getFav'}
                 getFavType={'work'}
-                user={user}
+                // user={user}
                 onGetFavorite={onGetFavorite}
                 onRemoveProject={onRemoveProject}
                 NavigationTitle={'我收藏的作品'}

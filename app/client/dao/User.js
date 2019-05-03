@@ -1,6 +1,7 @@
 import {handleFormData} from '../../utils/handleForm';
 
 const URL = "http://119.23.227.22:3303";
+// const URL = "http://192.168.1.105:3301"
 export default class User{
     constructor(formBody){
         this.formBody = formBody;
@@ -110,6 +111,20 @@ export default class User{
     RemoveProject(userId, removeType){
         return new Promise((resolve, reject) => {
             handleFormData(this.formBody, `${URL}/api/user/${userId}/remove/${removeType}`, {method:'put', credentials: 'include'})
+                .then(response => {
+                    if(response.ok){
+                        resolve(response.json())
+                    }
+                }).catch(err => reject(err))
+        })
+    }
+
+    /**
+     * 
+     */
+    like(userId){
+        return new Promise((resolve, reject) => {
+            handleFormData(this.formBody, `${URL}/api/user/update/${userId}/updateFav`, {method: 'put', credentials: 'include', headers: {'Content-Type': 'application/json'}, body:JSON.stringify(this.formBody)})
                 .then(response => {
                     if(response.ok){
                         resolve(response.json())

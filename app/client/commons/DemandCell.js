@@ -1,12 +1,22 @@
 import  React, {Component}  from 'react';
 import {View, StyleSheet, TouchableOpacity, Image, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'
-export default class DemandCell extends Component{
+import {connect} from 'react-redux';
+import actions from '../action/index';
+
+export class DemandCell extends Component{
     constructor(props){
         super(props)
         console.disableYellowBox = true;
     }
 
+    componentDidMount(){
+        
+    }
+
+    componentDidUpdate(){
+
+    }
 
     _genImage= ({image}) => {
         let imgArr = [];
@@ -42,8 +52,14 @@ export default class DemandCell extends Component{
     _favoriteProject = () => {
         
     }
+
+    onTag = () => {
+        this.setState({
+            isTagged: !isTagged
+        })
+    }
     render(){
-        const {data, onPress} = this.props
+        const {data, onPress, user} = this.props
         const date = new Date(data.date);
         return (
             <View style={styles.container}>
@@ -51,7 +67,7 @@ export default class DemandCell extends Component{
                     <View style={styles.header}>
                         <View style={styles.nameContainer}>
                             <Image
-                                source={data.avatar !== undefined ? {uri: data.avatar} : require('../../../img/AuthorAvatar.png')}
+                                source={data.avatar ? {uri: data.avatar} : require('../../../img/AuthorAvatar.png')}
                                 style={styles.avatar}
                             />
                             <Text style={styles.text}>
@@ -80,8 +96,8 @@ export default class DemandCell extends Component{
                     </View>
                     <Icon
                         size={20}
-                        name={'tago'}
-                        onPress={()=> this._favoriteProject}
+                        name={this.state.isTagged ? 'tag' :'tago'}
+                        onPress={()=> this.onTag()}
                         style={{position: 'absolute', right: 15, top: 10}} 
                         // color={}
                         />
@@ -90,6 +106,12 @@ export default class DemandCell extends Component{
         )     
     }
 }
+
+const mapStateToProps = (state) => ({
+    user: state.user
+})
+
+export default connect(mapStateToProps)(DemandCell);
 
 const styles = StyleSheet.create({
     container: {

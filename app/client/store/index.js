@@ -1,10 +1,12 @@
-import {applyMiddleware, createStore} from 'redux';
+import {applyMiddleware, createStore, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
 
+// import reducers from '../reducers';
 import reducers from '../reducers';
+const {demandsReducer, showWorksReducer, userReducer} = reducers;
 
 /**
  * 自定义logger中间件
@@ -25,14 +27,41 @@ const middleWares = [
     thunk
 ];
 
-const persistConfig = {
+const rootPersistConfig = {
     key: 'root',
     storage,
     stateReconciler: autoMergeLevel2,
-    blacklist: ['demands', 'showWorks']
+    // blacklist: ['demands', 'showWorks'],
+    // whiteList: ['user']
   }
 
-const persistedReducer = persistReducer(persistConfig, reducers)
+const userPersistConfig = {
+  key: 'user',
+  // stateReconciler: autoMergeLevel2,
+  storage: storage,
+  blacklist: ['isLoading', 'isUploaded', 'registered'],
+  whiteList: ['favorite', 'uploaded']
+}
+
+// const demandPersistConfig = {
+//     key: 'demands',
+//     storage: storage,
+//     blacklist: ['isLoading']
+// }
+
+// const showWorksPersistConfig = {
+//     key: 'showWorks',
+//     storage: storage,
+//     blacklist: ['isLoading', 'isUploaded', 'registered']
+// }
+
+const rootReducer = combineReducers({
+    user: persistReducer(userPersistConfig, userReducer),
+    demands: demandsReducer,
+    showWorks: showWorksReducer
+})
+
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer)
 
 export default () => {
     let store = createStore(persistedReducer, applyMiddleware(...middleWares))

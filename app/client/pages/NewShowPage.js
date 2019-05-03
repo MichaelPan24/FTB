@@ -10,7 +10,8 @@ export class NewShowPage extends Component{
     }
     
     checkIdentify = ({identify}) => {
-        if(identify === '0') return window.alert('只有个人用户可以进行作品展示哦');
+        if(identify === '0') return {msg: '只有个人用户可以进行作品展示哦'};
+        return true
     }
 
     render(){

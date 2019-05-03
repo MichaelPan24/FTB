@@ -2,10 +2,12 @@
 export function handleFormData(formObj, url, init={}){
     let formData = new FormData();
     for(let key in formObj){
-        if(key ==='image'){
+        if(key ==='image' ){
             for(img of formObj[key]){
                 formData.append(key, img)
             }
+        }else if(key ==='avatar'){
+            formData.append(key, formObj[key])
         }else{
             formData.append(key, formObj[key]);
         }

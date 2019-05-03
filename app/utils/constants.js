@@ -8,8 +8,8 @@ export const DEFAULT_WINDOW_MULTIPLIER = 0.50;
 export const DEFAULT_NAVBAR_HEIGHT = 65;
 
 export const USER = {
-  name: 'Katy Friedson',
-  title: 'Engineering Manager',
+  name: '无名氏',
+  title: '无职业',
   image: 'http://i.imgur.com/uma9OfG.jpg',
 };
 
@@ -26,10 +26,10 @@ export const MY_PROJECT_LIST = [
   //   title: '我的收藏',
   //   icon: 'favorite'
   // },
-  // {
-  //   title: '通知',
-  //   icon: 'notifications'
-  // },
+  {
+    title: '通知',
+    icon: 'notifications'
+  },
   // {
   //   title: 'Games',
   //   icon: 'videogame-asset'

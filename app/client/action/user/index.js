@@ -165,6 +165,11 @@ export function onGetFavorite(userId, type){
     }
 }
 
+/**
+ * 
+ * @param {*} userId 
+ * @param {*} formData 
+ */
 export function onUpdateUserInfo(userId, formData){
     return dispatch => {
         dispatch({type: Types.UPDATE_INFO});
@@ -181,5 +186,50 @@ export function onUpdateUserInfo(userId, formData){
                     msg: err
                 })
             })
+    }
+}
+
+/**
+ * 
+ * @param {*} type 
+ * @param {*} userId 
+ * @param {*} favItem 
+ */
+export function onLike(type, userId, favItem){
+    return dispatch => {
+        let user = new User(favItem);
+        let pendingUser = user.like(userId);
+        switch(type){
+            case 'project':
+                dispatch({type: Types.LIKE_PROJECT});
+                pendingUser
+                    .then(updatedUser => {
+                        dispatch({
+                            type: Types.LIKE_PROJECT_SUCCESS,
+                            updatedUser: updatedUser
+                        })
+                    }).catch(err => {
+                        dispatch({
+                            type: Type.LIKE_PROJECT_FAIL,
+                            msg: err
+                        })
+                    });
+                    break;
+            case 'work':
+                dispatch({type: Types.LIKE_WORK});
+                pendingUser
+                    .then(updatedUser => {
+                        dispatch({
+                            type: Types.LIKE_WORK_SUCCESS,
+                            updatedUser: updatedUser
+                        })
+                    }).catch(err => {
+                        dispatch({
+                            type: Type.LIKE_WORK_FAIL,
+                            msg: err
+                        })
+                    });
+                   
+        }
     }
 }

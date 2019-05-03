@@ -3,7 +3,8 @@ import fetch from 'cross-fetch';
 const API_URL = "https://api.dribbble.com/v2/",
     ACCESS_TOKEN = "9f061d26c5a8be96b17a81718959a67dd54ca9669ca41752777193f7cc5be7c3";
 
-const getURL = "http://119.23.227.22:3303"; 
+const getURL = "http://119.23.227.22:3303";
+// const getURL = "http://192.168.1.105:3301"; 
 
 const User = 'user',
     shots = '/shots';

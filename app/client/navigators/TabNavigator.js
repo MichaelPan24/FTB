@@ -17,6 +17,8 @@ import MyProjectPage from '../pages/Me/MyProjectPage';
 import AboutMePage from '../pages/Me/AboutMePage';
 import NotificationPage from '../pages/Me/NotificationPage';
 import MyInfoPage from '../pages/Me/MyInfoPage';
+import WebViewPage from '../pages/Me/WebViewPage';
+
 //配置底部导航栏每一栏模块栈
 const DemandsStack = createStackNavigator({
     Demands: {
@@ -153,6 +155,14 @@ const MyStack = createStackNavigator({
         }
       }
     },
+    WebView: {
+      screen: WebViewPage,
+      navigationOptions: ({navigation}) => {
+        return {
+          header: null
+        }
+      }
+    },
     Notification: {
       screen: NotificationPage,
       navigationOptions: ({navigation}) => {
@@ -219,7 +229,7 @@ export default BottomTab = createBottomTabNavigator({
     }
 },{
   tabBarOptions: {
-    // inactiveTintColor: 'white',
+    inactiveTintColor: 'white',
     activeTintColor: 'black',
   },
 })
