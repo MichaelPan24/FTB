@@ -10,27 +10,36 @@ const User = 'user',
     shots = '/shots';
 
 
-function fetchData(URL) {
-    return fetch(URL, {
-        headers: {
-            "Authorization": "Bearer " + ACCESS_TOKEN
-        }
-    }).then((response) => response.json())
+async function fetchData(URL) {
+    const response = await fetch(URL, {
+    headers: {
+      "Authorization": "Bearer " + ACCESS_TOKEN
+    }
+  });
+  return await response.json();
 }
 
-function getDemands(URL= getURL) {
-    return fetch(URL, {mode: 'cors', credentials:'include'})
-            .then(response => {if(response.ok) return response.json()})
+async function getDemands(URL= getURL) {
+    const response = await fetch(URL, { mode: 'cors', credentials: 'include' });
+  if (response.ok)
+    return response.json();
 }
 
-function getUsersShots(type=(User+shots)) {
+async function getWorks() {
   // const URL = API_URL + type;
   // return fetchData(URL);
   const URL = getURL + '/api/show/current'
-  return fetch(URL, {mode: 'cors', credentials:'include'})
-          .then(response => {if(response.ok) return response.json()})
+  const response = await fetch(URL, { mode: 'cors', credentials: 'include' });
+  if (response.ok)
+    return response.json();
 }
 
+async function getComments(URL=getURL, workId){
+  const url = URL + `/api/show/comment/${workId}`
+  const response = await fetch(url, {mode: 'cors', credentials: 'include'})
+  if(response.ok)
+    return response.json()
+}
 //获取具体的用户作品
 // function getExactShots(type=shots,id) {
 //   const URL = API_URL + type + `:${id}`;
@@ -39,11 +48,13 @@ function getUsersShots(type=(User+shots)) {
 
 export default {
       //根据类型获得所需资源
-      getResources: function(url, type) {
+      getResources: function(url, type, workId='') {
         if (type ==='show'){
-          return getUsersShots(url);
+          return getWorks(url);
         } else if (type === 'demands') {
           return getDemands(url);
+        }else if(type === 'comments'){
+          return getComments(url, workId);
         }
       } 
 };

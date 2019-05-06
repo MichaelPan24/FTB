@@ -1,109 +1,43 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, FlatList, Text, RefreshControl} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import actions from '../../action/index';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-import User from '../../dao/User';
-import NavigationBar from '../../commons/NavigationBar';
-import DemandCell from '../../commons/DemandCell';
-import ShowCell from '../../commons/ShowCell';
+import UserItem from '../../commons/UserItem';
 
 export class MyProjectPage extends Component{
     constructor(props){
         super(props);
         this.state={
-            userData: {}
+            isManage: false
         }
     }
 
-   loadData = () => {
-       const {user, onGetProject} = this.props;
-       return user.isLogin && onGetProject(user.user._id, user.identify)
-   }
-    componentDidMount(){
-        this.loadData();
-    }
-
-    /**
-     * @param {String} 根据身份来选择渲染的是需求列表还是作品列表 
-     */
-    renderList = (user) => {
-        return (
-            <View style={styles.container}>
-                <FlatList
-                    data={user.uploaded}
-                    renderItem={user.identify==='0' ? this._renderDemandItem : this._renderWorkItem}
-                    keyExtractor={(item, index) =>`${index}`}
-                    refreshControl={
-                        <RefreshControl
-                            title={'请稍等'}
-                            refreshing={user.isLoading}
-                            onRefresh={() => this.loadData()}
-                        />
-                    }
-
-                />
-            </View>
-        )
-    }
-
-    _renderDemandItem = ({item}) => {
-        return(
-            <DemandCell
-                data = {item}
-                onPress = {() => this._onPress(item)}
-            />
-        )
-    }
-
-    _renderWorkItem = ({item}) => {
-        return (
-            <ShowCell
-                data={item}
-                onPress={() => this._onPress(item)}
-            />
-        )
+    conditionComponent = (isTouched, component) => {
+        if(isManage){
+           
+        }
     }
 
     _onPress = () => {
-
+        this.setState((prevState, props) => {
+            return {
+                isManage: ! prevState.isManage
+            }
+        })
     }
     
-
-    /**
-     *  @param {Object} user 检验是否登录
-     * 如果登录则向用户展示发布列表,否则引导进入登录页
-     */
-    checkIsLogin = (user) => {
-        if(user.isLogin) return this.renderList(user);
-        return window.alert('请先登录');
-    }
-
-    renderRightButton = () => {
-        return <Text onPress={this.onManage} style={styles.manage}>
-            管理
-        </Text>
-    }
-
-    onManage = () => {
-
-    }
-
     render(){
-        const statusBar = {
-            barStyle: 'light-content',
-        };
-        let navigationBar = <NavigationBar
-            title={'我发布的项目/需求'}
-            statusBar={statusBar}
-            rightButton={this.renderRightButton()}
-        />;
-        const {user} = this.props;
+        const {user, onGetProject, onRemoveProject} = this.props;
         return (
-            <View style={{flex: 1}}>
-                {navigationBar}
-                {this.checkIsLogin(user)}
-            </View>
+            <UserItem
+                type={'getProject'}
+                onGetProject={onGetProject}
+                onRemoveProject={onRemoveProject}
+                NavigationTitle={'我发布的项目'}
+                isManage={this.state.isManage}
+            />
         )
     }
 }

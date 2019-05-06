@@ -20,11 +20,12 @@ export class UserItem extends Component{
         onGetProject: PropType.func,    //获取发布项目的action
         onGetFavorite: PropType.func,   //获取收藏项目的action
         onRemoveProject: PropType.func,     //移除项目的action
-        NavigationTitle: PropType.string.isRequired     //用于配置导航栏标题
+        NavigationTitle: PropType.string.isRequired,     //用于配置导航栏标题
+        isManage: PropType.bool     //用于触发管理操作
     }
    loadData = () => {
        const {user, onGetProject, onGetFavorite, getFavType, type} = this.props;
-       if(type === 'getProject')return user.user && onGetProject(user.user._id, user.identify)
+       if(type === 'getProject')return user.isLogin && user.user && onGetProject(user.user._id, user.identify)
        return user.isLogin && onGetFavorite(user.user._id, getFavType)
    }
     componentDidMount(){
@@ -52,7 +53,7 @@ export class UserItem extends Component{
                 <FlatList
                     data={this.renderData(user, type)}
                     renderItem={user.identify==='0' ? this._renderDemandItem : this._renderWorkItem}
-                    keyExtractor={(item, index) =>`${item._id.toString()}`}
+                    keyExtractor={(item, index) =>`${item._id}`}
                     refreshControl={
                         <RefreshControl
                             title={'请稍等'}
@@ -68,40 +69,62 @@ export class UserItem extends Component{
     /**
      * 根据条件(数据来源, 收藏类别)来设置列表中item
      */
-    _renderItem = (user, type) => {
-        if(type === 'getProject')   return this.renderProjectItem(user);
-        if(type === 'getFav')   return this.renderFavItem(user)
-    }
+    // _renderItem = (user, type) => {
+    //     if(type === 'getProject')   return this.renderProjectItem(user);
+    //     if(type === 'getFav')   return this.renderFavItem(user)
+    // }
 
-    /**
-     * 得到发布的项目
-     */
-    renderProjectItem = (user) => {
-      return  user.identify ==='0' ? this._renderDemandItem : this._renderWorkItem
-    }
+    // /**
+    //  * 得到发布的项目
+    //  */
+    // renderProjectItem = (user) => {
+    //   return  user.identify ==='0' ? this._renderDemandItem : this._renderWorkItem
+    // }
 
     _renderDemandItem = ({item}) => {
-        return(
-            <DemandCell
-                data = {item}
-                onPress = {() => this._onPress(item)}
-            />
-        )
+        const {type, getFavType, isManage} = this.props;
+        if(type ==='getProject' || (type ==='getFav' && getFavType ==='project')){
+            return(
+                <DemandCell
+                    data = {item}
+                    onPress = {() => this._onPress(item)}
+                    isManage={isManage}
+                />
+            )
+        }else {
+            return(
+                <ShowCell
+                    data={item}
+                    onPress={() => this._onPress(item)}
+                    isManage={isManage}
+                />
+            )
+        }
     }
 
     _renderWorkItem = ({item}) => {
-        return (
-            <ShowCell
-                data={item}
-                onPress={() => this._onPress(item)}
-            />
-        )
+        const {type, getFavType} = this.props;
+        if(type ==='getProject' || (type ==='getFav' && getFavType ==='work')){
+            return(
+                <ShowCell
+                    data = {item}
+                    onPress = {() => this._onPress(item)}
+                />
+            )
+        }else {
+            return(
+                <DemandCell
+                    data={item}
+                    onPress={() => this._onPress(item)}
+                />
+            )
+        }
     }
 
-    renderFavItem = () => {
-        const {getFavType} = this.props;
-        return getFavType === 'project' ? this._renderDemandItem : this._renderWorkItem;
-    }
+    // renderFavItem = () => {
+    //     const {getFavType} = this.props;
+    //     return getFavType === 'project' ? this._renderDemandItem : this._renderWorkItem;
+    // }
 
 
     _onPress = () => {

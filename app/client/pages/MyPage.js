@@ -104,7 +104,7 @@ export class MyPage extends Component {
                         hideChevron={true}
                         onPress={this._toggleLogin(isLogin)}
                         title={isLogin?'登出': '登入'}
-                        titleStyle={styles.logoutText}
+                        titleStyle={isLogin ?styles.logoutText : styles.logInText}
                         />
                     </List>
                   </View>  
@@ -133,6 +133,11 @@ const styles = StyleSheet.create({
   }, 
   logoutText: {
     color: 'red',
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  logInText: {
+    color: '#FF0000',
     textAlign: 'center',
     fontWeight: 'bold'
   }

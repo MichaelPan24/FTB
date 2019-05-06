@@ -3,10 +3,37 @@ import Types from '../../action/types'
 const defaultState = {
     // ShowWorks: {
         // data: [
-            
+
         // ],
-        isLoading: false,
-        
+        // info: '',
+        // isLoading: false,
+        // works: {
+        //     byId: {
+        //         'id1': {
+        //             author: 'user1',
+        //             comments: []
+        //         }
+        //     },
+        //     ids: ['id1']
+        // },
+        // authors: {
+        //     byId: {
+        //         'user1': {
+        //             userName: 'username',
+        //             avatar: 'http://......'
+        //         }
+        //     },
+        //     ids: ['user1']
+        // },
+        // comments: {
+        //     byId: {
+        //         'comment1': {
+        //             author: 'user1',
+        //             comment: 'awesome'
+        //         }
+        //     },
+        //     ids: ['comment1']
+        // }
     }
         
 
@@ -47,6 +74,23 @@ export default function LoadingWorks(state= defaultState, action){
                 ...state,
                 LoadingMore: false,
                 info: action.info
+            };
+        case Types.LOAD_COMMENTS:
+            return {
+                ...state,
+                loadComment: true,
+            };
+        case Types.LOAD_COMMENTS_SUCCESS:
+            return {
+                ...state,
+                loadComment: false,
+                comments: action.comments
+            };
+        case Types.LOAD_COMMENTS_FAIL:
+            return {
+                ...state,
+                loadComment: false,
+                msg: action.msg
             }
         default:
             return state

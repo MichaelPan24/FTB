@@ -1,6 +1,6 @@
-import {onRefreshShowWorks, } from './showWorks';
+import {onRefreshShowWorks, onLoadComments} from './showWorks';
 import {onRefreshDemands} from './demands';
-import {onLogin, onLogout, onRegister, onUploadNew, onGetProject, onRemoveProject, onGetFavorite, onLike, onUpdateUserInfo} from './user';
+import {onLogin, onLogout, onRegister, onUploadNew, onGetProject, onRemoveProject, onGetFavorite, onLike, onUpdateUserInfo, onPushComment} from './user';
 
 
-export default {onRefreshShowWorks, onRefreshDemands, onUploadNew, onLogin, onLogout, onRegister, onGetProject, onRemoveProject, onGetFavorite, onLike, onUpdateUserInfo};
+export default {onRefreshShowWorks, onLoadComments, onRefreshDemands, onUploadNew, onLogin, onLogout, onRegister, onGetProject, onRemoveProject, onGetFavorite, onLike, onUpdateUserInfo, onPushComment};

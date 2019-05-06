@@ -38,3 +38,22 @@ export function onLoadMoreShowWorks(pageIndex, pageSize, showArr,  ){
         }, 300)
     }
 }
+
+export function onLoadComments(url,  workId){
+    return dispatch => {
+        dispatch({type: Types.LOAD_COMMENTS});
+        let dataStore = new DataStore();
+        dataStore.fetchData(url, 'comments', workId)
+            .then(data => {
+                dispatch({
+                    type: Types.LOAD_COMMENTS_SUCCESS,
+                    comments: data
+                })
+            }).catch(err => {
+                dispatch({
+                    type: Types.LOAD_COMMENTS_FAIL,
+                    msg: err
+                })
+            })
+    }
+}

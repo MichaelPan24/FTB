@@ -94,6 +94,7 @@ export  class ShowPage extends Component {
                                 onRefresh= {() => this.loadData()}
                             />
                         }             
+                        removeClippedSubviews={false}
                     />
                 </View>
             </View>

@@ -91,7 +91,7 @@ export class MyInfoPage extends Component{
                         </View>
                 </View>)
         }else{
-            navigation.push('Login');
+            navigation.navigate('Login');
             return;
         }
     }

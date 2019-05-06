@@ -119,6 +119,17 @@ export default class User{
         })
     }
 
+    pushComment(userId, workId){
+        return new Promise((resolve, reject) => {
+            handleFormData(this.formBody, `!${URL}/api/user/${userId}/comment/${workId}`)
+                .then(response => {
+                    if(response.ok){
+                        resolve(response.json())
+                    }
+                }).catch(err => reject(err))
+        })
+    }
+
     /**
      * 
      */

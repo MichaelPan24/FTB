@@ -26,7 +26,8 @@ export default function userAction(state = defaultState, action){
                 isLoading: false,
                 isLogin: true,
                 identify: action.identify,
-                user:action.user
+                user:action.user,
+                // favorite: {demands: action.user.favorite_work, works: action.user.favorite_project}
             }
         case Types.LOGIN_FAIL:      //登陆失败
             return {
@@ -42,9 +43,10 @@ export default function userAction(state = defaultState, action){
             }
         case Types.LOGOUT_SUCCESS:      //登出成功
             return {
-                ...state,
+                // ...state,
                 isLoading: false,
-                isLogin: false
+                isLogin: false,
+                favorite: {...state['favorite']}
             }
         case Types.LOGOUT_FAIL:     //登出失败
             return {
@@ -168,34 +170,52 @@ export default function userAction(state = defaultState, action){
                 return {
                     ...state,
                     isLoading: true,
+                    isLiked: false
                 }
         case Types.LIKE_PROJECT_FAIL: 
                 return {
                     ...state,
                     isLoading: false,
+                    isLiked: false
                 }
         case Types.LIKE_PROJECT_SUCCESS:
                 return {
                     ...state,
                     isLoading: false,
+                    isLiked: true,
                     favorite: {...state['favorite'], demands: action.demands}
                 }
         case Types.LIKE_WORK: 
                 return {
                     ...state,
                     isLoading: true,
-                    
+                    isLiked: false
                 }
         case Types.LIKE_WORK_FAIL:
                 return {
                     ...state,
                     isLoading: false,
+                    isLiked: false
                 }
         case Types.LIKE_WORK_SUCCESS:
                 return {
                     ...state,
                     isLoading: false,
+                    isLiked: true,
                     favorite: {...state['favorite'], works: action.works}
+                }
+        case Types.PUSH_COMMENT: 
+                return {
+                    ...state,
+                    isLoading: true,
+                    commentPushed: false
+                }
+        case Types.PUSH_COMMENT_SUCCESS:
+                return {
+                    ...state,
+                    isLoading: false,
+                    commentPushed: true,
+                    
                 }
         default:
             return state;

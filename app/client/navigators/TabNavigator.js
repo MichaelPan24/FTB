@@ -51,6 +51,16 @@ const DemandsStack = createStackNavigator({
         }
       }
     }
+  }, {
+      navigationOptions: ({navigation}) => {
+        let tabBarVisible = true;
+        if(navigation.state.index>0 && (navigation.state.routes[1].routeName==='DemandsDetail')){ 
+            tabBarVisible = false
+        }
+        return {
+          tabBarVisible
+        }
+      }
   })
 
   const WorkShowStack = createStackNavigator({
@@ -84,6 +94,16 @@ const DemandsStack = createStackNavigator({
         }
       }
     }
+}, {
+  navigationOptions: ({navigation}) => {
+    let tabBarVisible = true;
+    if(navigation.state.index>0 && (navigation.state.routes[1].routeName==='ShowDetail')){ 
+        tabBarVisible = false
+    }
+    return {
+      tabBarVisible
+    }
+  }
 })
 
 const MyStack = createStackNavigator({
@@ -172,9 +192,15 @@ const MyStack = createStackNavigator({
     MyInfo: {
       screen: MyInfoPage,
       navigationOptions: ({navigation}) => {
-          return {
-            header: null
-          }
+        let tabBarVisible = true;
+        console.log(navigation.state)
+        if(navigation.state.routeName =='MyInfo' ){ 
+            tabBarVisible = false
+        }
+        return {
+          header: null,
+          tabBarVisible
+        }
       }
     }
   },{
@@ -191,8 +217,8 @@ const MyStack = createStackNavigator({
 
 // 底部导航栏
 export default BottomTab = createBottomTabNavigator({
-    Demands: {
-        screen: DemandsStack,
+    WorkShow: {
+        screen: WorkShowStack,
         navigationOptions: {
             tabBarLabel: '首页',
             tabBarIcon: ({tintColor,focused}) => (<Icon 
@@ -202,10 +228,10 @@ export default BottomTab = createBottomTabNavigator({
                 />)
         }
     },
-    WorkShow: {
-        screen: WorkShowStack,
+    Demands: {
+        screen: DemandsStack,
         navigationOptions: {
-            tabBarLabel: '展示',
+            tabBarLabel: '需求',
             tabBarIcon: ({tintColor, focused}) => (<Icon 
                 name={"dribbble"}
                 size={26}

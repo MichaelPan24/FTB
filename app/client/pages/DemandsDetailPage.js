@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView, Image, Dimensions, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Image,TextInput, Dimensions, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'
+import {connect} from 'react-redux';
 
+import actions from '../action/index';
 import NavigationBar from '../commons/NavigationBar';
+import { UserItem } from '../commons/UserItem';
 
 const   ScreenWidth = Dimensions.get('window').width;
 const ScreenHeight = Dimensions.get('window').height;
-export default  class InfoDetail extends Component{
+export class DemandsDetailPage extends Component{
     constructor(props){
         super(props)
     }
@@ -48,9 +51,12 @@ export default  class InfoDetail extends Component{
     }
 
     render(){
-        const {getParam} = this.props.navigation;
+        const {navigation, user} = this.props;
+        const {getParam} = navigation;
+        const {avatar} = user.user;
         const data = getParam('data');
-        const avatar = data.avatar ;
+        console.log(data)
+        const demandsAvatar = data.avatar.avatar ;
         const date = new Date(data.date);
         let navigationBar = <NavigationBar
                                 leftButton={this.renderLeftButton()}
@@ -66,10 +72,10 @@ export default  class InfoDetail extends Component{
                         style={styles.detailContainer}>
                             <View style={styles.header}>
                                 <Image
-                                    source={avatar!==undefined ? {uri: avatar} : require('../../../img/AuthorAvatar.png')}
+                                    source={demandsAvatar ? {uri: demandsAvatar} : require('../../../img/AuthorAvatar.png')}
                                     style={styles.avatar}
                                 />
-                                <Text style={styles.companyName}>{data.companyName}</Text>
+                                <Text style={styles.companyName}>{data.companyName.name}</Text>
                                 <Text style={styles.date}>{`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`}</Text>
                             </View>
                             <View style={styles.body}>
@@ -83,9 +89,6 @@ export default  class InfoDetail extends Component{
                                 </View>
                             </View>
                     </ScrollView>
-                    <View style={styles.chatContainer}>
-                        
-                    </View>
                 </View>
             </View>
             
@@ -93,12 +96,21 @@ export default  class InfoDetail extends Component{
     }
 }
 
+const mapStateToProps = (state) => ({
+    user: state.user
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    onLike: (type, userId, favItem) => dispatch(actions.onLike(type, userId, favItem))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DemandsDetailPage)
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center'
-        
     },
     header: {
         flex: 1,
@@ -123,10 +135,11 @@ const styles = StyleSheet.create({
         right: 5,
     },  
     detailContainer:{
-
+        // backgroundColor: '#F4F4F4'
     },
     imageContainer: {
-        flex: 1
+        flex: 1,
+        // backgroundColor: '#F4F4F4'
     },
     image: {
         flex: 1,
@@ -134,6 +147,5 @@ const styles = StyleSheet.create({
         width: ScreenWidth * 4/5,
         height: ScreenHeight * 3/5,
 
-    }
-
+    },
 })

@@ -3,54 +3,85 @@ import {View, StyleSheet, TouchableOpacity, Image, Dimensions, Text} from 'react
 import Icon from 'react-native-vector-icons/AntDesign';
 import Swiper from 'react-native-swiper';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 import actions from '../action/index';
+import {ModalView} from '../../utils/viewUtils';
+
 const ScreenWidth = Dimensions.get('window');
+
 
 export class ShowCell extends Component{
     constructor(props){
         super(props)
         console.disableYellowBox = true;
         this.state={
-            isFavorite: false
+            isFavorite: false,
+            isToggled: false,
+            showModal: false
         }
     }
 
-    static getDerivedStateFromProps(nextProps, PrevState){
+    static propTypes = {
+
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState){
         // console.log(typeof nextProps.user.user._id)
         let _ID = nextProps.user.isLogin ? nextProps.user.user._id : '';
         // console.log(_ID)
-        const {collectedUser} = nextProps.data;
         let CollectedUser=[];
         // for(let i in collectedUser){
         //     console.log(typeof collectedUser[i]['_id'])
         // }
         if(_ID){
+            const {collectedUser} = nextProps.data;
             for(let i in collectedUser){
                 CollectedUser.push(collectedUser[i]['_id'])
             }
-            if(CollectedUser.includes(_ID)){
+            if(CollectedUser.includes(_ID) && !prevState.isToggled){
                 return{
-                    isFavorite: true
+                    isFavorite: true,
+                    isToggled: !prevState.isToggled
                 }
             }
         }
         return null
     }
 
-    // shouldComponentUpdate(nextProps, nextState){
-    //     if(this.state.isFavorite !== nextState.isFavorite){
-    //         return true
-    //     }
-    // }
-
-    componentDidMount(){
-        // const {data, user} = this.props;
-        // this.checkIsBeenFavorite(data, user) && this.setState({isFavorite: true})
+    shouldComponentUpdate(nextProps, nextState){
+        if(this.state.isFavorite != nextState.isFavorite){
+            return true
+        }else if(nextProps.data.collectedUser.length !== this.props.data.collectedUser.length){
+            return true
+        }
+        return false
     }
 
-    componentDidUpdate(){
+    componentDidMount(){
+        const {data, user} = this.props;
+        // this.checkIsBeenFavorite(data, user) && this.setState({isFavorite: true})
 
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        const {onLike, data, user} = this.props;
+        const {isLogin} = user;
+        if(isLogin){
+            if(this.state.isFavorite !== prevState.isFavorite){
+                const favItem = {
+                    favWork: data._id,
+                    isFav: this.state.isFavorite ? '1' : '0'
+                }
+                onLike('work', user.user._id, favItem);
+                this.setState((prevState) => {
+                    return {
+
+                    }
+                })
+            }
+        }
+        
     }
 
     /**
@@ -77,39 +108,39 @@ export class ShowCell extends Component{
         return imgArr;
     }
 
-    /**
-     * @var {collectedUser} {_id, }
-     */
-    checkIsBeenFavorite = (data, user) => {
-        let _ID = nextProps.user.isLogin ? nextProps.user.user._id : '';
-        // console.log(_ID)
-        const {collectedUser} = nextProps.data;
-        let CollectedUser=[];
-        // for(let i in collectedUser){
-        //     console.log(typeof collectedUser[i]['_id'])
-        // }
-        if(_ID){
-            for(let i in collectedUser){
-                CollectedUser.push(collectedUser[i]['_id'])
-            }
-            if(CollectedUser.includes(_ID)){
-                return{
-                    isFavorite: true
-                }
-            }
-        }
-        // console.log(collectedUser)
-    }
+    // /**
+    //  * @var {collectedUser} {_id, }
+    //  */
+    // checkIsBeenFavorite = (data, user) => {
+    //     let _ID = nextProps.user.isLogin ? nextProps.user.user._id : '';
+    //     // console.log(_ID)
+    //     const {collectedUser} = nextProps.data;
+    //     let CollectedUser=[];
+    //     // for(let i in collectedUser){
+    //     //     console.log(typeof collectedUser[i]['_id'])
+    //     // }
+    //     if(_ID){
+    //         for(let i in collectedUser){
+    //             CollectedUser.push(collectedUser[i]['_id'])
+    //         }
+    //         if(CollectedUser.includes(_ID)){
+    //             return{
+    //                 isFavorite: true
+    //             }
+    //         }
+    //     }
+    //     // console.log(collectedUser)
+    // }
 
-    onLike = (data, user) => {
-        const {onLike} = this.props;
-        const favItem = {
-            favWork: data._id
-        }
+    onLikeWork = ( user) => {
         if(user.isLogin){
-            this.setState({isFavorite: !this.state.isFavorite})
+            this.setState((prevState) => {
+                return{
+                        isFavorite: ! prevState.isFavorite
+                    } 
+            })
             // onLike('work', user.user._id, favItem);
-            return true;
+            // return true;
         }else{
             window.alert('请先登录')
         }
@@ -119,6 +150,8 @@ export class ShowCell extends Component{
      */
     render(){
         const {data,  user} = this.props;
+        const {isLoading, isLiked} = user;
+        let visibleState
         return (
             <View style={styles.container} >
                 {/* <TouchableOpacity
@@ -126,6 +159,7 @@ export class ShowCell extends Component{
                     underlayColor = 'transparent'
                     activeOpacity={0.7}
                 > */}
+                    {/* {ModalView({success: '操作成功', fail: '操作失败'}, isLiked, )} */}
                     <View style={styles.cell_container} >
                         <View style={styles.description_container}>
                             <View style={{padding: 10}}>
@@ -157,7 +191,7 @@ export class ShowCell extends Component{
                         ref={(icon) => this.icon = icon}
                         size={20}
                         name={this.state.isFavorite? 'heart': 'hearto'}
-                        onPress={()=> this.onLike(data, user )}
+                        onPress={()=> this.onLikeWork(user )}
                         style={{position: 'absolute', right: 15, top: 15}} 
                         // color='#900'
                         />

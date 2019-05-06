@@ -8,14 +8,66 @@ export class DemandCell extends Component{
     constructor(props){
         super(props)
         console.disableYellowBox = true;
+        this.state={
+            isTagged: false,
+            avatar:'',
+            isToggled: false
+        }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        let _ID = nextProps.user.isLogin ? nextProps.user.user._id : '';
+        // console.log(_ID)
+        let CollectedUser=[];
+        // for(let i in collectedUser){
+        //     console.log(typeof collectedUser[i]['_id'])
+        // }
+        if(_ID){
+            const {collectedUser} = nextProps.data;
+            for(let i in collectedUser){
+                CollectedUser.push(collectedUser[i]['_id'])
+            }
+            if(CollectedUser.includes(_ID) && ! prevState.isToggled){
+                return{
+                    isTagged: true,
+                    isToggled: !prevState.isToggled
+                }
+            }
+        }
+        return null
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+        if(this.state.isTagged != nextState.isTagged){
+            return true
+        }else if(nextProps.data.collectedUser.length !== this.props.data.collectedUser.length){
+            return true
+        }
+        return false
     }
 
     componentDidMount(){
-        
+        const {data} = this.props;
+        Image.prefetch(data.avatar.avatar);
     }
 
-    componentDidUpdate(){
+    componentDidUpdate(prevProps, prevState){
+        const {onLike, data, user} = this.props;
+        const {isLogin} = user;
+        if(isLogin){
+            if(this.state.isTagged !== prevState.isTagged){
+                const favItem = {
+                    favProject: data._id,
+                    isFav: this.state.isTagged ? '1' : '0'
+                }
+                onLike('project', user.user._id, favItem);
+                this.setState((prevState) => {
+                    return {
 
+                    }
+                })
+            }
+        }
     }
 
     _genImage= ({image}) => {
@@ -53,25 +105,34 @@ export class DemandCell extends Component{
         
     }
 
-    onTag = () => {
-        this.setState({
-            isTagged: !isTagged
-        })
+    onTag = (user) => {
+        if(user.isLogin){
+            this.setState((prevState) => {
+                return {
+                    isTagged: ! prevState.isTagged
+                }
+            })
+        }else{
+            window.alert('请先登录')
+        }
     }
+
     render(){
         const {data, onPress, user} = this.props
         const date = new Date(data.date);
+        const avatarUrl = data.avatar.avatar;
         return (
             <View style={styles.container}>
                 <TouchableOpacity onPress={onPress} style={styles.cellContainer} activeOpacity={0.8}>
                     <View style={styles.header}>
                         <View style={styles.nameContainer}>
                             <Image
-                                source={data.avatar ? {uri: data.avatar} : require('../../../img/AuthorAvatar.png')}
+                                ref={img => this.avatarImg = img}
+                                source={avatarUrl ? {uri: avatarUrl} : require('../../../img/AuthorAvatar.png')}
                                 style={styles.avatar}
                             />
                             <Text style={styles.text}>
-                                {data.companyName}
+                                {data.companyName.name}
                             </Text>
                             
                         </View>
@@ -97,7 +158,7 @@ export class DemandCell extends Component{
                     <Icon
                         size={20}
                         name={this.state.isTagged ? 'tag' :'tago'}
-                        onPress={()=> this.onTag()}
+                        onPress={()=> this.onTag(user)}
                         style={{position: 'absolute', right: 15, top: 10}} 
                         // color={}
                         />
@@ -108,10 +169,14 @@ export class DemandCell extends Component{
 }
 
 const mapStateToProps = (state) => ({
-    user: state.user
+    user: state.user,
+    demands: state.demands
 })
 
-export default connect(mapStateToProps)(DemandCell);
+const mapDispatchToProps = (dispatch) => ({
+    onLike: (type, userId, favItem) => dispatch(actions.onLike(type, userId, favItem))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(DemandCell);
 
 const styles = StyleSheet.create({
     container: {

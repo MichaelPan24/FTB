@@ -229,7 +229,25 @@ export function onLike(type, userId, favItem){
                             msg: err
                         })
                     });
-                   
         }
+    }
+}
+
+export function onPushComment(){
+    return dispatch => {
+        dispatch({type: Types.PUSH_COMMENT});
+        let user = new User()
+        user.pushComment(userId, workId)
+            .then(newComment => {
+                dispatch({
+                    type: Types.PUSH_COMMENT_SUCCESS,
+                    newComment: newComment
+                })
+            }).catch(err => {
+                dispatch({
+                    type: Types.PUSH_COMMENT_FAIL,
+                    msg: err
+                })
+            })
     }
 }

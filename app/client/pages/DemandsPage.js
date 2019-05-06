@@ -79,6 +79,7 @@ export class InfoPage extends Component {
         const statusBar = {
             barStyle: 'light-content',
         };
+        // console.log(demands)
         let navigationBar = <NavigationBar
                                 title={'热门需求'}
                                 statusBar={statusBar}

@@ -1,6 +1,6 @@
 import {applyMiddleware, createStore, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
-import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
 
@@ -30,9 +30,9 @@ const middleWares = [
 const rootPersistConfig = {
     key: 'root',
     storage,
-    stateReconciler: autoMergeLevel2,
-    // blacklist: ['demands', 'showWorks'],
-    // whiteList: ['user']
+    stateReconciler: autoMergeLevel1,
+    blacklist: ['user'],
+    whiteList: ['demands', 'showWorks']
   }
 
 const userPersistConfig = {

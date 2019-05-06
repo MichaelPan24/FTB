@@ -14,12 +14,11 @@ export  class FavoriteDemandPage extends Component{
     }
 
     render(){
-        const {user, onGetFavorite, onRemoveProject} = this.props;
+        const { onGetFavorite, onRemoveProject} = this.props;
         return (
             <UserItem
                 type={'getFav'}
                 getFavType={'project'}
-                // user={user}
                 onGetFavorite={onGetFavorite}
                 onRemoveProject={onRemoveProject}
                 NavigationTitle={'我收藏的需求'}
