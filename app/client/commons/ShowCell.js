@@ -23,23 +23,30 @@ export class ShowCell extends Component{
     }
 
     static propTypes = {
-
+        data: PropTypes.object.isRequired, //数据来源
+        onPress: PropTypes.func, //点击操作
+        onManage: PropTypes.func    //管理操作
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
         // console.log(typeof nextProps.user.user._id)
         let _ID = nextProps.user.isLogin ? nextProps.user.user._id : '';
         // console.log(_ID)
-        let CollectedUser=[];
+        let CollectedUser = [];
+        let CollectedWork = [];
         // for(let i in collectedUser){
         //     console.log(typeof collectedUser[i]['_id'])
         // }
         if(_ID){
-            const {collectedUser} = nextProps.data;
+            const {collectedUser, _id} = nextProps.data;
+            const {favorite_work} = nextProps.user.user;
             for(let i in collectedUser){
                 CollectedUser.push(collectedUser[i]['_id'])
             }
-            if(CollectedUser.includes(_ID) && !prevState.isToggled){
+            for(let i in favorite_work){
+                CollectedWork.push(favorite_work[i]['_id'])
+            }
+            if(CollectedUser.includes(_ID) && CollectedWork.includes(_id)&&!prevState.isToggled){
                 return{
                     isFavorite: true,
                     isToggled: !prevState.isToggled

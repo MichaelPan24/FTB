@@ -32,7 +32,7 @@ const rootPersistConfig = {
     storage,
     stateReconciler: autoMergeLevel1,
     blacklist: ['user'],
-    whiteList: ['demands', 'showWorks']
+    // whiteList: ['demands', 'showWorks']
   }
 
 const userPersistConfig = {
@@ -40,19 +40,19 @@ const userPersistConfig = {
   // stateReconciler: autoMergeLevel2,
   storage: storage,
   blacklist: ['isLoading', 'isUploaded', 'registered'],
-  whiteList: ['favorite', 'uploaded']
+  whiteList: ['favorite', 'uploaded', 'isLogin']
 }
 
 // const demandPersistConfig = {
 //     key: 'demands',
 //     storage: storage,
-//     blacklist: ['isLoading']
+//     blacklist: ['isLoading', 'loadComment']
 // }
 
 // const showWorksPersistConfig = {
 //     key: 'showWorks',
 //     storage: storage,
-//     blacklist: ['isLoading', 'isUploaded', 'registered']
+//     blacklist: ['isLoading', 'data']
 // }
 
 const rootReducer = combineReducers({

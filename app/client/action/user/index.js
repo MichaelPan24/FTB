@@ -137,9 +137,9 @@ export function onRemoveProject(userId, identify, projectId){
  * @param {String} type 收藏类型
  */
 export function onGetFavorite(userId, type){
-    return dispatch => {
+    return async dispatch => {
         dispatch({type: Types.GET_FAVORITE});
-        let user = new User();
+        let user = await new User();
         user.getFavorite(userId, type)
             .then(userFavorite => {
                 switch(type){
@@ -233,10 +233,10 @@ export function onLike(type, userId, favItem){
     }
 }
 
-export function onPushComment(){
+export function onPushComment(userId, workId, commentContent){
     return dispatch => {
         dispatch({type: Types.PUSH_COMMENT});
-        let user = new User()
+        let user = new User(commentContent);
         user.pushComment(userId, workId)
             .then(newComment => {
                 dispatch({

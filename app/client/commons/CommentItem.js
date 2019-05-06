@@ -17,8 +17,9 @@ export default class CommentItem extends Component {
         }
       }
   }
-  
+
   render() {
+    // const {avatar, commentDetail, author} = this.props;
     const {avatar, commentDetail, author} = this.state.comments;
     // console.log(this.props.data, avatar, commentDetail, author)
     return <View>
@@ -32,9 +33,9 @@ export default class CommentItem extends Component {
                       <Text style={styles.userName}>
                         {author.name}
                       </Text>
-                      <Text style={styles.commentText}>
+                      <View style={styles.commentText}>
                         <HTMLView value={commentDetail} />
-                      </Text>
+                      </View>
                     </View>
                   </View>
                   <View style={styles.cellBorder} />
