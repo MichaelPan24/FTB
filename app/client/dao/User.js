@@ -13,15 +13,15 @@ export default class User{
     login(){
         return new Promise((resolve, reject) => {
             handleFormData(this.formBody, URL+'/api/user/login', {credentials: 'include', headers: {'Content-Type': 'application/json'}, body:JSON.stringify(this.formBody)} )
-            .then(response => {
-                if(response.ok){
-                    resolve(response.json());
-                }else if(!response.ok && response.status === 400){
-                    reject('密码错误')
-                }else if(!response.ok && response.status === 404){
-                    reject('用户不存在')
-                }
-            }).catch(err => reject(err))
+                .then(response => {
+                    if(response.ok){
+                        resolve(response.json());
+                    }else if(!response.ok && response.status === 400){
+                        reject('密码错误')
+                    }else if(!response.ok && response.status === 404){
+                        reject('用户不存在')
+                    }
+                }).catch(err => reject(err))
         })
     }
 
@@ -30,7 +30,7 @@ export default class User{
      */
     register(){
         return new Promise((resolve, reject) => {
-            handleFormData(this.formBody, URL+'/api/user/register', {credentials: 'include', headers: {'Content-Type': 'application/json'},body:JSON.stringify(this.formBody)})
+            handleFormData(this.formBody, URL+'/api/user/register', {credentials: 'include'})
             .then(response => {
                 if(response.ok){
                     resolve(response.json());

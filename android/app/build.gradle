@@ -139,8 +139,11 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fs')
+    compile project(':react-native-splash-screen')
     compile project(':react-native-webview')
     compile project(':react-native-image-crop-picker')
+    compile project(':aurora-imui-react-native')
     // compile "com.facebook.fresco:animated-gif:1.10.0"
     compile project(':react-native-gesture-handler')
     compile project(':react-native-vector-icons')

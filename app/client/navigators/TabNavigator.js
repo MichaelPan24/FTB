@@ -18,6 +18,7 @@ import AboutMePage from '../pages/Me/AboutMePage';
 import NotificationPage from '../pages/Me/NotificationPage';
 import MyInfoPage from '../pages/Me/MyInfoPage';
 import WebViewPage from '../pages/Me/WebViewPage';
+import ChatPage from '../pages/ChatPage';
 
 //配置底部导航栏每一栏模块栈
 const DemandsStack = createStackNavigator({
@@ -39,6 +40,14 @@ const DemandsStack = createStackNavigator({
           header: null,
           // title: `${navigation.state.params.info&&navigation.state.params.info||''}详情`,
           gesturesEnabled: true
+        }
+      }
+    },
+    Chat: {
+      screen: ChatPage,
+      navigationOptions: ({navigation}) => {
+        return {
+          header: null
         }
       }
     },

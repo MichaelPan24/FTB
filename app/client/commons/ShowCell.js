@@ -37,6 +37,7 @@ export class ShowCell extends Component{
         // for(let i in collectedUser){
         //     console.log(typeof collectedUser[i]['_id'])
         // }
+        console.log(nextProps.data, '\n', nextProps.user.user);
         if(_ID){
             const {collectedUser, _id} = nextProps.data;
             const {favorite_work} = nextProps.user.user;
@@ -46,7 +47,7 @@ export class ShowCell extends Component{
             for(let i in favorite_work){
                 CollectedWork.push(favorite_work[i]['_id'])
             }
-            if(CollectedUser.includes(_ID) && CollectedWork.includes(_id)&&!prevState.isToggled){
+            if(CollectedUser.includes(_ID) &&  ! prevState.isToggled){
                 return{
                     isFavorite: true,
                     isToggled: !prevState.isToggled
@@ -143,7 +144,7 @@ export class ShowCell extends Component{
         if(user.isLogin){
             this.setState((prevState) => {
                 return{
-                        isFavorite: ! prevState.isFavorite
+                        isFavorite: !prevState.isFavorite,
                     } 
             })
             // onLike('work', user.user._id, favItem);
@@ -221,9 +222,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(ShowCell);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center', 
+        justifyContent: 'space-between', 
         flexDirection: 'row',
-        alignItems: 'center',
+        // alignItems: 'center',
         marginBottom: 10,
         marginTop: 10
     },

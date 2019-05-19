@@ -1,5 +1,5 @@
 import React, {Component, PureComponent} from 'react';
-import {View, StyleSheet, ScrollView, TouchableOpacity, FlatList, PixelRatio, Text, RefreshControl, Image, TextInput} from 'react-native';
+import {View, StyleSheet, ScrollView, TouchableOpacity, ToastAndroid,FlatList, PixelRatio, Text, RefreshControl, Image, TextInput} from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import FontIcon from 'react-native-vector-icons/FontAwesome';
 
@@ -10,7 +10,7 @@ import NavigationBar from '../commons/NavigationBar';
 import ShowCell from '../commons/ShowCell';
 import CommentItem from '../commons/CommentItem';
 import Loading from '../commons/Loading';
-
+import Spinner from 'react-native-loading-spinner-overlay';
 import HTMLView from 'react-native-htmlview'; 
 
 const URL = 'http://119.23.227.22:3303'
@@ -25,7 +25,7 @@ export  class ShowDetailsPage extends Component {
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
-        if(nextProps.showWorks.comments.data){
+        if(nextProps.showWorks.comments){
             // console.log(nextProps.showWorks.comments)
             return{
                 commentsLoaded: nextProps.showWorks.loadComment,
@@ -70,7 +70,7 @@ export  class ShowDetailsPage extends Component {
         onLoadComments(URL, workId);
     }
     _onPress = () => {
-
+        
     }
 
     goBack = () => {
@@ -94,7 +94,6 @@ export  class ShowDetailsPage extends Component {
                         <View style={styles.separator} />
                         {/* {console.log(data)} */}
                         <FlatList
-                            // ref="commentsView"
                             data={data}
                             renderItem={this._renderCommentItem}
                             keyExtractor={(item) => `${item._id}`}
@@ -123,8 +122,13 @@ export  class ShowDetailsPage extends Component {
         const {onPushComment, user} = this.props;
         if(user.isLogin && user.user){
             let pushContent = {};
-
-            onPushComment(userId, workId);
+            const {commentContent} = this.state;
+            if(!commentContent.trim()){
+                window.alert('请输入评论内容');
+                return;
+            }
+            pushContent['detail'] = commentContent;
+            onPushComment(userId, workId, pushContent);
         }
         window.alert('请先登录')
     }
@@ -151,7 +155,6 @@ export  class ShowDetailsPage extends Component {
         const {navigation, showWorks, user} = this.props;
         const {commentsArr, commentsLoaded} = this.state;
         const {getParam} = navigation;
-        const {comments, loadComment} = showWorks;
         let avatar = user.isLogin ? user.user.avatar : '';
         // console.log(comment)
         const ItemData = getParam('item');
@@ -211,6 +214,7 @@ export  class ShowDetailsPage extends Component {
                                 />
                         </TouchableOpacity>
                     </View>
+                    {}
                 {/* </View> */}
             </View>
                 
@@ -225,7 +229,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     onLoadComments: (url, workId) => dispatch(actions.onLoadComments(url, workId)),
-    onPushComment: (userId, workId) => dispatch(actions.onPushComment(userId, workId))
+    onPushComment: (userId, workId, commentContent) => dispatch(actions.onPushComment(userId, workId, commentContent))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowDetailsPage);

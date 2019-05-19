@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {View, Text, StyleSheet, Button} from 'react-native'
+import SplashScreen from 'react-native-splash-screen';
 
 export default class WelcomePage extends Component {
     constructor(props){
@@ -7,6 +8,7 @@ export default class WelcomePage extends Component {
     }
 
     componentDidMount(){
+        SplashScreen.hide();
         setTimeout(()=>{this.props.navigation.navigate('Main')},300)
     }
     render(){

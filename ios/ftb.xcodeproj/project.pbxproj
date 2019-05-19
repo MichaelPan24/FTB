@@ -59,6 +59,19 @@
 		46BF8F74C2B44BA1835EB404 /* NexaRustSlab-BlackShadow01.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95EB7A5CE5154A17AC8BB059 /* NexaRustSlab-BlackShadow01.otf */; };
 		9B674804575E4CCE8754EDEE /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 88A1548FDAF7496CAE8DBDD1 /* libimageCropPicker.a */; };
 		7E9EB3749C50497CB8C464D9 /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43598128E09848C9AC6379FB /* libRNCWebView.a */; };
+		7E391A3C285043D69E307870 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A13FD525394517B26421FA /* libSplashScreen.a */; };
+		C46FE51F24D2451BA45DE236 /* libAuroraIMUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7627B0E7EE148C9A7F682E5 /* libAuroraIMUI.a */; };
+		B767F6FAF5BB41ACA33337B3 /* RCTAuroraIMUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F89A9B22EE74F1EB6BF7A99 /* RCTAuroraIMUI.framework */; };
+		97D18830011F4374A7CDCB9C /* RCTAuroraIMUITests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = 76FCB1D198BE4A28992D5B54 /* RCTAuroraIMUITests.xctest */; };
+		95D8EE1307AF4D0CB92199AB /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A746BE04F94172B901EB54 /* libz.tbd */; };
+		3943F07D236645BCA4BB16EC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9E8E508800429E9ACB100B /* CoreTelephony.framework */; };
+		131AAE3DFB394E0798A8F2CA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ED61554542C4DD79EA4E745 /* CFNetwork.framework */; };
+		0C1BDFA373474F1B808671CF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A3A38557D0F481CA93D0EC6 /* CoreFoundation.framework */; };
+		177BD192860F4805BDF81AC6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5002FB045F1C4647A822956B /* SystemConfiguration.framework */; };
+		275BFCEAB9FC473AA9F9058B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079D2363FF884D34B8543BFF /* Foundation.framework */; };
+		E527590075E94B51BF8A452C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 453CDA04D43E49658830839B /* UIKit.framework */; };
+		B2B3D0C6205B465E912E7C18 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21F3A86E4CFE46BBBC003B58 /* CoreGraphics.framework */; };
+		577310A9D5514B0692D64A2F /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98492B96D9174BB7866282F3 /* libRNFS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -390,6 +403,22 @@
 		88A1548FDAF7496CAE8DBDD1 /* libimageCropPicker.a */ = {isa = PBXFileReference; name = "libimageCropPicker.a"; path = "libimageCropPicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		3335519815A2481894A1ECF4 /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; name = "RNCWebView.xcodeproj"; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		43598128E09848C9AC6379FB /* libRNCWebView.a */ = {isa = PBXFileReference; name = "libRNCWebView.a"; path = "libRNCWebView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		1B90CDD756254605BF21008E /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; name = "SplashScreen.xcodeproj"; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		F8A13FD525394517B26421FA /* libSplashScreen.a */ = {isa = PBXFileReference; name = "libSplashScreen.a"; path = "libSplashScreen.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		FAFB92DB734641DC84F87735 /* RCTAuroraIMUI.xcodeproj */ = {isa = PBXFileReference; name = "RCTAuroraIMUI.xcodeproj"; path = "../node_modules/aurora-imui-react-native/ReactNative/ios/RCTAuroraIMUI.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		B7627B0E7EE148C9A7F682E5 /* libAuroraIMUI.a */ = {isa = PBXFileReference; name = "libAuroraIMUI.a"; path = "libAuroraIMUI.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		5F89A9B22EE74F1EB6BF7A99 /* RCTAuroraIMUI.framework */ = {isa = PBXFileReference; name = "RCTAuroraIMUI.framework"; path = "System/Library/Frameworks/RCTAuroraIMUI.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		76FCB1D198BE4A28992D5B54 /* RCTAuroraIMUITests.xctest */ = {isa = PBXFileReference; name = "RCTAuroraIMUITests.xctest"; path = "RCTAuroraIMUITests.xctest"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.cfbundle; explicitFileType = undefined; includeInIndex = 0; };
+		36A746BE04F94172B901EB54 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		8D9E8E508800429E9ACB100B /* CoreTelephony.framework */ = {isa = PBXFileReference; name = "CoreTelephony.framework"; path = "System/Library/Frameworks/CoreTelephony.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		7ED61554542C4DD79EA4E745 /* CFNetwork.framework */ = {isa = PBXFileReference; name = "CFNetwork.framework"; path = "System/Library/Frameworks/CFNetwork.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		6A3A38557D0F481CA93D0EC6 /* CoreFoundation.framework */ = {isa = PBXFileReference; name = "CoreFoundation.framework"; path = "System/Library/Frameworks/CoreFoundation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		5002FB045F1C4647A822956B /* SystemConfiguration.framework */ = {isa = PBXFileReference; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		079D2363FF884D34B8543BFF /* Foundation.framework */ = {isa = PBXFileReference; name = "Foundation.framework"; path = "System/Library/Frameworks/Foundation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		453CDA04D43E49658830839B /* UIKit.framework */ = {isa = PBXFileReference; name = "UIKit.framework"; path = "System/Library/Frameworks/UIKit.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		21F3A86E4CFE46BBBC003B58 /* CoreGraphics.framework */ = {isa = PBXFileReference; name = "CoreGraphics.framework"; path = "System/Library/Frameworks/CoreGraphics.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		51DB48363D6E4746B2B2ABB7 /* RNFS.xcodeproj */ = {isa = PBXFileReference; name = "RNFS.xcodeproj"; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		98492B96D9174BB7866282F3 /* libRNFS.a */ = {isa = PBXFileReference; name = "libRNFS.a"; path = "libRNFS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -421,6 +450,19 @@
 				5EFEFE89D55A4057A02684CA /* libRNGestureHandler.a in Frameworks */,
 				9B674804575E4CCE8754EDEE /* libimageCropPicker.a in Frameworks */,
 				7E9EB3749C50497CB8C464D9 /* libRNCWebView.a in Frameworks */,
+				7E391A3C285043D69E307870 /* libSplashScreen.a in Frameworks */,
+				C46FE51F24D2451BA45DE236 /* libAuroraIMUI.a in Frameworks */,
+				B767F6FAF5BB41ACA33337B3 /* RCTAuroraIMUI.framework in Frameworks */,
+				97D18830011F4374A7CDCB9C /* RCTAuroraIMUITests.xctest in Resources */,
+				95D8EE1307AF4D0CB92199AB /* libz.tbd in Frameworks */,
+				3943F07D236645BCA4BB16EC /* CoreTelephony.framework in Frameworks */,
+				131AAE3DFB394E0798A8F2CA /* CFNetwork.framework in Frameworks */,
+				0C1BDFA373474F1B808671CF /* CoreFoundation.framework in Frameworks */,
+				177BD192860F4805BDF81AC6 /* SystemConfiguration.framework in Frameworks */,
+				275BFCEAB9FC473AA9F9058B /* Foundation.framework in Frameworks */,
+				E527590075E94B51BF8A452C /* UIKit.framework in Frameworks */,
+				B2B3D0C6205B465E912E7C18 /* CoreGraphics.framework in Frameworks */,
+				577310A9D5514B0692D64A2F /* libRNFS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +613,14 @@
 			isa = PBXGroup;
 			children = (
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
+				36A746BE04F94172B901EB54 /* libz.tbd */,
+				8D9E8E508800429E9ACB100B /* CoreTelephony.framework */,
+				7ED61554542C4DD79EA4E745 /* CFNetwork.framework */,
+				6A3A38557D0F481CA93D0EC6 /* CoreFoundation.framework */,
+				5002FB045F1C4647A822956B /* SystemConfiguration.framework */,
+				079D2363FF884D34B8543BFF /* Foundation.framework */,
+				453CDA04D43E49658830839B /* UIKit.framework */,
+				21F3A86E4CFE46BBBC003B58 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -612,6 +662,9 @@
 				E665E62675E3409D9E94C7F4 /* RNGestureHandler.xcodeproj */,
 				E0AB150AC04B449DBF5828FA /* imageCropPicker.xcodeproj */,
 				3335519815A2481894A1ECF4 /* RNCWebView.xcodeproj */,
+				1B90CDD756254605BF21008E /* SplashScreen.xcodeproj */,
+				FAFB92DB734641DC84F87735 /* RCTAuroraIMUI.xcodeproj */,
+				51DB48363D6E4746B2B2ABB7 /* RNFS.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1284,6 +1337,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)/System/Library/Frameworks\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1291,6 +1349,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-crop-picker\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-splash-screen\ios",
+					"$(SRCROOT)\..\node_modules\aurora-imui-react-native\iOS\IMUIMessageCollectionView/**",
+					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 				);
 			};
 			name = Debug;
@@ -1314,6 +1375,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)/System/Library/Frameworks\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1321,6 +1387,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-crop-picker\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-splash-screen\ios",
+					"$(SRCROOT)\..\node_modules\aurora-imui-react-native\iOS\IMUIMessageCollectionView/**",
+					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 				);
 			};
 			name = Release;
@@ -1347,6 +1416,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-crop-picker\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-splash-screen\ios",
+					"$(SRCROOT)\..\node_modules\aurora-imui-react-native\iOS\IMUIMessageCollectionView/**",
+					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 				);
 			};
 			name = Debug;
@@ -1372,6 +1444,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-crop-picker\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-splash-screen\ios",
+					"$(SRCROOT)\..\node_modules\aurora-imui-react-native\iOS\IMUIMessageCollectionView/**",
+					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 				);
 			};
 			name = Release;
@@ -1403,6 +1478,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)/System/Library/Frameworks\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1410,6 +1490,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-crop-picker\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-splash-screen\ios",
+					"$(SRCROOT)\..\node_modules\aurora-imui-react-native\iOS\IMUIMessageCollectionView/**",
+					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 				);
 			};
 			name = Debug;
@@ -1441,6 +1524,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)/System/Library/Frameworks\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1448,6 +1536,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-crop-picker\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-splash-screen\ios",
+					"$(SRCROOT)\..\node_modules\aurora-imui-react-native\iOS\IMUIMessageCollectionView/**",
+					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 				);
 			};
 			name = Release;
@@ -1478,6 +1569,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)/System/Library/Frameworks\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1485,6 +1581,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-crop-picker\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-splash-screen\ios",
+					"$(SRCROOT)\..\node_modules\aurora-imui-react-native\iOS\IMUIMessageCollectionView/**",
+					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 				);
 			};
 			name = Debug;
@@ -1515,6 +1614,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)/System/Library/Frameworks\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1522,6 +1626,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-crop-picker\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-splash-screen\ios",
+					"$(SRCROOT)\..\node_modules\aurora-imui-react-native\iOS\IMUIMessageCollectionView/**",
+					"$(SRCROOT)\..\node_modules\react-native-fs/**",
 				);
 			};
 			name = Release;

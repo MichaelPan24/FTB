@@ -40,12 +40,14 @@ const MainNavigator = createStackNavigator({
   }
 })
 
-const RootStack = createAppContainer(createSwitchNavigator({
-  Main: MainNavigator,
-  Init: InitStack
-},{
-  initialRouteName: 'Init'
-}))
+// const RootStack = createAppContainer(createSwitchNavigator({
+//   Main: MainNavigator,
+//   Init: InitStack
+// },{
+//   initialRouteName: 'Init'
+// }))
+
+const RootStack = createAppContainer(MainNavigator);
 
 // const navReducer = createNavigationReducer(RootStack);
 //初始化react-navigation和 redux的中间件

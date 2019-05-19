@@ -103,7 +103,7 @@ export class LoginPage extends Component{
                         style={styles.pass}
                         placeholder={'请输入密码'}
                         onChangeText={(pass) => this.setState({pass})}
-                        // value={this.state.pass}
+                        secureTextEntry={true}                        
                         />
                 </View>
                 <View style={styles.submitContainer}>

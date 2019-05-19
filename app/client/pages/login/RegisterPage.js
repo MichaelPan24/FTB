@@ -36,7 +36,7 @@ export class RegisterPage extends Component{
     }
 
     loadingRegister = (isLoading, isRegistered) => {
-        // const {navigation, user} = this.props;
+        const { user} = this.props;
         if(!isLoading && isRegistered){
             window.alert('注册成功');
         }else if(!isLoading && !isRegistered && user.msg !==undefined){
@@ -52,7 +52,7 @@ export class RegisterPage extends Component{
         ImgPicker.openPicker({
             multiple: false
         }).then(image => {
-            let avatarContainer = {uri: image.path, type:'multipart/form-data', name: escape(image.path.slice(image.path.lastIndexOf('/')+1))};
+            let avatarContainer = {uri: image.path, type:'multipart/form-data', name: image.path.slice(image.path.lastIndexOf('/')+1)};
             this.setState({isPicked: true, avatar: avatarContainer})
         })
     }
@@ -113,8 +113,8 @@ export class RegisterPage extends Component{
                             <TextInput 
                                 style={styles.inputArea}
                                 placeholder={'请输入密码'}
-                                ref={(pass) => this.pass = pass}
-                                onChangeText={(pass) => this.state.pass = pass }
+                                ref={(pass) => this.password = pass}
+                                onChangeText={(pass) => this.state.password = pass }
                                 />
                         </View>
                         <View style={styles.submitContainer}>

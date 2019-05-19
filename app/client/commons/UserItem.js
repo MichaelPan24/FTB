@@ -3,10 +3,10 @@ import {View, StyleSheet, FlatList, Text, RefreshControl} from 'react-native';
 import PropType from 'prop-types';
 import {connect} from 'react-redux';
 
-import actions from '../action/index';
 import NavigationBar from '../commons/NavigationBar';
 import DemandCell from '../commons/DemandCell';
 import ShowCell from '../commons/ShowCell';
+import NavigationService from '../../utils/navigationUtil';
 
 export class UserItem extends Component{
     constructor(props){
@@ -108,14 +108,14 @@ export class UserItem extends Component{
             return(
                 <ShowCell
                     data = {item}
-                    onPress = {() => this._onPress(item)}
+                    onPress = {() => NavigationService.navigate('ShowDetail', {name: '项目', item})}
                 />
             )
         }else {
             return(
                 <DemandCell
                     data={item}
-                    onPress={() => this._onPress(item)}
+                    onPress={() => NavigationService.navigate('DemandsDetail', {info: '需求', data: item})}
                 />
             )
         }
@@ -127,8 +127,11 @@ export class UserItem extends Component{
     // }
 
 
-    _onPress = () => {
-
+    _onPress = (isShowWork, item) => {
+        if(isShowWork === 'showWork'){
+            NavigationService.navigate('ShowDetail', {name: '项目', item})
+        }
+        NavigationService.navigate('DemandsDetail', {info: '需求', data: item})
     }
     
 

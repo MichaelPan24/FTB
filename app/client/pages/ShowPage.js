@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, StyleSheet, FlatList, RefreshControl, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/AntDesign';
+import SplashScreen from 'react-native-splash-screen';
 
 import actions from '../action';
 
@@ -19,6 +20,7 @@ export  class ShowPage extends Component {
     }
 
     componentDidMount(){
+        SplashScreen.hide();
         this.loadData();
     }
 

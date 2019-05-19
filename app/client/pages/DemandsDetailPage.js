@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, ScrollView, Image,TextInput, Dimensions, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, Image, Dimensions, TouchableOpacity, Button} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'
 import {connect} from 'react-redux';
 
 import actions from '../action/index';
 import NavigationBar from '../commons/NavigationBar';
 import { UserItem } from '../commons/UserItem';
+import autoMergeLevel1 from 'redux-persist/es/stateReconciler/autoMergeLevel1';
 
 const   ScreenWidth = Dimensions.get('window').width;
 const ScreenHeight = Dimensions.get('window').height;
@@ -31,6 +32,11 @@ export class DemandsDetailPage extends Component{
         const {navigation} = this.props;
         navigation.goBack();
     }
+
+    goChat= () => {
+        const {navigation} = this.props;
+        navigation.navigate('Chat')
+    }
     
     renderLeftButton = () => {
         return <TouchableOpacity
@@ -53,7 +59,6 @@ export class DemandsDetailPage extends Component{
     render(){
         const {navigation, user} = this.props;
         const {getParam} = navigation;
-        const {avatar} = user.user;
         const data = getParam('data');
         console.log(data)
         const demandsAvatar = data.avatar.avatar ;
@@ -65,7 +70,7 @@ export class DemandsDetailPage extends Component{
         return (
             <View style={{flex: 1}}>
                 {navigationBar}
-                <View style={styles.container}>
+                <View style={styles.scroll_container}>
                     <ScrollView 
                         showsVerticalScrollIndicator={false}
                         keyboardDismissMode={'on-drag'}
@@ -90,6 +95,23 @@ export class DemandsDetailPage extends Component{
                             </View>
                     </ScrollView>
                 </View>
+
+                <View style={styles.chatContainer}>
+                    <View style={styles.contact_button_container}>
+                        <Button
+                            onPress={this.goChat}
+                            title={'联系企业'}
+                            color={'#1194F6'}
+                            style={{borderRadius: 20}}
+                        />
+                    </View>
+                    <View style={styles.share_button_container}>
+                        <Icon
+                            name={'link'}
+                            size={26}
+                        />
+                    </View>
+                </View>
             </View>
             
         )
@@ -107,10 +129,16 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(DemandsDetailPage)
 
 const styles = StyleSheet.create({
-    container: {
+    scroll_container: {
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center'
+    },
+    chatContainer: {
+        position: 'absolute',
+        bottom: 10,
+        flex: 1,
+        flexDirection: 'row',
     },
     header: {
         flex: 1,
@@ -128,7 +156,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlignVertical: 'center',
         marginLeft: 5
-    },
+    }, 
     date: {
         position: 'absolute',
         top: 5,
@@ -148,4 +176,17 @@ const styles = StyleSheet.create({
         height: ScreenHeight * 3/5,
 
     },
+    contact_button_container: {
+        marginLeft: 20,
+        flex: 6,
+        borderRadius: 20,
+        flexDirection: 'column'
+    },
+     share_button_container: {
+        flex: 2,
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        borderRadius: 50,
+        marginRight: 20
+     }
 })
