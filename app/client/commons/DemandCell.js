@@ -52,7 +52,7 @@ export class DemandCell extends Component{
 
     componentDidMount(){
         const {data} = this.props;
-        // Image.prefetch(data.avatar.avatar);
+        Image.prefetch(data.avatar.avatar);
     }
 
     componentDidUpdate(prevProps, prevState){
