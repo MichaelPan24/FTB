@@ -32,7 +32,7 @@ const rootPersistConfig = {
     storage,
     stateReconciler: autoMergeLevel1,
     blacklist: ['user'],
-    // whiteList: ['demands', 'showWorks']
+    whiteList: ['demands', 'showWorks']
   }
 
 const userPersistConfig = {
