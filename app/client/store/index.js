@@ -37,7 +37,6 @@ const rootPersistConfig = {
 
 const userPersistConfig = {
   key: 'user',
-  // stateReconciler: autoMergeLevel2,
   storage: storage,
   blacklist: ['isLoading', 'isUploaded', 'registered'],
   whiteList: ['favorite', 'uploaded', 'isLogin']
