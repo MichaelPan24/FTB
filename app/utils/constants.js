@@ -8,8 +8,8 @@ export const DEFAULT_WINDOW_MULTIPLIER = 0.50;
 export const DEFAULT_NAVBAR_HEIGHT = 65;
 
 export const USER = {
-  name: '无名氏',
-  title: '无职业',
+  name: '请登录',
+  title: '',
   image: 'http://i.imgur.com/uma9OfG.jpg',
 };
 
