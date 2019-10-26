@@ -150,7 +150,8 @@ export default function userAction(state = defaultState, action){
         case Types.UPDATE_INFO:
                 return {
                     ...state,
-                    isLoading: true
+                    isLoading: true,
+                    isInfoChanged: false
                 };
         case Types.UPDATE_INFO_SUCCESS:
                 return {
@@ -215,7 +216,13 @@ export default function userAction(state = defaultState, action){
                     ...state,
                     isLoading: false,
                     commentPushed: true,
-                    
+                }
+        case Types.PUSH_COMMENT_FAIL: 
+                return {
+                    ...state,
+                    isLoading: false,
+                    commentPushed: false,
+                    msg: action.msg
                 }
         default:
             return state;
