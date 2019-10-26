@@ -3,6 +3,7 @@ import {View, StyleSheet, FlatList, RefreshControl, TouchableOpacity} from 'reac
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/AntDesign';
 import SplashScreen from 'react-native-splash-screen';
+import Toast from 'react-native-easy-toast';
 
 import actions from '../action';
 
@@ -19,9 +20,22 @@ export  class ShowPage extends Component {
         console.disableYellowBox = true
     }
 
+
     componentDidMount(){
         SplashScreen.hide();
         this.loadData();
+        // console.log(this.cell.state)
+    }
+
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if(nextProps.user.isLogin !== this.props.user.isLogin){
+    //         return true;
+    //     }
+    // }
+    componentDidUpdate(prevProps, prevState){
+        if((prevProps.user.isLiked !== this.props.user.isLiked) && this.props.user.isLiked){
+            this.refs.toast.show('操作成功', 200)
+        }
     }
 
     //刷新数据
@@ -40,6 +54,7 @@ export  class ShowPage extends Component {
             <ShowCell
                 data = {item}
                 onPress = {() => (this._onPress(item))}
+                ref={(cell) => this.cell = cell}
                 // key={`${item._id.toString()}`}
             />
         )
@@ -99,6 +114,7 @@ export  class ShowPage extends Component {
                         removeClippedSubviews={false}
                     />
                 </View>
+                <Toast ref="toast"/>
             </View>
             
         )
@@ -107,7 +123,8 @@ export  class ShowPage extends Component {
 
 //将state 映射到 props中
 const mapStateToProps = (state) => ({
-    showWorks: state.showWorks
+    showWorks: state.showWorks,
+    user: state.user
 });
 
 //将dispatch 映射到 props中

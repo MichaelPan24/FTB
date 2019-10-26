@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, StyleSheet, ImageBackground, TextInput, Text, Button, Picker, TouchableOpacity, Image} from 'react-native';
 import {connect} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Toast from 'react-native-easy-toast';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ImgPicker from 'react-native-image-crop-picker';
 
@@ -16,13 +17,14 @@ export class RegisterPage extends Component{
             uName: '',
             identify: '',
             isPicked: false,
-            avatar: {}
+            avatar: {},
+            label: '企业用户'
         }
         console.disableYellowBox=true;
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        if( this.state.email !== nextState.email || this.state.pass !== nextState.pass || this.state.uName !== nextState.uName || this.state.identify !== nextState.identify){
+        if( this.state.email !== nextState.email || this.state.pass !== nextState.pass || this.state.uName !== nextState.uName ){
             return false;
         }else{
             return true;
@@ -32,7 +34,10 @@ export class RegisterPage extends Component{
 
     componentDidUpdate(prevProps, prevStates){
         if(prevStates.avatar !== this.state.avatar) return null;
-        this.loadingRegister(this.props.user.isLoading, this.props.user.isRegistered)
+        this.loadingRegister(this.props.user.isLoading, this.props.user.isRegistered);
+        if((prevProps.user.registered !== this.props.user.registered)){
+            this.toast.show('注册成功', 200);
+        }
     }
 
     loadingRegister = (isLoading, isRegistered) => {
@@ -96,17 +101,22 @@ export class RegisterPage extends Component{
                                 onChangeText={(uName) => this.state.uName = uName }
                                 />
                         </View>
-                        <View style={styles.emailContainer}>
-                                <Text style={styles.inputArea}>
-                                    您的身份是?
-                                </Text>
+                        <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                                 <Picker
-                                    selectedValue={this.state.language}
-                                    style={{ height: 50, width: 100 }}
-                                    onValueChange={(itemValue, itemIndex) => this.setState({identify: itemValue})}>
-                                    <Picker.Item label="您的身份是"/>
-                                    <Picker.Item label="企业用户" value="0" />
-                                    <Picker.Item label="学生用户" value="1" />
+                                    selectedValue={this.state.label}
+                                    style={{ height: 50, width: 150, marginLeft: -4 }}
+                                    onValueChange={(itemValue, itemIndex) => this.setState(prevState => {
+                                        return {
+                                            identify: itemValue ==='企业用户' ? '0' : '1' ,
+                                            label: itemValue
+                                        }
+                                    })}
+                                    mode={'dropdown'} 
+                                    itemStyle={{marginLeft: -5}}   
+                                >
+                                    {/* <Picker.Item label="您的身份是" value="选择"/> */}
+                                    <Picker.Item label="企业用户" value="企业用户" />
+                                    <Picker.Item label="学生用户" value="学生用户" />
                                 </Picker>
                         </View>
                         <View style={styles.emailContainer}>
@@ -115,6 +125,7 @@ export class RegisterPage extends Component{
                                 placeholder={'请输入密码'}
                                 ref={(pass) => this.password = pass}
                                 onChangeText={(pass) => this.state.password = pass }
+                                secureTextEntry={true}
                                 />
                         </View>
                         <View style={styles.submitContainer}>
@@ -162,6 +173,7 @@ export class RegisterPage extends Component{
                         source={require('../../../../img/backGround.jpg')}
                         style={styles.backGround}
                     >
+                        <Toast ref={toast => this.toast = toast}/>
                         <Spinner
                             visible={!isRegistered && isLoading}
                             textContent={'请稍等'}
@@ -207,10 +219,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F4F4F4',
-        height:60,
-        width: 60,
+        height:55,
+        width: 55,
         borderRadius: 50,
-        alignSelf: 'center'
+        // alignSelf: 'center'
     }, 
     inputArea: {
         flex: 1

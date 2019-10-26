@@ -29,6 +29,9 @@ export class ShowCell extends Component{
     }
 
     static getDerivedStateFromProps(nextProps, prevState){
+        nextProps.data.image.forEach((img) => {
+            Image.prefetch(img)
+        })
         // console.log(typeof nextProps.user.user._id)
         let _ID = nextProps.user.isLogin ? nextProps.user.user._id : '';
         // console.log(_ID)
@@ -37,7 +40,7 @@ export class ShowCell extends Component{
         // for(let i in collectedUser){
         //     console.log(typeof collectedUser[i]['_id'])
         // }
-        console.log(nextProps.data, '\n', nextProps.user.user);
+        // console.log(nextProps.data, '\n', nextProps.user.user);
         if(_ID){
             const {collectedUser, _id} = nextProps.data;
             const {favorite_work} = nextProps.user.user;
@@ -53,14 +56,21 @@ export class ShowCell extends Component{
                     isToggled: !prevState.isToggled
                 }
             }
+        }else{
+            return{
+                isFavorite: false,
+                isToggled: false
+            }
         }
-        return null
+        
     }
 
     shouldComponentUpdate(nextProps, nextState){
         if(this.state.isFavorite != nextState.isFavorite){
             return true
         }else if(nextProps.data.collectedUser.length !== this.props.data.collectedUser.length){
+            return true
+        }else if(nextProps.user.isLogin !== this.props.user.isLogin){
             return true
         }
         return false
@@ -76,20 +86,14 @@ export class ShowCell extends Component{
         const {onLike, data, user} = this.props;
         const {isLogin} = user;
         if(isLogin){
-            if(this.state.isFavorite !== prevState.isFavorite){
+            if((this.state.isFavorite !== prevState.isFavorite) ){
                 const favItem = {
                     favWork: data._id,
                     isFav: this.state.isFavorite ? '1' : '0'
                 }
                 onLike('work', user.user._id, favItem);
-                this.setState((prevState) => {
-                    return {
-
-                    }
-                })
             }
         }
-        
     }
 
     /**
@@ -107,7 +111,7 @@ export class ShowCell extends Component{
                 activeOpacity={0.8}
                 >
                 <Image
-                    source={{uri: unescape( img)}}
+                    source={{uri: img}}
                     style={styles.img}
                 />
             </TouchableOpacity>
@@ -186,6 +190,7 @@ export class ShowCell extends Component{
                         {/* <View style={styles.img_container}> */}
                         <Swiper  
                             style={styles.img_container}
+                            autoplay={true}
                         >
                                 {this.showImgs(data)}
                         </Swiper>
@@ -272,6 +277,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        borderBottomWidth: 0.1
     },
     img: {
         flex: 1,

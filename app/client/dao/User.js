@@ -121,7 +121,7 @@ export default class User{
 
     pushComment(userId, workId){
         return new Promise((resolve, reject) => {
-            handleFormData(this.formBody, `${URL}/api/user/${userId}/comment/${workId}`)
+            handleFormData(this.formBody, `${URL}/api/user/${userId}/comment/${workId}`, {credentials: 'include', headers: {'Content-Type': 'application/json'}, body:JSON.stringify(this.formBody)})
                 .then(response => {
                     if(response.ok){
                         resolve(response.json())

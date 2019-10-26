@@ -4,6 +4,7 @@ import ImgPicker from 'react-native-image-crop-picker';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {connect} from 'react-redux'
 import Spinner from 'react-native-loading-spinner-overlay';
+import Toast from 'react-native-easy-toast';
 
 import {ModalView} from '../../../utils/viewUtils';
 import actions from '../../action/index';
@@ -32,6 +33,12 @@ export class MyInfoPage extends Component{
             return false
         }else {
             return true
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if((prevProps.user.isInfoChanged !== this.props.user.isInfoChanged) && this.props.user.isInfoChanged){
+            this.toast.show('更改信息成功', 200)
         }
     }
 
@@ -132,6 +139,7 @@ export class MyInfoPage extends Component{
         />
         return (
             <View style={{flex: 1 }}>
+                <Toast ref={toast => this.toast = toast}/>
                 <Spinner
                     visible={user.isLoading}
                     textContent={'请稍等'}

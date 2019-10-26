@@ -264,7 +264,7 @@ export default BottomTab = createBottomTabNavigator({
     }
 },{
   tabBarOptions: {
-    inactiveTintColor: 'white',
+    inactiveTintColor: '#F4F4F4',
     activeTintColor: 'black',
   },
 })

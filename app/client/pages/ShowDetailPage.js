@@ -2,16 +2,16 @@ import React, {Component, PureComponent} from 'react';
 import {View, StyleSheet, ScrollView, TouchableOpacity, ToastAndroid,FlatList, PixelRatio, Text, RefreshControl, Image, TextInput} from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import FontIcon from 'react-native-vector-icons/FontAwesome';
-
+import HTMLView from 'react-native-htmlview'; 
 import {connect} from 'react-redux';
+import Spinner from 'react-native-loading-spinner-overlay';
+import Toast from 'react-native-easy-toast';
 
 import actions from '../action/index';
 import NavigationBar from '../commons/NavigationBar';
 import ShowCell from '../commons/ShowCell';
 import CommentItem from '../commons/CommentItem';
 import Loading from '../commons/Loading';
-import Spinner from 'react-native-loading-spinner-overlay';
-import HTMLView from 'react-native-htmlview'; 
 
 const URL = 'http://119.23.227.22:3303'
 export  class ShowDetailsPage extends Component {
@@ -55,12 +55,10 @@ export  class ShowDetailsPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-        // if(prevProps.showWorks.comments.length !==this.props.showWorks.comments.length || prevProps.showWorks.loadComment !==this.props.showWorks.loadComment){
-        //     this.setState({
-        //         commentsLoaded: true,
-        //         comments: this.props.showWorks.comments
-        //     })
-        // }
+        if((prevProps.user.commentPushed !== this.props.user.commentPushed) && this.props.user.commentPushed){
+            this.toast.show('发布评论论成功', 200);
+            this.setState({commentsLoaded: false});
+        }
     }
 
     loadComment = () => {
@@ -93,6 +91,7 @@ export  class ShowDetailsPage extends Component {
                         <Text style={styles.heading}>评论</Text>
                         <View style={styles.separator} />
                         {/* {console.log(data)} */}
+                        {data.length ? 
                         <FlatList
                             data={data}
                             renderItem={this._renderCommentItem}
@@ -109,7 +108,7 @@ export  class ShowDetailsPage extends Component {
                                 />
                             } 
                             removeClippedSubviews={false}
-                        />
+                        /> : <Text>暂且没有评论</Text>}
                     </View>
                     }
 
@@ -130,7 +129,7 @@ export  class ShowDetailsPage extends Component {
             pushContent['detail'] = commentContent;
             onPushComment(userId, workId, pushContent);
         }
-        window.alert('请先登录')
+        // window.alert('请先登录')
     }
 
     renderLeftButton = () => {
@@ -167,6 +166,12 @@ export  class ShowDetailsPage extends Component {
         // console.log(ItemData.title)
         return (
             <View style={{flex: 1}}>
+                <Toast ref={toast => this.toast = toast }/>
+                <Spinner
+                    visible={user.isLoading}
+                    textContent={'请稍等'}
+                    cancelable={true}
+                />
                 {navigationBar}
                     <View style={styles.scrollViewContainer}>
                         <ScrollView style={styles.scrollViewContainer}>

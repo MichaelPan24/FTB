@@ -33,14 +33,18 @@ export class DemandCell extends Component{
                     isToggled: !prevState.isToggled
                 }
             }
+        }else{
+            return{
+                isTagged: false,
+                isToggled: false
+            }
         }
-        return null
     }
 
     shouldComponentUpdate(nextProps, nextState){
         if(this.state.isTagged != nextState.isTagged){
             return true
-        }else if(nextProps.data.collectedUser.length !== this.props.data.collectedUser.length){
+        }else if(nextProps.data.collectedUser.length !== this.props.data.collectedUser.length || nextProps.user.isLogin !== this.props.user.isLogin){
             return true
         }
         return false
@@ -48,7 +52,7 @@ export class DemandCell extends Component{
 
     componentDidMount(){
         const {data} = this.props;
-        Image.prefetch(data.avatar.avatar);
+        // Image.prefetch(data.avatar.avatar);
     }
 
     componentDidUpdate(prevProps, prevState){

@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import {View, StyleSheet, TextInput, TouchableOpacity, Image, Text, ScrollView, Modal, TouchableHighlight} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import  Icon from 'react-native-vector-icons/AntDesign';
-import NavigationBar from './NavigationBar';
 import ImagePicker from 'react-native-image-crop-picker';
 import PropType from 'prop-types';
+import Toast  from 'react-native-easy-toast';
+
+import NavigationBar from './NavigationBar';
 export default class BaseAddItem extends Component {
     constructor(props){
         super(props);
@@ -31,6 +33,12 @@ export default class BaseAddItem extends Component {
             return false;
         }
         return true;
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if((prevProps.user.isUploaded !== this.props.user.isUploaded) && this.props.user.isUploaded){
+            this.toast.show('发布成功', 200)
+        }
     }
     //检验用户上传类型
     static propTypes = {
@@ -108,7 +116,7 @@ export default class BaseAddItem extends Component {
             multiple: true
         }).then(images => {
             // console.log(images);
-            let imgContainer = images.map((img) =>({uri: img.path, type:'multipart/form-data', name:escape(img.path.slice(img.path.lastIndexOf('/')+1))}))//需要更改
+            let imgContainer = images.map((img) =>({uri: img.path, type:'multipart/form-data', name: img.path.slice(img.path.lastIndexOf('/')+1)}))//需要更改
             images.length ? this.setState({isPicked: true, imgArr: this.state.imgArr.concat(imgContainer)}) : this.state;
         })
     }
@@ -159,12 +167,15 @@ export default class BaseAddItem extends Component {
         />;
         return (
                 <ScrollView style={styles.container}>
+                    <Toast 
+                        ref={toast => this.toast = toast}
+                    />
                     <Spinner
                         visible={user.isLoading}
                         textContent={'请稍等...'}
                         cancelable={true}
                     />
-                    <Modal
+                    {/* <Modal
                         animationType='slide'
                         transparent={false}
                         visible={this.state.isPublished}
@@ -182,7 +193,7 @@ export default class BaseAddItem extends Component {
                                 </TouchableHighlight>
                             </View>
                         </View>
-                    </Modal>
+                    </Modal> */}
                     {navigationBar}
                     {/* <ScrollView style={styles.formContainer}> */}
                         <View style={styles.inputContainer}>
@@ -221,7 +232,7 @@ export default class BaseAddItem extends Component {
                                 </View>
                             </ScrollView>
                         </View>
-                        
+                    <Toast ref={toast => this.toast = toast }/>
                 </ScrollView>
                 )
     }

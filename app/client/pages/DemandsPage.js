@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import {View, StyleSheet, FlatList, RefreshControl, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 import  Icon from 'react-native-vector-icons/AntDesign'
+import Toast from 'react-native-easy-toast';
 
 import NavigationBar from '../commons/NavigationBar';
 import DemandCell from '../commons/DemandCell';
 
 import actions from '../action';
+import { stat } from 'react-native-fs';
 
 const URL = "http://119.23.227.22:3303/";
 // const URL = "http://192.168.1.105:3301";
@@ -22,6 +24,13 @@ export class InfoPage extends Component {
     componentDidMount(){
         this.loadData();
     }
+
+    componentDidUpdate(prevProps, prevState){
+        if((prevProps.user.isLiked !== this.props.user.isLiked) && this.props.user.isLiked){
+            this.refs.toast.show('操作成功', 200)
+        }
+    }
+
     //加载数据
     loadData = () => {
         const {onRefreshDemands} = this.props;
@@ -102,15 +111,16 @@ export class InfoPage extends Component {
                         }
                     />
                  </View>
+                 <Toast ref="toast"/>
             </View>
-            
         )
     }
 }
 
 //将state 映射到 props中
 const mapStateToProps = (state) => ({
-    demands: state.demands
+    demands: state.demands,
+    user: state.user
 })
 
 //将dispatch 映射到 props中

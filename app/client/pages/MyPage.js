@@ -70,7 +70,7 @@ export class MyPage extends Component {
                 navBarTitle='Michael Pan'
                 userName={(isLogin && user.user)? user.user.name: null}
                 userTitle={isLogin? user.identify==='0'? '企业用户': '个人用户': null}
-                userImage = {(user.isLogin && user.user) ? {uri: user.user.avatar} : require('../../../img/userAvatar.jpg')}
+                userImage = {(user.isLogin && user.user) ? {uri: user.user.avatar} : require('../../../img/AuthorAvatar.png')}
                 // userImage='http://i.imgur.com/RQ1iLOs.jpg'  //会在以后根据需要考虑增添用户头像
             >
                   <View style={styles.listView}>
